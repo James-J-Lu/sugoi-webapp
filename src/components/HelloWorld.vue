@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <button type="button" name="button" v-on:click="getmsg">get</button>
+    <button type="button" name="button" v-on:click="postmsg">post</button>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -31,10 +33,33 @@
 </template>
 
 <script>
+import TodoDataService from "../services/TodoDataService";
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  methods: {
+    getmsg () {
+      var id = 'M001'
+      TodoDataService.get(id)
+        .then(response => {
+          console.log('res=', response)
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    postmsg () {
+      TodoDataService.postAll()
+        .then(response => {
+          console.log('res=', response)
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   }
 }
 </script>
