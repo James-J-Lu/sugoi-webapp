@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import TodoDataService from "../services/TodoDataService";
+import MemberDataService from "../services/MemberDataService";
 
 export default {
   name: 'HelloWorld',
@@ -42,19 +42,28 @@ export default {
   },
   methods: {
     getmsg () {
-      var id = 'M001'
-      TodoDataService.get(id)
+      var id = 'M004'
+      console.log('get')
+      MemberDataService.get(id)
         .then(response => {
-          console.log('res=', response)
+          console.log(response.data)
         })
         .catch(e => {
           console.log(e);
         });
     },
     postmsg () {
-      TodoDataService.postAll()
+      var id = 'M004';
+      var _member_ = {
+        account: '052',
+        pw: '959595959',
+        name: 'Jacky'
+      };
+
+      MemberDataService.update(id, _member_)
         .then(response => {
-          console.log('res=', response)
+          // console.log('res=', response)
+          console.log(response)
         })
         .catch(e => {
           console.log(e);
