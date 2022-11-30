@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     getmsg () {
-      var id = 'M003'
+      var id = 'M004'
       console.log('get')
       MemberDataService.get(id)
         .then(response => {
