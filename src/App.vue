@@ -1,9 +1,5 @@
 <template>
-  <div id="mainHeader">
-  </div>
-  <div id="mainBody">
-    <router-view msg="Welcome to Hello World" />
-  </div>
+  <router-view />
 </template>
 
 <script>
@@ -14,27 +10,18 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif, "ChenYuluoyan-Thin"; */
+  font-family: "ChenYuluoyan-Thin";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
-#mainHeader {
-  background-color: #f9ecbe;
-  position: absolute;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-  height: 15%;
+html, body{
+  margin: 0;
+  padding: 0;
 }
-#mainBody {
-  background-color: #ffffff;
-  position: absolute;
-  top: 15%;
-  left: 0%;
-  width: 100%;
-  height: 85%;
+p {
+  margin: 0 !important;
 }
 </style>

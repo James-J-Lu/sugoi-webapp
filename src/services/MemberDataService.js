@@ -10,6 +10,11 @@ class MemberDataService {
     return http.get(`/member/${id}`);
   }
 
+  logIn(data) {
+    console.log(data)
+    return http.post(`/member/login`, data);
+  }
+
   create(data) {
     console.log(data);
     return http.post("/member", data);
