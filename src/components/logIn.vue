@@ -28,7 +28,7 @@ export default {
             isMember: null,
             name: null,
             account: 'jack',
-            password: '123'
+            password: '123',
         }
     },
     methods: {
@@ -37,21 +37,24 @@ export default {
             //要傳回parent的參數
             var _value = {
                 desTination: null,
-                name: null
+                name: null,
+                petCheck: null,
+                adoptCheck: null
             }
             //單純回到上一頁
             if(_login == 0) {
                 _value.name = null
-                _value.desTination = 'adoptMain'
+                _value.desTination = 'defaultMain'
                 this.$emit('getChild', _value)
             }
             //登入輸入的那個按鈕
             else if (_login == 1) {
                 //是會員
                 if(this.isMember == 'member') {
-                    console.log(0)
                     _value.name = this.name
-                    _value.desTination = 'adoptMain'
+                    _value.desTination = 'defaultMain'
+                    _value.petCheck = true
+                    _value.adoptCheck = true
                     this.$emit('getChild', _value)
                 }
                 //是管理員
@@ -65,7 +68,7 @@ export default {
         //登入submit
         logIn () {
             this.name = 'kelly'
-            this.isMember = 'manager' //管理者
+            this.isMember = 'member' //管理者
             // this.isMember = 'member' //會員
             this.back2Main(1)
             // var data = {

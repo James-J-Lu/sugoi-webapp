@@ -20,8 +20,9 @@
         </li>
         <li>
           <div class="bar-right nav-link px-2">
-            <p v-if="ifLogin" @mouseover="(sideBar = true)" class="nav-link px-2 link-dark">{{ name }}小姐</p>
-            <button v-if="!ifLogin" type="button" @click="changeBody('logIn',0)" class="btn btn-outline-primary me-2">登入</button>
+            <p v-if="memberStatus.Login" @mouseover="(sideBar = true)" class="nav-link px-2 link-dark">{{ memberStatus.name }}小姐</p>
+            <button v-if="!memberStatus.Login" type="button" @click="changeBody('signIn',0)" class="btn btn-outline-primary me-2">註冊</button>
+            <button v-if="!memberStatus.Login" type="button" @click="changeBody('logIn',0)" class="btn btn-outline-primary me-2">登入</button>
           </div>
         </li>
       </ul>
@@ -42,17 +43,18 @@
           <a href="#" @click="changeBody('myOrder',0)" class="dropdown-item rounded-2 active">我的訂單</a>
         </li>
         <li>
-          <a v-if="ifLogin" type="button" id="logOut" @click="logOut()" class="dropdown-item rounded-2 active">登出</a>
+          <a v-if="memberStatus.Login" type="button" id="logOut" @click="logOut()" class="dropdown-item rounded-2 active">登出</a>
         </li>
       </ul>
     </div>
     <!--主要內容顯示的地方-->
-    <component :login=ifLogin v-bind:is="currentComponent" class="mainBody" @getChild="childBack" @mouseover="(sideBar = false)" />
+    <component :memberStatus=memberStatus v-bind:is="currentComponent" class="mainBody" @getChild="childBack" @mouseover="(sideBar = false)" />
   </div>
 </template>
 
 <script>
 import logIn from "../components/logIn.vue";
+import signIn from "../components/signIn.vue"
 import managerMain from "../components/managerMain.vue"
 import whatWedo from "../components/whatWedo.vue"
 import contactUs from "../components/contactUs.vue"
@@ -70,8 +72,13 @@ export default {
     return {
       currentComponent: 'defaultMain', //目前顯示的頁面，要到components註冊
       name: null, //bar上面顯示的名稱(會員or管理者)
-      ifLogin: false, //是否為登入狀態，會同步給各component
       sideBar: false,
+      memberStatus: {
+        name: null,
+        Login: false, //是否為登入狀態，會同步給各component
+        pet: null,
+        adopt: null,
+      }
     }
   },
   components: {
@@ -85,31 +92,34 @@ export default {
     'adoptData': adoptData,
     'memberData': memberData,
     'myOrder': myOrder,
-    'petData': petData
+    'petData': petData,
+    'signIn': signIn
   },
   methods: {
     //登出，回出初始化
     logOut() {
-      this.ifLogin = false
+      this.memberStatus.Login = false
       this.sideBar = false
-      this.name = null
+      this.memberStatus.name = null
       this.currentComponent = 'defaultMain'
     },
-    //接收component回傳回來的指令
+    //接收component回傳回來的指令，
     childBack(_value) {
       if(_value.name) //如果是登入&登入成功
-        this.ifLogin = true
-        this.name = _value.name
+        this.memberStatus.Login = true
+        this.memberStatus.name = _value.name
+        this.memberStatus.pet = _value.petCheck
+        this.memberStatus.adopt = _value.adoptCheck
       this.currentComponent = _value.desTination
     },
     //切換除bar以外的子頁面
     changeBody(id,log) {
       this.sideBar = false //讓sidebar消失
       if(log == 1) { //需要登入才能用的頁面
-        if(this.ifLogin) {
+        if(this.memberStatus.Login == true) {
           this.currentComponent = id
         }
-        else if(!this.ifLogin) {
+        else if(this.memberStatus.Login != true) {
           this.currentComponent = 'logIn'
         }
       }
@@ -127,6 +137,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .userDrop {
+  z-index: 10;
   position: absolute;
   top: 15%;
   right: 0;

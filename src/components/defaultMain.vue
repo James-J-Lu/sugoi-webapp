@@ -10,7 +10,7 @@
 export default {
     name: 'defaultMain',
     props: {
-        login: Boolean
+        memberStatus: Object
     }
 }
 </script>
