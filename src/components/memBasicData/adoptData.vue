@@ -1,13 +1,13 @@
 <template>
-    <div class="adoptMain">
-        <p>我要領養</p>
+    <div class="adoptData">
+        <p>會員領養檔案</p>
     </div>
 </template>
 
 <script></script>
 
 <style>
-.adoptMain {
+.adoptData {
     font-size: 40px;
 }
 </style>

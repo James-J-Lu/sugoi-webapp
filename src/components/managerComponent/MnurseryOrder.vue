@@ -1,13 +1,13 @@
 <template>
-    <div class="adoptMain">
-        <p>我要領養</p>
+    <div class="MnurseryOrder">
+        <p>管理者*托兒訂單</p>
     </div>
 </template>
 
 <script></script>
 
 <style>
-.adoptMain {
+.MnurseryOrder {
     font-size: 40px;
 }
 </style>

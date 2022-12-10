@@ -1,13 +1,13 @@
 <template>
-    <div class="adoptMain">
-        <p>我要領養</p>
+    <div class="MadoptPet">
+        <p>管理者*待領養狗狗檔案</p>
     </div>
 </template>
 
 <script></script>
 
 <style>
-.adoptMain {
+.MadoptPet {
     font-size: 40px;
 }
 </style>

@@ -13,10 +13,8 @@
             <div class="checkbox mb-3"></div>
             <button type="button" class="w-100 btn btn-lg btn-primary" @click="logIn">Sign in</button>
         </form>
-        <!-- <button type="button" @click="logIn">log in</button> //登入submit那個按鈕
-        <button type="button" v-on:click="getmsg">get</button>
-        <button type="button" v-on:click="postmsg">post</button>
-        <button type="button" @click="back2Main(0)">back 2 default</button> //回上一頁那個按鈕-->
+        <!-- <button type="button" v-on:click="getmsg">get</button>
+        <button type="button" v-on:click="postmsg">post</button> -->
     </div>
 </template>
 
@@ -66,29 +64,33 @@ export default {
         },
         //登入submit
         logIn () {
-            var data = {
-                id: null,
-                account: this.account,
-                pw: this.password,
-                name: null
-            };
-            MemberDataService.logIn(data)
-                .then(response => {
-                    //登入成功
-                    if(response.data != true) {
-                        this.name = response.data.memberName
-                        if(response.data.memberAccount != 'manager')
-                            this.isMember = 'member'
-                        else if(response.data.memberAccount == 'manager')
-                            this.isMember = 'manager'
-                        this.back2Main(1)
-                    }
-                    else
-                        console.log('登入失敗')
-                })
-                .catch(e => {
-                    console.log(e);
-                });
+            this.name = 'kelly'
+            this.isMember = 'manager' //管理者
+            // this.isMember = 'member' //會員
+            this.back2Main(1)
+            // var data = {
+            //     id: null,
+            //     account: this.account,
+            //     pw: this.password,
+            //     name: null
+            // };
+            // MemberDataService.logIn(data)
+            //     .then(response => {
+            //         //登入成功
+            //         if(response.data != true) {
+            //             this.name = response.data.memberName
+            //             if(response.data.memberAccount != 'manager')
+            //                 this.isMember = 'member'
+            //             else if(response.data.memberAccount == 'manager')
+            //                 this.isMember = 'manager'
+            //             this.back2Main(1)
+            //         }
+            //         else
+            //             console.log('登入失敗')
+            //     })
+            //     .catch(e => {
+            //         console.log(e);
+            //     });
         },
         getmsg () {
             var id = 'M004'
@@ -122,7 +124,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;

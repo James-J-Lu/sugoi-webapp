@@ -4,7 +4,7 @@
     <div class="mainBar">
       <ul class="nav mb-md-0">
         <li>
-          <a href="#" @click="changeBody('adoptMain',0)" class="nav-link px-2 link-dark">思狗意</a>
+          <a href="#" @click="changeBody('defaultMain',0)" class="nav-link px-2 link-dark">思狗意</a>
         </li>
         <li>
           <a href="#" @click="changeBody('whatWedo',0)" class="nav-link px-2 link-dark">我們在做的事</a>
@@ -20,7 +20,7 @@
         </li>
         <li>
           <div class="bar-right nav-link px-2">
-            <p v-if="ifLogin" @mouseover="(sideBar = true)" class="nav-link px-2 link-dark">{{ name }}&ensp;小姐<br>您好</p>
+            <p v-if="ifLogin" @mouseover="(sideBar = true)" class="nav-link px-2 link-dark">{{ name }}小姐</p>
             <button v-if="!ifLogin" type="button" @click="changeBody('logIn',0)" class="btn btn-outline-primary me-2">登入</button>
           </div>
         </li>
@@ -30,16 +30,16 @@
     <div v-if="sideBar" class="userDrop">
       <ul class="dropdown-menu position-static d-grid gap-1 p-2 mx-0 shadow w-220px">
         <li>
-          <a href="#" class="dropdown-item rounded-2 active">個人基本資料</a>
+          <a href="#" @click="changeBody('memberData',0)" class="dropdown-item rounded-2 active">個人基本資料</a>
         </li>
         <li>
-          <a href="#" class="dropdown-item rounded-2 active">個人基本資料</a>
+          <a href="#" @click="changeBody('adoptData',0)" class="dropdown-item rounded-2 active">領養資料</a>
         </li>
         <li>
-          <a href="#" class="dropdown-item rounded-2 active">個人基本資料</a>
+          <a href="#" @click="changeBody('petData',0)" class="dropdown-item rounded-2 active">寵物資料</a>
         </li>
         <li>
-          <a href="#" class="dropdown-item rounded-2 active">個人基本資料</a>
+          <a href="#" @click="changeBody('myOrder',0)" class="dropdown-item rounded-2 active">我的訂單</a>
         </li>
         <li>
           <a v-if="ifLogin" type="button" id="logOut" @click="logOut()" class="dropdown-item rounded-2 active">登出</a>
@@ -56,14 +56,19 @@ import logIn from "../components/logIn.vue";
 import managerMain from "../components/managerMain.vue"
 import whatWedo from "../components/whatWedo.vue"
 import contactUs from "../components/contactUs.vue"
-import adoptMain from "../components/adoptMain.vue"
+import defaultMain from "../components/defaultMain.vue"
 import nurseryMain from "../components/nurseryMain.vue"
+import adoptMain from "../components/adoptMain.vue"
+import adoptData from "../components/memBasicData/adoptData.vue"
+import memberData from "../components/memBasicData/memberData.vue"
+import myOrder from "../components/memBasicData/myOrder.vue"
+import petData from "../components/memBasicData/petData.vue"
 
 export default {
   name: 'mainRoute',
   data () {
     return {
-      currentComponent: 'adoptMain', //目前顯示的頁面，要到components註冊
+      currentComponent: 'defaultMain', //目前顯示的頁面，要到components註冊
       name: null, //bar上面顯示的名稱(會員or管理者)
       ifLogin: false, //是否為登入狀態，會同步給各component
       sideBar: false,
@@ -71,11 +76,16 @@ export default {
   },
   components: {
     'logIn': logIn,
-    'adoptMain': adoptMain,
+    'defaultMain': defaultMain,
     'managerMain': managerMain,
     'whatWedo': whatWedo,
     'contactUs': contactUs,
-    'nurseryMain': nurseryMain
+    'nurseryMain': nurseryMain,
+    'adoptMain': adoptMain,
+    'adoptData': adoptData,
+    'memberData': memberData,
+    'myOrder': myOrder,
+    'petData': petData
   },
   methods: {
     //登出，回出初始化
@@ -83,7 +93,7 @@ export default {
       this.ifLogin = false
       this.sideBar = false
       this.name = null
-      this.currentComponent = 'adoptMain'
+      this.currentComponent = 'defaultMain'
     },
     //接收component回傳回來的指令
     childBack(_value) {
@@ -95,12 +105,11 @@ export default {
     //切換除bar以外的子頁面
     changeBody(id,log) {
       this.sideBar = false //讓sidebar消失
-      if(log == 1) {
+      if(log == 1) { //需要登入才能用的頁面
         if(this.ifLogin) {
           this.currentComponent = id
         }
         else if(!this.ifLogin) {
-          console.log("go to login")
           this.currentComponent = 'logIn'
         }
       }
