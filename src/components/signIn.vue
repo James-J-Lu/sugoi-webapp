@@ -121,7 +121,7 @@ export default {
 .signinForm li {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     font-size: 30px;
     font-weight: bold;
 }

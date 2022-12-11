@@ -68,8 +68,8 @@ export default {
         //登入submit
         logIn () {
             this.name = 'kelly'
-            this.isMember = 'member' //管理者
-            // this.isMember = 'member' //會員
+            // this.isMember = 'manager' //管理者
+            this.isMember = 'member' //會員
             this.back2Main(1)
             // var data = {
             //     id: null,

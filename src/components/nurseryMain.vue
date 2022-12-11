@@ -128,6 +128,6 @@ p {
     font-size: 50px;
     padding-left: 15%;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
 }
 </style>

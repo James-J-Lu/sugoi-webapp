@@ -13,7 +13,7 @@
           <a href="#" @click="changeBody('nurseryMain',1)" class="nav-link px-2 link-dark">我要托兒</a>
         </li>
         <li>
-          <a href="#" @click="changeBody('adoptMain',1)" class="nav-link px-2 link-dark">我要領養</a>
+          <a href="#" @click="changeBody('defaultMain',1)" class="nav-link px-2 link-dark">我要領養</a>
         </li>
         <li>
           <a href="#" @click="changeBody('contactUs',0)" class="nav-link px-2 link-dark">聯絡我們</a>
@@ -60,7 +60,6 @@ import whatWedo from "../components/whatWedo.vue"
 import contactUs from "../components/contactUs.vue"
 import defaultMain from "../components/defaultMain.vue"
 import nurseryMain from "../components/nurseryMain.vue"
-import adoptMain from "../components/adoptMain.vue"
 import adoptData from "../components/memBasicData/adoptData.vue"
 import memberData from "../components/memBasicData/memberData.vue"
 import myOrder from "../components/memBasicData/myOrder.vue"
@@ -88,7 +87,6 @@ export default {
     'whatWedo': whatWedo,
     'contactUs': contactUs,
     'nurseryMain': nurseryMain,
-    'adoptMain': adoptMain,
     'adoptData': adoptData,
     'memberData': memberData,
     'myOrder': myOrder,
@@ -193,7 +191,6 @@ export default {
   justify-content: center !important;
 }
 .mainBody {
-  display: block;
   height: 85%;
   background-color: #ffffff;
 }
