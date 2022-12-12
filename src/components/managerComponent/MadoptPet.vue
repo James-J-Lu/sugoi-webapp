@@ -1,7 +1,7 @@
 <template>
-    <div class="MadoptPet">
+  <div class="MadoptPet">
       <p class="Ptop">待領養狗狗</p>
-      <div class="table-responsive">
+      <div class="table-responsive" v-if="!gocheck">
         <table class="table table-striped table-sm">
           <thead class="PtableHead">
             <tr>
@@ -12,30 +12,33 @@
             </tr>
           </thead>
           <tbody class="PtableBody">
-            <tr v-for="member in members" :key="member.id">
+            <tr v-for="adoptPet in adoptPets" :key="adoptPet.id" @click="test(adoptPet.id)">
               <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
-              <td>{{member.id}}</td>
-              <td>{{member.name}}</td>
-              <td>{{member.description}}</td>
+              <td>{{adoptPet.id}}</td>
+              <td>{{adoptPet.name}}</td>
+              <td>{{adoptPet.description}}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div>
-        
-      </div>
+    <div v-if="gocheck">
+        <button v-if="gocheck" @click="back(gocheck)">返回</button>
+        <p>ID: {{ adoptPets[selectPet].id }}</p>
+        <p>名字: {{ adoptPets[selectPet].name }}</p>
+        <p>說明: {{ adoptPets[selectPet].description }}</p>
     </div>
+  </div>
 </template>
 
 <script>
     export default {
-    name: 'MmemberData',
+    name: 'MadoptPet',
     components: {
         
     },
     data () {
         return {
-            members: [
+            adoptPets: [
                 {id: 0, name:'Alice', description:''},
                 {id: 1, name:'Bob', description:''},
                 {id: 2, name:'Charlie', description:''},
@@ -52,9 +55,20 @@
                 {id: 13, name:'Nora', description:''},
                 {id: 14, name:'Olga', description:''}
             ],
+            gocheck:false,
+            selectPet: null,
         }
     },
-
+    methods: {
+      test(id) {
+        console.log(id)
+        this.gocheck=!this.gocheck
+        this.selectPet = id
+      },
+      back() {
+        this.gocheck=!this.gocheck
+      }
+    }
 }
 </script>
 

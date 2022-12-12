@@ -1,30 +1,33 @@
 <template>
-    <div class="MmemberData">
-      <p class="Mtop">會員資料表</p>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead class="MtableHead">
-            <tr>
-              <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
-              <th>會員ID</th>
-              <th>帳號</th>
-              <th>姓名</th>
-            </tr>
-          </thead>
-          <tbody class="MtableBody">
-            <tr v-for="member in members" :key="member.id">
-              <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
-              <td>{{member.id}}</td>
-              <td>{{member.account}}</td>
-              <td>{{member.name}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div>
-        
-      </div>
+  <div class="MmemberData">
+    <p class="Mtop">會員資料表</p>
+    <div class="table-responsive" v-if="!gocheck">
+      <table class="table table-striped table-sm">
+        <thead class="MtableHead">
+          <tr>
+            <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
+            <th>會員ID</th>
+            <th>帳號</th>
+            <th>姓名</th>
+          </tr>
+        </thead>
+        <tbody class="MtableBody">
+          <tr v-for="member in members" :key="member.id" @click="test(member.id)">
+            <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
+            <td>{{member.id}}</td>
+            <td>{{member.account}}</td>
+            <td>{{member.name}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <div v-if="gocheck">
+      <button v-if="gocheck" @click="back(gocheck)">返回</button>
+      <p>ID: {{ members[selectMember].id }}</p>
+      <p>帳號: {{ members[selectMember].account }}</p>
+      <p>名字: {{ members[selectMember].name }}</p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -52,9 +55,20 @@
                 {id: 13, account:'0014', name:'Nora'},
                 {id: 14, account:'0015', name:'Olga'}
             ],
+            gocheck:false,
+            selectMember: null,
         }
     },
-
+    methods: {
+      test(id) {
+        console.log(id)
+        this.gocheck=!this.gocheck
+        this.selectMember = id
+      },
+      back() {
+        this.gocheck=!this.gocheck
+      }
+    }
 }
 </script>
 
