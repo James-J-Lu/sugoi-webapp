@@ -8,7 +8,7 @@
                     <th>訂單編號</th>
                     <th>會員帳號</th>
                     <th>會員姓名</th>
-                    <th>說明</th>
+                    <th style="width:40%">說明</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,7 +22,7 @@
             </tbody>
         </table>
     </div>
-
+ 
 </template>
 
 <script>
@@ -47,9 +47,7 @@
 <style>
 .MadoptOrder {
     font-size: 40px;
-
 }
-
 
 td, th {
   border: 1px solid #706D6D;
