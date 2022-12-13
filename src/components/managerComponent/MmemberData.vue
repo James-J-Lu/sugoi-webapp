@@ -1,8 +1,10 @@
 <template>
   <div class="MmemberData">
-    <p class="Mtop">會員資料表</p>
+    <p class="Mtop">會員資料表
+      <input v-if="gocheck" @click="back(gocheck)" class="backButton" type="button" value="返回">
+    </p>
     <div class="table-responsive" v-if="!gocheck">
-      <table class="table table-striped table-sm">
+      <table class="table table-striped table-sm tableType" >
         <thead class="MtableHead">
           <tr>
             <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
@@ -22,10 +24,72 @@
       </table>
     </div>
     <div v-if="gocheck">
-      <button v-if="gocheck" @click="back(gocheck)">返回</button>
-      <p>ID: {{ members[selectMember].id }}</p>
-      <p>帳號: {{ members[selectMember].account }}</p>
-      <p>名字: {{ members[selectMember].name }}</p>
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">姓名</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ members[selectMember].name }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">性別</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ members[selectMember].gender }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Ｅmail</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ members[selectMember].email }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">生日</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ members[selectMember].birth }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">電話</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ members[selectMember].tele }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">手機</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ members[selectMember].phone }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">地址</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ members[selectMember].address }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -39,21 +103,21 @@
     data () {
         return {
             members: [
-                {id: 0, account:'0001', name:'Alice'},
-                {id: 1, account:'0002', name:'Bob'},
-                {id: 2, account:'0003', name:'Charlie'},
-                {id: 3, account:'0004', name:'Daisy'},
-                {id: 4, account:'0005', name:'Ella'},
-                {id: 5, account:'0006', name:'Flora'},
-                {id: 6, account:'0007', name:'George'},
-                {id: 7, account:'0008', name:'Hank'},
-                {id: 8, account:'0009', name:'Ivy'},
-                {id: 9, account:'0010', name:'Jack'},
-                {id: 10, account:'0011', name:'Kelly'},
-                {id: 11, account:'0012', name:'Lisa'},
-                {id: 12, account:'0013', name:'Mary'},
-                {id: 13, account:'0014', name:'Nora'},
-                {id: 14, account:'0015', name:'Olga'}
+                {id: 0, account:'0001', name:'Alice', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 1, account:'0002', name:'Bob', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 2, account:'0003', name:'Charlie', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 3, account:'0004', name:'Daisy', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 4, account:'0005', name:'Ella', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 5, account:'0006', name:'Flora', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 6, account:'0007', name:'George', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 7, account:'0008', name:'Hank', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 8, account:'0009', name:'Ivy', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 9, account:'0010', name:'Jack', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 10, account:'0011', name:'Kelly', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 11, account:'0012', name:'Lisa', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 12, account:'0013', name:'Mary', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 13, account:'0014', name:'Nora', gender:'', email:'', birth:'', tele:'', phone:'', address:''},
+                {id: 14, account:'0015', name:'Olga', gender:'', email:'', birth:'', tele:'', phone:'', address:''}
             ],
             gocheck:false,
             selectMember: null,
@@ -61,7 +125,6 @@
     },
     methods: {
       test(id) {
-        console.log(id)
         this.gocheck=!this.gocheck
         this.selectMember = id
       },
@@ -88,5 +151,19 @@
 .MtableBody {
     background-color:white;
     font-size: 28px;
+}
+
+.tableType {
+  --bs-table-border-color: none !important;
+}
+
+input[type=button] {
+  background-color: #bdbdbd;
+  border: none;
+  color: black;
+  padding: 10px;
+  float:right; 
+  font-size: 20px;
+  margin: 4px 2px;
 }
 </style>
