@@ -9,10 +9,13 @@
             {{tab}}
         </button>
 
-        <div class="workspace">
+        <div v-if="show" class="workspace">
             <tabNursery v-if="currentTab == '托兒訂單'"></tabNursery>
             <tabAdpot v-if="currentTab == '領養訂單'"></tabAdpot>
 
+
+        </div>
+        <div v-if="!show">
 
         </div>
 
@@ -24,8 +27,13 @@
 export default{
     data(){
         return{
+            show: true,
             currentTab: "托兒訂單",
-            tabs:['托兒訂單','領養訂單']
+            tabs:['托兒訂單','領養訂單'],
+            data: [
+                // {id: , name: ,},
+                // {},
+            ]
         }
     },
     components:{
@@ -48,5 +56,9 @@ export default{
     height: 85%;
     font-size: 30px;
     background-color: rgba(249, 236, 190, 0.44);
+}
+
+.tab-button {
+    background-color: aquamarine;
 }
 </style>
