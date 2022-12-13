@@ -13,7 +13,7 @@
             </thead>
             <tbody>
                 <tr v-for="order in orders" :key="order.id">
-                    <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
+                    <td width="100px"><input class="form-check-input me-1" type="checkbox"></td>
                     <td>{{order.orderID}}</td>
                     <td>{{order.Maccount}}</td>
                     <td>{{order.Mname}}</td>
@@ -30,13 +30,13 @@
         data () {
             return {
                 orders: [
-                    {orderID: '0000001', Maccount: 'bob123', Mname:'bob', Description: 'tesing'},
-                    {orderID: '0000002', Maccount: 'alice123', Mname:'alice', Description: 'tesing1'},
-                    {orderID: '0000003', Maccount: 'mia123', Mname:'mia', Description: 'tesing3'},
-                    {orderID: '0000004', Maccount: 'ethan123', Mname:'ethan', Description: 'tesing4'},
-                    {orderID: '0000005', Maccount: 'jack123', Mname:'jack', Description: 'tesing5'},
-                    {orderID: '0000006', Maccount: 'vivian123', Mname:'vivian', Description: 'tesing6'},
-                    {orderID: '0000007', Maccount: 'josh123', Mname:'josh', Description: 'tesing7'},
+                    {orderID: '0000001', Maccount: 'bob123', Mname:'bob', Description: 'testing'},
+                    {orderID: '0000002', Maccount: 'alice123', Mname:'alice', Description: 'testing1'},
+                    {orderID: '0000003', Maccount: 'mia123', Mname:'mia', Description: 'testing3'},
+                    {orderID: '0000004', Maccount: 'ethan123', Mname:'ethan', Description: 'testing4'},
+                    {orderID: '0000005', Maccount: 'jack123', Mname:'jack', Description: 'testing5'},
+                    {orderID: '0000006', Maccount: 'vivian123', Mname:'vivian', Description: 'testing6'},
+                    {orderID: '0000007', Maccount: 'josh123', Mname:'josh', Description: 'testing7'},
                 ],
             }
         },
