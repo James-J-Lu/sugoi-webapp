@@ -23,9 +23,34 @@
             </tbody>
         </table>
         </div>
-        <div v-if="flag" class="orderdetail">
-            <button @click="flag=!flag">返回</button>
-            <p>{{orders[selectorder].Maccount}}</p>
+        <div v-if="flag">
+            <button @click="flag=!flag" class="back">返回</button>
+            <table>
+                <tbody class="orderdetail">
+                    <tr>
+                        <p>領養訂單編號：{{orders[selectorder].orderID}}</p>
+                    </tr>
+                    <tr>
+                        <p>會員帳號：{{orders[selectorder].Maccount}}</p>
+                    </tr>
+                    <tr>
+                        <p>會員姓名：{{orders[selectorder].Mname}}</p>
+                    </tr>
+                    <tr>
+                        <p>{{orders[selectorder].Description}}</p>
+                    </tr>
+                    <tr>
+                        <p>約看時間：</p>
+                    </tr>
+                    <tr>
+                        <p>領養進度：</p>
+                    </tr>
+                    <tr>
+                        <p>建立日期：</p>
+                    </tr>
+                </tbody>
+            </table>
+           
         </div>
     </div>
 
@@ -65,6 +90,7 @@
 <style>
 .MadoptOrder {
     font-size: 40px;
+    background-color: white
 }
 
 
@@ -84,7 +110,13 @@ td, th {
     right: 2%;
     width: 72.5%;
     height: 93%;
-    background-color: bisque;
+    background-color: white;
+}
+
+.orderdetail{
+    text-align:center;
 }
 </style>
+
+
 
