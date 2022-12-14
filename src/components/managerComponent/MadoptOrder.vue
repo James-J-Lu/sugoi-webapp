@@ -23,6 +23,10 @@
         </table>
     </div>
  
+
+    <div v-if="isclick" class="orderinfo">
+        <p>order details</p>
+    </div>
 </template>
 
 <script>
