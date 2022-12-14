@@ -6,17 +6,17 @@
                 <div class="row">
                     <div class="col">
                         <label for="cc-name" class="form-label">大房間：{{bigRoom}}間</label>
-                        <input type="number" class="form-control inputDisplay" v-model="bigRoom" :value="bigRoom">
+                        <input type="number" class="form-control inputDisplay" v-model="bigRoom" min="0" max="10">
                     </div>
 
                     <div class="col">
                         <label for="cc-number" class="form-label">中房間：{{middleRoom}}間</label>
-                        <input type="number" class="form-control inputDisplay" v-model="middleRoom" :value="middleRoom">
+                        <input type="number" class="form-control inputDisplay" v-model="middleRoom" min="0" max="10">
                     </div>
 
                     <div class="col">
                         <label for="cc-number" class="form-label">小房間：{{smallRoom}}間</label>
-                        <input type="number" class="form-control inputDisplay" v-model="smallRoom"  :value="smallRoom">
+                        <input type="number" class="form-control inputDisplay" v-model="smallRoom" min="0" max="10">
                     </div>
                 </div>
             </div>
