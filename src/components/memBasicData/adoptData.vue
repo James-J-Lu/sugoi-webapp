@@ -6,120 +6,69 @@
                 <form class="row g-3">
                     <li>
                         <label><span>體型偏好：</span></label>
-                        <input type="radio" id="s0" value="nosize" v-model="size">
+                        <input type="radio" id="s0" value="nosize" v-model="size" name="inlineRadioOptions0">
                         <label for="one">沒有特別偏好</label>
-                        <input type="radio" id="s1" value="big" v-model="size">
+                        <input type="radio" id="s1" value="big" v-model="size" name="inlineRadioOptions0">
                         <label for="two">大型犬</label>
-                        <input type="radio" id="s2" value="medium" v-model="size">
-                        <label for="two">中型犬</label>
-                        <input type="radio" id="s3" value="small" v-model="size">
-                        <label for="two">小型犬</label>
+                        <input type="radio" id="s2" value="medium" v-model="size" name="inlineRadioOptions0">
+                        <label for="three">中型犬</label>
+                        <input type="radio" id="s3" value="small" v-model="size" name="inlineRadioOptions0">
+                        <label for="four">小型犬</label>
                     </li>
                     <li>
-                        年齡偏好：
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio1"
-                                value="option1">
-                            <label class="form-check-label" for="inlineRadio1">沒有特別偏好</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio2"
-                                value="option2">
-                            <label class="form-check-label" for="inlineRadio2">2歲以下</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio3"
-                                value="option3">
-                            <label class="form-check-label" for="inlineRadio3">2～5歲</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio4"
-                                value="option4">
-                            <label class="form-check-label" for="inlineRadio4">5歲以上</label>
-                        </div>
+                        <label><span>年齡偏好：</span></label>
+                        <input type="radio" id="a0" value="noage" v-model="age" name="inlineRadioOptions1">
+                        <label for="one">沒有特別偏好</label>
+                        <input type="radio" id="a1" value="below2" v-model="age" name="inlineRadioOptions1">
+                        <label for="two">2歲以下</label>
+                        <input type="radio" id="a2" value="2to5" v-model="age" name="inlineRadioOptions1">
+                        <label for="three">2～5歲</label>
+                        <input type="radio" id="a3" value="above5" v-model="age" name="inlineRadioOptions1">
+                        <label for="four">5歲以上</label>
                     </li>
                     <li>
-                        毛色偏好：
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio1"
-                                value="option1">
-                            <label class="form-check-label" for="inlineRadio1">沒有特別偏好</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2"
-                                value="option2">
-                            <label class="form-check-label" for="inlineRadio2">白色</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio3"
-                                value="option3">
-                            <label class="form-check-label" for="inlineRadio3">黑色</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio4"
-                                value="option4">
-                            <label class="form-check-label" for="inlineRadio4">黃色</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio5"
-                                value="option5">
-                            <label class="form-check-label" for="inlineRadio4">花花色</label>
-                        </div>
+                        <label><span>毛色偏好：</span></label>
+                        <input type="radio" id="c0" value="nocolor" v-model="color" name="inlineRadioOptions2">
+                        <label for="one">沒有特別偏好</label>
+                        <input type="radio" id="c1" value="white" v-model="color" name="inlineRadioOptions2">
+                        <label for="two">白色</label>
+                        <input type="radio" id="c2" value="black" v-model="color" name="inlineRadioOptions2">
+                        <label for="three">黑色</label>
+                        <input type="radio" id="c3" value="yellow" v-model="color" name="inlineRadioOptions2">
+                        <label for="four">黃色</label>
+                        <input type="radio" id="c4" value="multi" v-model="color" name="inlineRadioOptions2">
+                        <label for="five">花花色</label>
                     </li>
                     <li>
-                        毛髮偏好：
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio1"
-                                value="option1">
-                            <label class="form-check-label" for="inlineRadio1">沒有特別偏好</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio2"
-                                value="option2">
-                            <label class="form-check-label" for="inlineRadio2">長毛</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3"
-                                value="option3">
-                            <label class="form-check-label" for="inlineRadio3">短毛</label>
-                        </div>
+                        <label><span>毛髮偏好：</span></label>
+                        <input type="radio" id="h0" value="nohair" v-model="hair" name="inlineRadioOptions3">
+                        <label for="one">沒有特別偏好</label>
+                        <input type="radio" id="h1" value="long" v-model="hair" name="inlineRadioOptions3">
+                        <label for="two">長毛</label>
+                        <input type="radio" id="h2" value="short" v-model="hair" name="inlineRadioOptions3">
+                        <label for="three">短毛</label>
                     </li>
                     <li>
-                        性別偏好：
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions4" id="inlineRadio1"
-                                value="option1">
-                            <label class="form-check-label" for="inlineRadio1">沒有特別偏好</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions4" id="inlineRadio2"
-                                value="option2">
-                            <label class="form-check-label" for="inlineRadio2">男生</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions4" id="inlineRadio3"
-                                value="option3">
-                            <label class="form-check-label" for="inlineRadio3">女生</label>
-                        </div>
+                        <label><span>性別偏好：</span></label>
+                        <input type="radio" id="s0" value="nosexual" v-model="sexual" name="inlineRadioOptions4">
+                        <label for="one">沒有特別偏好</label>
+                        <input type="radio" id="s1" value="boy" v-model="sexual" name="inlineRadioOptions4">
+                        <label for="two">男生</label>
+                        <input type="radio" id="s2" value="girl" v-model="sexual" name="inlineRadioOptions4">
+                        <label for="three">女生</label>
                     </li>
                     <li>
-                        品種偏好：
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions5" id="inlineRadio1"
-                                value="option1">
-                            <label class="form-check-label" for="inlineRadio1">沒有特別偏好</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions5" id="inlineRadio2"
-                                value="option2">
-                            <label class="form-check-label" for="inlineRadio2">只限品種狗</label>
-                        </div>
+                        <label><span>品種偏好：</span></label>
+                        <input type="radio" id="b0" value="nobreed" v-model="breed" name="inlineRadioOptions5">
+                        <label for="one">沒有特別偏好</label>
+                        <input type="radio" id="b1" value="pure" v-model="breed" name="inlineRadioOptions5">
+                        <label for="two">只限品種狗</label>
                     </li>
 
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">簡述家庭環境：</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="(如空間大小，有無院子等)"
-                            style="height: 110px">
+                        <label for="background" class="form-label">簡述家庭環境：</label>
+                        <input type="text" class="form-control" id="background" v-model="background"
+                            placeholder="(如空間大小，有無院子等)" style="height: 110px">
                     </div>
 
                     <li>
@@ -141,12 +90,12 @@ export default {
     data() {
         return {
             size: "big",
-            age: "male",
-            account: "a12334",
-            telephone: "071234567",
-            phonenumber: "0903333333",
-            email: "qqq123@ncu.edu.tw",
-            address: "桃園市中壢區中大路300號",
+            age: "2to5",
+            color: "white",
+            hair: "short",
+            sexual: "boy",
+            breed: "pure",
+            background: "我家有水池",
         }
     }
 }
