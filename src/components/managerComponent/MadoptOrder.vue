@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="order in orders" :key="order.id">
+                <tr v-for="order in orders" :key="order.id" @click="handleClick">
                     <td width="100px"><input class="form-check-input me-1" type="checkbox"></td>
                     <td>{{order.orderID}}</td>
                     <td>{{order.Maccount}}</td>
@@ -42,8 +42,15 @@
                     {orderID: '0000006', Maccount: 'vivian123', Mname:'vivian', Description: 'testing6'},
                     {orderID: '0000007', Maccount: 'josh123', Mname:'josh', Description: 'testing7'},
                 ],
+        
             }
         },
+
+        methods:{
+            handleClick: function(){
+                alert("被點擊了");
+            }
+        }
     }
 
 </script>
