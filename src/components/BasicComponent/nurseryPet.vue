@@ -3,7 +3,7 @@
         <div>
             <img src="" alt="">
         </div>
-        <p>{{ name }}</p>
+        <p>{{ pet.name }}</p>
     </div>
 </template>
 
@@ -11,7 +11,7 @@
 export default {
     name: 'nurseryPet',
     props: {
-        name: String,
+        pet: Object,
     }
 }
 </script>

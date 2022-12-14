@@ -7,14 +7,14 @@
                     <p class="dropdown-item rounded-2 active">請選擇一隻狗狗</p>
                 </li>
                 <li>
-                    <Pet v-for="pet in pets" :key="pet.id" :name="pet.name" @click="(selectedPet = pet.id)" />
+                    <nurseryPet v-for="pet in Mpets" :key="pet.id" :pet="pet" @click="(selectedPet = pet.id)"/>
                 </li>
                 <li>
                     <p class="dropdown-item rounded-2 active">什麼時候...</p>
                 </li>
                 <li>
                     <div class="time">
-                        <DatePicker v-model="date" :enable-time-picker="false" :clearable="false"></DatePicker>
+                        <DatePicker v-model="selectedTime" :enable-time-picker="false" :clearable="false"></DatePicker>
                     </div>
                 </li>
                 <li>
@@ -26,20 +26,25 @@
 </template>
 
 <script>
-import Pet from "../components/BasicComponent/nurseryPet.vue"
+import nurseryPet from "../components/BasicComponent/nurseryPet.vue"
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import MemberPetDataService from "../services/MemberPetDataService";
+import MemberDataService from "../services/MemberDataService";
 
 export default {
     name: 'nurseryMain',
+    props: {
+        memberStatus: Object,
+    },
     components: {
-        'Pet': Pet,
+        'nurseryPet': nurseryPet,
         'DatePicker': DatePicker,
     },
     data () {
         return {
             date: null,
-            pets: [
+            Mpets: [
                 {id: 0, name:'cockie'},
                 {id: 1, name:'rock'},
                 {id: 2, name:'mabao'},
@@ -51,12 +56,34 @@ export default {
         }
     },
     methods: {
-        //送出nursery
+        //送出nursery code=2
         submitNursery() {
             console.log(this.selectedPet)
             console.log(this.electedTime)
-        }
-    }
+        },
+        //取得會員的寵物資料 code=2
+        getMemberPet() {
+            var memberId = 'M0011'
+            MemberPetDataService.findByMID(memberId)
+                .then(response => {
+                    var a = ["id", "name"];
+                    a.forEach(function(entry) {
+                        for(var i = 0; i < length(response.data); i++) {
+                            var singlePet = {};
+                            singlePet['id'] = length(this.pets);
+                            singlePet['name'] = response.data[i].name;
+                            this.pets.push(singlePet);
+                        }
+                    });
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+    },
+    mounted() {
+        // this.getMemberPet()
+    },
 }
 </script>
 

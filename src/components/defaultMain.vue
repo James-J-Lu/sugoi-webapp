@@ -2,61 +2,52 @@
     <div class="defaultMain">
         <p class="dropdown-item rounded-2 active">以下是可以被領養的狗狗</p>
         <div class="adoptpet">
-            <adoptPet v-for="pet in aPets" :key="pet.id" :name="pet.name"/>
+            <adoptPet v-for="pet in aPets" :key="pet.id" :pet="pet"/>
         </div>
-        <DatePicker v-if="memberStatus.Login" v-model="date" :enable-time-picker="false" :clearable="false" class="choseTime"></DatePicker>
-        <button v-if="memberStatus.Login" type="button" @click="submitNursery" class="submitBtn">完成領養申請</button>
     </div>
 </template>
 
 <script>
 import adoptPet from "../components/BasicComponent/adoptPet.vue"
-import DatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import AdoptionPetDataService from "../services/AdoptionPetDataService"
 
 export default {
     name: 'defaultMain',
-    props: {
-        memberStatus: Object
-    },
     components: {
         'adoptPet': adoptPet,
-        'DatePicker': DatePicker,
     },
     data () {
         return {
-            date: null,
             aPets: [
-                {id: 0, name:'cockie'},
-                {id: 1, name:'rock'},
-                {id: 2, name:'mabao'},
-                {id: 3, name:'rick'},
-                {id: 4, name:'sting'},
-                {id: 5, name:'甜甜'},
-                {id: 6, name:'黑黑'}
+                {id: 0, name:'cockie', img:"../../assets/Pet/1.jpg"},
+                {id: 1, name:'rock', img:"../../assets/Pet/2.jpg"},
+                {id: 2, name:'mabao', img:"../../assets/Pet/3.jpg"},
+                {id: 3, name:'rick', img:"../../assets/Pet/4.jpg"},
+                {id: 4, name:'sting', img:"../../assets/Pet/5.jpg"},
+                {id: 5, name:'甜甜', img:"../../assets/Pet/6.jpg"},
+                {id: 6, name:'黑黑', img:"../../assets/Pet/6.jpg"}
             ],
         }
+    },
+    methods: {
+        getAdoptPet() {
+            console.log('Get Adoption Pet')
+            // AdoptionPetDataService.getAll()
+            //     .then(response => {
+            //         console.log(response.data)
+            //     })
+            //     .catch(e => {
+            //         console.log(e)
+            //     })
+        },
+    },
+    mounted() {
+        this.getAdoptPet()
     },
 }
 </script>
 
 <style scoped>
-.choseTime {
-    position: relative;
-    margin: 2rem;
-}
-.submitBtn {
-    position: relative;
-    display: inline-block;
-    margin:0;
-    width: 20%;
-    height: 10%;
-    bottom: 2%;
-    background-color: #FF3D00;
-    border-radius: 27px;
-    font-size: 30px;
-    color: white;
-}
 .defaultMain {
     position: relative;
     height: 100%;

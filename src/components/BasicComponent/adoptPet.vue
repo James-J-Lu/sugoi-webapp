@@ -1,12 +1,12 @@
 <template>
     <div class="petComp">
-        <div class="img">
-
+        <div class="imgdiv">
+            <img :src="src"  alt="??" class="img">
         </div>
-        <div class="detail">
+        <div class="detail" @click="click()">
             <ul>
                 <li>
-                    {{ name }}
+                    {{ pet.name }}
                 </li>
                 <li></li>
                 <li></li>
@@ -22,7 +22,17 @@
 export default {
     name: 'adoptPet',
     props: {
-        name: String,
+        pet: Object,
+    },
+    methods: {
+        click() {
+            console.log(this.pet.img)
+        }
+    },
+    data() {
+        return {
+            src: require('../../assets/Pet/5.jpg'),
+        }
     }
 }
 
@@ -33,13 +43,17 @@ export default {
     position: relative;
     background-color: white;
 }
-.img {
-    background-color: cornflowerblue;
+.imgdiv {
     border-radius: 20px;
     height: 50%;
     top: 0;
     margin-left: 10%;
     margin-right: 10%;
+}
+.img {
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
 }
 .detail {
     position: absolute;

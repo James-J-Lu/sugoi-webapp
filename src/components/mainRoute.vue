@@ -13,7 +13,7 @@
           <a href="#" @click="changeBody('nurseryMain',1)" class="nav-link px-2 link-dark">我要托兒</a>
         </li>
         <li>
-          <a href="#" @click="changeBody('defaultMain',1)" class="nav-link px-2 link-dark">我要領養</a>
+          <a href="#" @click="changeBody('adoptMain',1)" class="nav-link px-2 link-dark">我要領養</a>
         </li>
         <li>
           <a href="#" @click="changeBody('contactUs',0)" class="nav-link px-2 link-dark">聯絡我們</a>
@@ -59,6 +59,7 @@ import managerMain from "../components/managerMain.vue"
 import whatWedo from "../components/whatWedo.vue"
 import contactUs from "../components/contactUs.vue"
 import defaultMain from "../components/defaultMain.vue"
+import adoptMain from "../components/adoptMain.vue"
 import nurseryMain from "../components/nurseryMain.vue"
 import adoptData from "../components/memBasicData/adoptData.vue"
 import memberData from "../components/memBasicData/memberData.vue"
@@ -86,6 +87,7 @@ export default {
     'managerMain': managerMain,
     'whatWedo': whatWedo,
     'contactUs': contactUs,
+    'adoptMain':adoptMain,
     'nurseryMain': nurseryMain,
     'adoptData': adoptData,
     'memberData': memberData,
@@ -115,7 +117,12 @@ export default {
       this.sideBar = false //讓sidebar消失
       if(log == 1) { //需要登入才能用的頁面
         if(this.memberStatus.Login == true) {
-          this.currentComponent = id
+          if(id == 'nurseryMain' && this.memberStatus.pet != true)
+            console.log('no pet') //code=3 沒有狗狗提醒
+          else if(id == 'adoptMain' && this.memberStatus.adopt != true)
+            console.log('no adoption file') //code=3 沒有領養資料提醒
+          else
+            this.currentComponent = id
         }
         else if(this.memberStatus.Login != true) {
           this.currentComponent = 'logIn'
