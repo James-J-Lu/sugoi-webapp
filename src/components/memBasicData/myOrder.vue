@@ -12,11 +12,22 @@
         <div v-if="show" class="workspace">
             <tabNurseryNoData v-if="currentTab == '托兒訂單'" class="nurseryNoData"></tabNurseryNoData>
             <tabAdpotNoData v-if="currentTab == '領養訂單'" class="nurseryNoData"></tabAdpotNoData>
-
-
         </div>
+
         <div v-if="!show" class="workspace">
-            <div v-for="nurseryOrder in nurseryOrders" :key="nurseryOrders.id" :name="nurseryOrders.name" @click="">
+            <tabNurseryData v-if="currentTab == '托兒訂單'" class="nurseryNoData">
+                <div>
+                    <p>測試托兒</p>
+                    <li>
+                        <tabNurseryOrder v-for="nurseryOrder in nurseryOrders" :key="nurseryOrder.id" :name="nurseryOrder.name" @click=""></tabNurseryOrder>
+                    </li>
+                </div>
+            </tabNurseryData>
+            <tabAdpotData v-if="currentTab == '領養訂單'" class="nurseryNoData">
+                <div>
+                    <p>測試領養</p>
+                </div>
+            </tabAdpotData>
         </div>
 
         
@@ -27,7 +38,7 @@
 export default{
     data(){
         return{
-            show: true,
+            show: false,
             currentTab: "托兒訂單",
             tabs:['托兒訂單','領養訂單'],
             nurseryOrders: [
@@ -83,4 +94,5 @@ export default{
     height: 85%;
     top: 200px;
 }
+
 </style>
