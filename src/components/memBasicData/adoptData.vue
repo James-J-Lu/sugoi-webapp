@@ -5,27 +5,15 @@
             <ul class="dropdown-menu position-static d-grid gap-1 mx-0 shadow w-220px">
                 <form class="row g-3">
                     <li>
-                        體型偏好：
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                value="option1">
-                            <label class="form-check-label" for="inlineRadio1">沒有特別偏好</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                value="option2">
-                            <label class="form-check-label" for="inlineRadio2">大型犬</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                                value="option3">
-                            <label class="form-check-label" for="inlineRadio3">中型犬</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"
-                                value="option4">
-                            <label class="form-check-label" for="inlineRadio4">小型犬</label>
-                        </div>
+                        <label><span>體型偏好：</span></label>
+                        <input type="radio" id="s0" value="nosize" v-model="size">
+                        <label for="one">沒有特別偏好</label>
+                        <input type="radio" id="s1" value="big" v-model="size">
+                        <label for="two">大型犬</label>
+                        <input type="radio" id="s2" value="medium" v-model="size">
+                        <label for="two">中型犬</label>
+                        <input type="radio" id="s3" value="small" v-model="size">
+                        <label for="two">小型犬</label>
                     </li>
                     <li>
                         年齡偏好：
@@ -145,7 +133,24 @@
     </div>
 </template>
     
-<script></script>
+<script>
+export default {
+    name: 'MmemberData',
+    components: {
+    },
+    data() {
+        return {
+            size: "big",
+            age: "male",
+            account: "a12334",
+            telephone: "071234567",
+            phonenumber: "0903333333",
+            email: "qqq123@ncu.edu.tw",
+            address: "桃園市中壢區中大路300號",
+        }
+    }
+}
+</script>
     
 <style scoped>
 .workspace ul {
@@ -189,10 +194,12 @@ p {
     height: 70%;
     font-size: 30px;
 }
-.form-check{
+
+.form-check {
     font-size: 30px;
 }
-.form-control{
+
+.form-control {
     font-size: 35px;
 }
 
