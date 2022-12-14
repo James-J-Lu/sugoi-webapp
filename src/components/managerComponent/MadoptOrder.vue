@@ -1,5 +1,6 @@
 <template>
     <div class="MadoptOrder">
+        <div v-if="!flag" class="Morderlist">
         <p>管理者*領養訂單</p>
          <table class="table table-striped table-sm tableType">
             <thead>
@@ -12,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="order in orders" :key="order.id" @click="handleClick">
+                <tr v-for="order in orders" :key="order.id" @click="handleClick(order.orderID)">
                     <td width="100px"><input class="form-check-input me-1" type="checkbox"></td>
                     <td>{{order.orderID}}</td>
                     <td>{{order.Maccount}}</td>
@@ -21,12 +22,15 @@
                 </tr>
             </tbody>
         </table>
+        </div>
+        <div v-if="flag" class="orderdetail">
+            <button @click="flag=!flag">返回</button>
+            <p>{{orders[selectorder].Maccount}}</p>
+        </div>
     </div>
- 
 
-    <div v-if="isclick" class="orderinfo">
-        <p>order details</p>
-    </div>
+    
+
 </template>
 
 <script>
@@ -34,24 +38,27 @@
         data () {
             return {
                 orders: [
-                    {orderID: '0000001', Maccount: 'bob123', Mname:'bob', Description: 'testing'},
-                    {orderID: '0000002', Maccount: 'alice123', Mname:'alice', Description: 'testing1'},
-                    {orderID: '0000003', Maccount: 'mia123', Mname:'mia', Description: 'testing3'},
-                    {orderID: '0000004', Maccount: 'ethan123', Mname:'ethan', Description: 'testing4'},
-                    {orderID: '0000005', Maccount: 'jack123', Mname:'jack', Description: 'testing5'},
-                    {orderID: '0000006', Maccount: 'vivian123', Mname:'vivian', Description: 'testing6'},
-                    {orderID: '0000007', Maccount: 'josh123', Mname:'josh', Description: 'testing7'},
+                    {orderID: 0, Maccount: 'bob123', Mname:'bob', Description: 'testing'},
+                    {orderID: 1, Maccount: 'alice123', Mname:'alice', Description: 'testing1'},
+                    {orderID: 2, Maccount: 'mia123', Mname:'mia', Description: 'testing3'},
+                    {orderID: 3, Maccount: 'ethan123', Mname:'ethan', Description: 'testing4'},
+                    {orderID: 4, Maccount: 'jack123', Mname:'jack', Description: 'testing5'},
+                    {orderID: 5, Maccount: 'vivian123', Mname:'vivian', Description: 'testing6'},
+                    {orderID: 6, Maccount: 'josh123', Mname:'josh', Description: 'testing7'},
                 ],
-        
+            flag: false,
+            selectorder: null,
             }
         },
 
         methods:{
-            handleClick: function(){
-                alert("被點擊了");
+                handleClick(ID){
+                    this.flag = !this.flag
+                    this.selectorder = ID
+                }
             }
         }
-    }
+    
 
 </script>
 
@@ -59,6 +66,8 @@
 .MadoptOrder {
     font-size: 40px;
 }
+
+
 
 td, th {
   border: 1px solid #706D6D;
