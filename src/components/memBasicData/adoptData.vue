@@ -2,6 +2,12 @@
     <div class="adoptData">
         <p id="title">領養資料</p>
         <div class="workspace">
+            <div v-if="pop && visibility" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ members }}您好：</strong> 領養資料已更新
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                    v-on:click="popoff"></button>
+            </div>
+            <br>
             <ul class="dropdown-menu position-static d-grid gap-1 mx-0 shadow w-220px">
 
                 <form class="row g-3">
@@ -155,13 +161,14 @@
 
                         <div class="col-12">
                             <label for="background" class="form-label">簡述家庭環境：</label>
-                            <input style="background-color:#F9ECBE" type="text" class="form-control" id="background" v-model="background_t"
-                                placeholder="(如空間大小，有無院子等)" style="height: 110px">
+                            <input style="background-color:#F9ECBE, height: 110px;" type="text" class="form-control" id="background"
+                                v-model="background_t" placeholder="(如空間大小，有無院子等)">
                         </div>
                         <br>
                         <li>
                             <button type="button" class="cancel" v-on:click="cancel">取消更改</button>
-                            <button type="button" class="confirm" v-on:click="modify(size_t,age_t,color_t,hair_t,sexual_t,breed_t,background_t)">確認更改</button>
+                            <button type="button" class="confirm"
+                                v-on:click="modify(size_t, age_t, color_t, hair_t, sexual_t, breed_t, background_t)">確認更改</button>
                         </li>
 
                     </div>
@@ -182,59 +189,67 @@ export default {
     data() {
         return {
             size: "big",
-            size_t:null,
+            size_t: null,
             age: "2to5",
-            age_t:null,
+            age_t: null,
             color: "white",
-            color_t:null,
+            color_t: null,
             hair: "short",
-            hair_t:null,
+            hair_t: null,
             sexual: "boy",
-            sexual_t:null,
+            sexual_t: null,
             breed: "pure",
-            breed_t:null,
+            breed_t: null,
             background: "我家有水池",
-            background_t:null,
-            visibility: true
+            background_t: null,
+            visibility: true,
+            pop: false
         }
     },
     methods: {
         cancel() {
             this.visibility = true
+            this.pop = false
         },
         edit() {
             this.visibility = false
-            this.size_t=this.size
-            this.age_t=this.age
-            this.color_t=this.color
-            this.hair_t=this.hair
-            this.sexual_t=this.sexual
-            this.breed_t=this.breed
-            this.background_t=this.background
+            this.size_t = this.size
+            this.age_t = this.age
+            this.color_t = this.color
+            this.hair_t = this.hair
+            this.sexual_t = this.sexual
+            this.breed_t = this.breed
+            this.background_t = this.background
         },
-        modify(size_t,age_t,color_t,hair_t,sexual_t,breed_t,background_t) {
+        modify(size_t, age_t, color_t, hair_t, sexual_t, breed_t, background_t) {
             this.size = size_t
-            this.age=age_t
-            this.color=color_t
-            this.hair=hair_t
-            this.sexual=sexual_t
-            this.breed=breed_t
-            this.background=background_t
-            this.visibility=true
-        
-    }
+            this.age = age_t
+            this.color = color_t
+            this.hair = hair_t
+            this.sexual = sexual_t
+            this.breed = breed_t
+            this.background = background_t
+            this.visibility = true
+            this.pop = true
+
+        },
+        popoff() {
+            this.pop = false
+        }
     }
 
 }
 </script>
     
 <style scoped>
-.first{
+.first {
     font-size: 35px;
 }
-.second{
+
+.second {
     font-size: 35px;
 }
+
 .workspace ul {
     font-size: 25px;
     display: block;
@@ -265,6 +280,10 @@ p {
     padding-left: 42%;
     display: flex;
     justify-content: start;
+}
+
+.alert alert-warning alert-dismissible fade show {
+    border-radius: 20px;
 }
 
 .workspace {
