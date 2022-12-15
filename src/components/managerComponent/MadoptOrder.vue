@@ -23,38 +23,74 @@
             </tbody>
         </table>
         </div>
-        <div v-if="flag">
-            <button @click="flag=!flag" class="back">返回</button>
-            <table>
-                <tbody class="orderdetail">
-                    <tr>
-                        <p>領養訂單編號：{{orders[selectorder].orderID}}</p>
+
+        <div v-if="!editflag" class="Morderlist">
+            <div v-if="flag">
+                <button @click="flag=!flag" class="backbutton">返回</button>
+                <button @click="editflag=!editflag" class="editbutton">修改</button>
+                <table>
+                    <tbody>
+                        <div class="card mb-4" style="width: 25rem;">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">領養訂單編號：{{orders[selectorder].orderID}}</li>
+                                <li class="list-group-item">會員帳號：{{orders[selectorder].Maccount}}</li>
+                                <li class="list-group-item">會員姓名：{{orders[selectorder].Mname}}</li>
+                                <li class="list-group-item">約看時間：</li>
+                                <li class="list-group-item">領養進度：</li>
+                                <li class="list-group-item">建立時間：</li>
+                            </ul>
+                        </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div v-if="editflag">
+            <p>測試</p>
+            <tr>
+                        <div class="card">
+                            <div class="card-body">
+                                <p>領養訂單編號：{{orders[selectorder].orderID}}</p>
+                            </div>
+                        </div>
                     </tr>
                     <tr>
-                        <p>會員帳號：{{orders[selectorder].Maccount}}</p>
+                        <div class="card">
+                            <div class="card-body">
+                                <p>會員帳號：{{orders[selectorder].Maccount}}</p>
+                            </div>
+                        </div>
                     </tr>
                     <tr>
-                        <p>會員姓名：{{orders[selectorder].Mname}}</p>
+                        <div class="card">
+                            <div class="card-body">
+                                <p>會員姓名：{{orders[selectorder].Mname}}</p>
+                            </div>
+                        </div>
                     </tr>
                     <tr>
-                        <p>{{orders[selectorder].Description}}</p>
+                        <div class="card">
+                            <div class="card-body">
+                                <p>約看時間：</p>
+                            </div>
+                        </div>
                     </tr>
                     <tr>
-                        <p>約看時間：</p>
+                        <div class="card">
+                            <div class="card-body">
+                                <p>領養進度：</p>
+                            </div>
+                        </div>
                     </tr>
                     <tr>
-                        <p>領養進度：</p>
+                        <div class="card">
+                            <div class="card-body">
+                                <p>建立日期：</p>
+                            </div>
+                        </div>
                     </tr>
-                    <tr>
-                        <p>建立日期：</p>
-                    </tr>
-                </tbody>
-            </table>
-           
         </div>
     </div>
-
-    
 
 </template>
 
@@ -73,6 +109,7 @@
                 ],
             flag: false,
             selectorder: null,
+            editflag: false,
             }
         },
 
@@ -113,8 +150,26 @@ td, th {
     background-color: white;
 }
 
-.orderdetail{
-    text-align:center;
+.backbutton {
+    position: relative;
+    left: 37%;
+}
+
+.editbutton {
+    position: relative;
+    left: 39%;
+}
+
+.orderdetail {
+    position: relative;
+    left: 110%;
+}
+
+.card {
+    position: relative;
+    top: 50%;  
+    left: 110%;
+    /* transform: translate(0, -50%); */
 }
 </style>
 
