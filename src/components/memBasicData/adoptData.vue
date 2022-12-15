@@ -166,10 +166,10 @@
                                 v-model="background_t" placeholder="(如空間大小，有無院子等)">
                         </div>
                         <br>
-                        <button type="button" class="cancel" v-on:click="cancel">取消更改</button>
+                        <button type="button" class="cancel" v-on:click="cancel">取消更改</button><!--點了cancel回到overview-->
                         <button type="button" class="confirm"
                             v-on:click="modify(size_t, age_t, color_t, hair_t, sexual_t, breed_t, background_t)">確認更改</button>
-
+                        <!--點了confirm存入資料庫-->
 
                     </div>
                 </form>
@@ -200,9 +200,9 @@ export default {
             breed_t: null,
             background: "我家有水池",
             background_t: null,
-            visibility: true,
-            pop: false,
-            now: null
+            visibility: true,//是否為overview，true為overview
+            pop: false,//是否顯示更改成功資訊
+            now: null//現在時間
         }
     },
     methods: {
@@ -233,7 +233,7 @@ export default {
             this.now = new Date()
         },
         popoff() {
-            this.pop = false
+            this.pop = false//關閉顯示更改成功資訊
         }
     }
 
