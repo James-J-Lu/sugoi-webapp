@@ -85,8 +85,7 @@
                         </li>
 
                         <div class="col-12">
-                            <label for="background" class="form-label">簡述家庭環境：</label>
-                            <p>{{ background }}</p>
+                            <label for="background" class="form-label">簡述家庭環境：{{ background }}</label>
                         </div>
                         <li>
                             <button type="button" class="confirm" v-on:click="edit">編輯</button>
@@ -156,9 +155,10 @@
 
                         <div class="col-12">
                             <label for="background" class="form-label">簡述家庭環境：</label>
-                            <input type="text" class="form-control" id="background" v-model="background_t"
+                            <input style="background-color:#F9ECBE" type="text" class="form-control" id="background" v-model="background_t"
                                 placeholder="(如空間大小，有無院子等)" style="height: 110px">
                         </div>
+                        <br>
                         <li>
                             <button type="button" class="cancel" v-on:click="cancel">取消更改</button>
                             <button type="button" class="confirm" v-on:click="modify(size_t,age_t,color_t,hair_t,sexual_t,breed_t,background_t)">確認更改</button>
@@ -220,6 +220,7 @@ export default {
             this.sexual=sexual_t
             this.breed=breed_t
             this.background=background_t
+            this.visibility=true
         
     }
     }
@@ -228,6 +229,12 @@ export default {
 </script>
     
 <style scoped>
+.first{
+    font-size: 35px;
+}
+.second{
+    font-size: 35px;
+}
 .workspace ul {
     font-size: 25px;
     display: block;
