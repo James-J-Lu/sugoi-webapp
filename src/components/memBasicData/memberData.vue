@@ -118,9 +118,9 @@ export default {
             address_t: null,
             date: "12.01.2022",
             date_t: null,
-            visibility: true,
-            pop: false,
-            now: null
+            visibility: true,//是否為overview，true為overview
+            pop: false,//是否顯示更改成功資訊
+            now: null//現在時間
         }},
     
         methods: {
@@ -151,7 +151,7 @@ export default {
                 this.now=new Date()
             },
             popoff() {
-                this.pop = false
+                this.pop = false//關閉顯示更改成功資訊
             }
 
 
