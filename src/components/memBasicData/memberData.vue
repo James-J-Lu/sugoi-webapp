@@ -32,7 +32,7 @@
                         <br>
                         <label><span>地址：{{ address }}</span></label>
                         <li>
-                            <button type="button" class="confirm" v-on:click="edit">編輯</button>
+                            <button type="button" class="edit" v-on:click="edit">編輯</button>
                         </li>
                     </div>
                     <div class="second" v-if="!visibility"><!--memberdataedit-->
@@ -67,10 +67,11 @@
                             v-model="address_t">
                         <br>
                         <li>
-                            <button type="button" class="cancel" v-on:click="cancel">取消更改</button>
+                            <button type="button" class="cancel" v-on:click="cancel">取消更改</button><!--點了cancel回到overview-->
                             <button type="button" class="confirm"
                                 v-on:click="modify(members_t, picked_t, telephone_t, phonenumber_t, email_t, address_t, date_t)">確認更改</button>
-                        </li>
+                        <!--點了confirm存入資料庫-->
+                            </li>
 
                     </div>
                 </ul>
@@ -233,6 +234,13 @@ p {
 }
 
 .confirm {
+    float: right;
+    color: white;
+    background: #114ABA;
+    border-radius: 20px;
+    font-size: 40px;
+}
+.edit {
     float: right;
     color: white;
     background: #114ABA;
