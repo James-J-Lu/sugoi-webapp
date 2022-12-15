@@ -1,16 +1,16 @@
 <template>
     <div class="memberData">
-        <p id="title">會員基本資料</p>
+        <p id="title">會員基本資料</p><!--鈺倫負責的-->
         <div class="workspace">
-            <div v-if="pop && visibility" class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>{{ members }}您好：</strong> 會員資料已更新<br>{{now}}
+            <div v-if="pop && visibility" class="alert alert-warning alert-dismissible fade show" role="alert"><!--更新成功提示-->
+                <strong>{{ members }}您好：</strong> 會員資料已更新<br>{{now}}<!--儲存成功時間紀錄-->
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                     v-on:click="popoff"></button>
             </div>
             <br>
             <form class="row g-3">
                 <ul class="dropdown-menu position-static d-grid gap-1 mx-0 shadow w-220px">
-                    <div class="first" v-if="visibility">
+                    <div class="first" v-if="visibility"><!--memberdataoverview-->
 
                         <label><span>姓名：{{ members }}</span></label>
                         <br>
@@ -35,7 +35,7 @@
                             <button type="button" class="confirm" v-on:click="edit">編輯</button>
                         </li>
                     </div>
-                    <div class="second" v-if="!visibility">
+                    <div class="second" v-if="!visibility"><!--memberdataedit-->
 
                         <label><span>姓名：<input style="background-color:#F9ECBE" name="name" v-model="members_t"
                                     class="form-control " placeholder="請輸入姓名"></span></label>
@@ -119,8 +119,7 @@ export default {
             date_t: null,
             visibility: true,
             pop: false,
-            now: null,
-            time: null
+            now: null
         }},
     
         methods: {
