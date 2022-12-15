@@ -9,12 +9,13 @@
             {{tab}}
         </button>
 
-        <div v-if="show" class="workspace">
+        <div v-if="noOrders" class="workspace">
             <tabNurseryNoData v-if="currentTab == '托兒訂單'" class="nurseryNoData"></tabNurseryNoData>
             <tabAdpotNoData v-if="currentTab == '領養訂單'" class="nurseryNoData"></tabAdpotNoData>
+            <br><br><br><br><br><br><br><br><br>
         </div>
 
-        <div v-if="!show" class="workspace">
+        <div v-if="!noOrders" class="workspace">
             <p>test</p>
             <!-- <tabNurseryData v-if="currentTab == '托兒訂單'" class="nurseryNoData">
                 <nOrder v-for="nurseryOrder in nurseryOrders" :key="nurseryOrder.id" :name="nurseryOrder.name" ></nOrder>
@@ -28,10 +29,25 @@
     <div v-if="!atOrdersPage" class="myOrder">
         <p>訂單詳細資料</p>
         <div class="workspace">
-            <p>test</p>
-            <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg" class="image">
-            {{detailNOrder}}
+            <div class="orderId">
+                <!-- &emsp; 全形空格 排版用 -->
+                <p>訂單編號：{{detailNOrderId}}&emsp;</p>
+            </div>
+            
+            <div class="content">
+                <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg" class="image">
+                <div class="text">
+                    <p>狗狗：{{detailNOrderPetName}}</p>
+                    <p>床位：{{detailNOrderRoomNum}}</p>
+                    <p>入住時間：{{detailNOrderSTime}}</p>
+                    <p>退房時間：{{detailNOrderETime}}</p>
+                    <p>總金額：$ {{detailNOrderPrice}}</p>
+                </div>
 
+            </div>
+        
+            
+            
         </div>
         <br>
         <button type="button" class="blueBtn" v-on:click="edit">編輯</button>
@@ -43,10 +59,13 @@
 export default{
     data(){
         return{
+            //是在orders overview page還是特定order detail page
             atOrdersPage: false,
-            show: false,
+            //此mamber有沒有任何訂單
+            noOrders: false,
             currentTab: "托兒訂單",
             tabs:['托兒訂單','領養訂單'],
+
             nurseryOrders: [
                 {id: 123, petName: 'cookie'},
                 {id: 124, petName: 'apple'},
@@ -56,12 +75,18 @@ export default{
                 {id: 444, petName: 'teddy'},
                 {id: 555, petName: 'gina'},
             ],
-            detailNOrder:[
-                {id: 123, petName: 'cookie', roomNum: '506', sTime: '2022/5/6 19:00', eTime: '2022/5/9 19:00', price: 4000},
-            ],
-            detailAOrder:[
-                {id: 555, petName: 'gina', appointmentTime: '2022/7/14 09:00'},
-            ],
+
+            detailNOrderId: 123,
+            detailNOrderPetName: 'cookie',
+            detailNOrderRoomNum: '506',
+            detailNOrderSTime: '2022/5/6 19:00',
+            detailNOrderETime: '2022/5/9 19:00',
+            detailNOrderPrice: 4000,
+            
+            detailAOrderId: 555,
+            detailAOrderPetName: 'gina',
+            detailAOrderAppointTime: '2022/7/14 09:00',
+            
             editable: false
         }
     },
@@ -98,7 +123,8 @@ export default{
 }
 
 .tab-button {
-    background-color: aquamarine;
+    background-color: rgba(249, 236, 190, 0.44);
+    border-radius: 20px;
 }
 
 .nurseryNoData{
@@ -125,10 +151,27 @@ export default{
     font-size: 40px;
 }
 
+.orderId{
+    position: relative;
+    text-align: right;
+    height: 85%;
+}
+
+.content{
+    position: relative;
+    width: 85%;
+    display: inline-flex;
+}
+
 .image{
-    margin-right:500px;
-    width: 30%;
-    height: 50%;
+    width: 300px;
+    height: 300px;
+}
+
+.text{
+    margin-left:5%;
+    font-size: 40px;
+    text-align: left;
 }
 
 </style>
