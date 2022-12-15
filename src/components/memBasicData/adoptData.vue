@@ -2,8 +2,9 @@
     <div class="adoptData">
         <p id="title">領養資料</p><!--鈺倫負責的-->
         <div class="workspace">
-            <div v-if="pop && visibility" class="alert alert-warning alert-dismissible fade show" role="alert"><!--更新成功提示-->
-                <strong>{{ members }}您好：</strong> 領養資料已更新<br>{{now}}<!--儲存成功時間紀錄-->
+            <div v-if="pop && visibility" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <!--更新成功提示-->
+                <strong>{{ members }}您好：</strong> 領養資料已更新<br>{{ now }}<!--儲存成功時間紀錄-->
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                     v-on:click="popoff"></button>
             </div>
@@ -92,9 +93,9 @@
 
                         <div class="col-12">
                             <label for="background" class="form-label">簡述家庭環境：{{ background }}</label>
-                        </div>
+                        </div><br><br><br>
                         <li>
-                            <button type="button" class="confirm" v-on:click="edit">編輯</button>
+                            <button type="button" class="edit" v-on:click="edit">編輯</button>
                         </li>
                     </div>
                     <div class="second" v-if="!visibility"><!--adoptdataedit-->
@@ -161,19 +162,16 @@
 
                         <div class="col-12">
                             <label for="background" class="form-label">簡述家庭環境：</label>
-                            <input style="background-color:#F9ECBE, height: 110px;" type="text" class="form-control" id="background"
+                            <input style="background-color:#F9ECBE" type="text" class="form-control" id="background"
                                 v-model="background_t" placeholder="(如空間大小，有無院子等)">
                         </div>
                         <br>
-                        <li>
-                            <button type="button" class="cancel" v-on:click="cancel">取消更改</button>
-                            <button type="button" class="confirm"
-                                v-on:click="modify(size_t, age_t, color_t, hair_t, sexual_t, breed_t, background_t)">確認更改</button>
-                        </li>
+                        <button type="button" class="cancel" v-on:click="cancel">取消更改</button>
+                        <button type="button" class="confirm"
+                            v-on:click="modify(size_t, age_t, color_t, hair_t, sexual_t, breed_t, background_t)">確認更改</button>
+
 
                     </div>
-
-
                 </form>
 
             </ul>
@@ -204,7 +202,7 @@ export default {
             background_t: null,
             visibility: true,
             pop: false,
-            now:null
+            now: null
         }
     },
     methods: {
@@ -232,8 +230,7 @@ export default {
             this.background = background_t
             this.visibility = true
             this.pop = true
-            this.now=new Date()
-
+            this.now = new Date()
         },
         popoff() {
             this.pop = false
@@ -245,7 +242,7 @@ export default {
     
 <style scoped>
 .first {
-    font-size: 35px;
+    font-size: 30px;
 }
 
 .second {
@@ -291,7 +288,7 @@ p {
 .workspace {
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 60%;
+    top: 58%;
     left: 50%;
     width: 65%;
     height: 70%;
@@ -299,11 +296,11 @@ p {
 }
 
 .form-check {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .form-control {
-    font-size: 35px;
+    font-size: 25px;
 }
 
 .cancel {
@@ -311,11 +308,18 @@ p {
     color: white;
     background: #9A9DA2;
     border-radius: 20px;
-    font-size: 40px;
+    font-size: 35px;
 }
 
 .confirm {
-    font-family: 'Iansui094-Regular';
+    float: right;
+    color: white;
+    background: #114ABA;
+    border-radius: 20px;
+    font-size: 35px;
+}
+
+.edit {
     float: right;
     color: white;
     background: #114ABA;
