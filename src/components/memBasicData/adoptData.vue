@@ -1,9 +1,9 @@
 <template>
     <div class="adoptData">
-        <p id="title">領養資料</p>
+        <p id="title">領養資料</p><!--鈺倫負責的-->
         <div class="workspace">
-            <div v-if="pop && visibility" class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>{{ members }}您好：</strong> 領養資料已更新
+            <div v-if="pop && visibility" class="alert alert-warning alert-dismissible fade show" role="alert"><!--更新成功提示-->
+                <strong>{{ members }}您好：</strong> 領養資料已更新<br>{{now}}<!--儲存成功時間紀錄-->
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                     v-on:click="popoff"></button>
             </div>
@@ -11,7 +11,7 @@
             <ul class="dropdown-menu position-static d-grid gap-1 mx-0 shadow w-220px">
 
                 <form class="row g-3">
-                    <div class="first" v-if="visibility">
+                    <div class="first" v-if="visibility"><!--adoptdataoverview-->
                         <li>
                             <label><span>體型偏好：</span></label>
                             <input type="radio" id="s0" value="nosize" v-model="size" name="inlineRadioOptions0"
@@ -97,7 +97,7 @@
                             <button type="button" class="confirm" v-on:click="edit">編輯</button>
                         </li>
                     </div>
-                    <div class="second" v-if="!visibility">
+                    <div class="second" v-if="!visibility"><!--adoptdataedit-->
                         <li>
                             <label><span>體型偏好：</span></label>
                             <input type="radio" id="s0" value="nosize" v-model="size_t" name="inlineRadioOptions0">
@@ -203,7 +203,8 @@ export default {
             background: "我家有水池",
             background_t: null,
             visibility: true,
-            pop: false
+            pop: false,
+            now:null
         }
     },
     methods: {
@@ -231,6 +232,7 @@ export default {
             this.background = background_t
             this.visibility = true
             this.pop = true
+            this.now=new Date()
 
         },
         popoff() {
