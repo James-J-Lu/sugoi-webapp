@@ -3,7 +3,7 @@
         <p id="title">會員基本資料</p>
         <div class="workspace">
             <div v-if="pop && visibility" class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>{{ members }}您好：</strong> 會員資料已更新
+                <strong>{{ members }}您好：</strong> 會員資料已更新<br>{{now}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                     v-on:click="popoff"></button>
             </div>
