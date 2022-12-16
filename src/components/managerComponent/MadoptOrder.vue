@@ -1,27 +1,27 @@
 <template>
     <div class="MadoptOrder">
         <div v-if="!flag" class="Morderlist">
-        <p class="tabletitle">領養訂單列表</p>
-         <table class="table table-striped table-sm tableType">
-            <thead class="tablehead">
-                <tr>
-                    <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
-                    <th>訂單編號</th>
-                    <th>會員帳號</th>
-                    <th>會員姓名</th>
-                    <th style="width:40%">說明</th>
-                </tr>
-            </thead>
-            <tbody class="tablebody">
-                <tr v-for="order in orders" :key="order.id" @click="handleClick(order.orderID)">
-                    <td width="100px"><input class="form-check-input me-1" type="checkbox"></td>
-                    <td>{{order.orderID}}</td>
-                    <td>{{order.Maccount}}</td>
-                    <td>{{order.Mname}}</td>
-                    <td>{{order.Description}}</td>
-                </tr>
-            </tbody>
-        </table>
+            <p class="tabletitle">領養訂單列表</p>
+                <table class="table table-striped table-sm tableType">
+                    <thead class="tablehead">
+                        <tr>
+                            <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
+                            <th>訂單編號</th>
+                            <th>會員帳號</th>
+                            <th>會員姓名</th>
+                            <th style="width:40%">說明</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tablebody">
+                        <tr v-for="order in orders" :key="order.id" @click="handleClick(order.orderID)">
+                            <td width="100px"><input class="form-check-input me-1" type="checkbox"></td>
+                            <td>{{order.orderID}}</td>
+                            <td>{{order.Maccount}}</td>
+                            <td>{{order.Mname}}</td>
+                            <td>{{order.Description}}</td>
+                        </tr>
+                    </tbody>
+                </table>
         </div>
 
         <div v-if="!editflag" class="Morderlist">
@@ -86,62 +86,66 @@
             </div>
         </div>
 
-        <div v-if="editflag">
-            <button @click="flag=!flag" class="backbutton">返回</button>
-            <button @click="editflag=!editflag" class="savebutton">儲存</button>
-            <!-- <input type="button" value="儲存" @click="modify(x)"> -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">領養訂單編號</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0">{{orders[selectorder].orderID}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">會員帳號</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0">{{orders[selectorder].Maccount}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">會員姓名</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0">{{orders[selectorder].Mname}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">約看時間</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <DatePicker v-model="date"></DatePicker>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <label for="progress">領養進度</label>
-                        </div>
-                        <div class="col-sm-9">
-                                <select name="progress" id="state">
-                                    <option value="提出申請">提出申請</option>
-                                    <option value="約看中">約看中</option>
-                                    <option value="領養完成">領養完成</option>
-                                </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">建立時間</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0">{{orders[selectorder].createDate}}</p>
+        <div v-if="!saveflag">
+            <div>
+                <div v-if="editflag">
+                <button @click="editflag=!editflag" class="backbutton">返回</button>
+                <button @click="saveflag=!saveflag" class="savebutton">儲存</button>
+                <!-- <input type="button" value="儲存" @click="modify(x)"> -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">領養訂單編號</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{orders[selectorder].orderID}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">會員帳號</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{orders[selectorder].Maccount}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">會員姓名</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{orders[selectorder].Mname}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">約看時間</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <DatePicker v-model="date"></DatePicker>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label for="progress">領養進度</label>
+                                </div>
+                                <div class="col-sm-9">
+                                        <select name="progress" id="state">
+                                            <option value="提出申請">提出申請</option>
+                                            <option value="約看中">約看中</option>
+                                            <option value="領養完成">領養完成</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">建立時間</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{orders[selectorder].createDate}}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -170,6 +174,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
             flag: false,
             selectorder: null,
             editflag: false,
+            saveflag: false,
             date: null,
             }
         },
