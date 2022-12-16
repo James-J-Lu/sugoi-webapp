@@ -188,8 +188,6 @@ export default {
             detailAOrderPetName: 'gina',
             detailAOrderAppointTime: '2022/7/14 09:00',
             detailAOrderStatus: '處理中',
-
-            editable: false
         }
     },
     components: {
@@ -198,9 +196,6 @@ export default {
         'DatePicker': DatePicker,
     },
     methods: {
-        edit() {
-            this.editable = true
-        },
         navigation() {
 
         },
