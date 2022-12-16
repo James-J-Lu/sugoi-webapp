@@ -16,13 +16,21 @@
         </div>
 
         <div v-if="!noOrders" class="workspace">
-            <p>test</p>
-            <!-- <tabNurseryData v-if="currentTab == '托兒訂單'" class="nurseryNoData">
-                <nOrder v-for="nurseryOrder in nurseryOrders" :key="nurseryOrder.id" :name="nurseryOrder.name" ></nOrder>
+            <tabNurseryData v-if="currentTab == '托兒訂單'" >
+                <br>
+                <div v-for="nurseryOrder in nurseryOrders" :key="nurseryOrder.id">
+                    <div class="eachOrder">
+                    {{nurseryOrder.id}}
+                    {{nurseryOrder.petName}}
+                    </div>
+                    <br>
+                </div>
             </tabNurseryData>
-            <tabAdpotData v-if="currentTab == '領養訂單'" class="nurseryNoData">
-                <aOrder v-for="adpotOrder in adoptOrders" :key="adpotOrder.id" :name="adpotOrder.name" ></aOrder>
-            </tabAdpotData> -->
+            
+
+            <tabAdpotData v-if="currentTab == '領養訂單'" >
+                <p>adpot test</p>
+            </tabAdpotData>
         </div>
     </div>
 
@@ -68,8 +76,8 @@
 
             <div class="container">
                 <ul class="progress2">
-                    <li class="done">受理中</li>
-                    <li class="active">配對成功，請於指定時間辦理領養手續</li>
+                    <li class="done">受理中<br>2022/7/1 21:22</li>
+                    <li class="active">配對成功，請於指定時間辦理領養手續<br>2022/7/2 14:45</li>
                     <li class="">領養完成</li>
                 </ul>
             </div>
@@ -101,8 +109,8 @@ export default{
             //noOrders: true,
 
             //是在orders overview page還是特定order detail page
-            atOrdersPage: false,
-            //atOrdersPage: true,
+            //atOrdersPage: false,
+            atOrdersPage: true,
 
             currentTab: "托兒訂單",
             tabs:['托兒訂單','領養訂單'],
@@ -188,6 +196,20 @@ export default{
     width: 70%;
     height: 85%;
     top: 200px;
+}
+
+.eachOrder{
+    background-color: #fff;
+    width: 90%;
+    height: 70%;
+    border-radius: 10px;
+    border-color: #000;
+    margin:0px auto;
+}
+
+.space{
+    background-color: rgb(220, 15, 15);
+    height: 70%;
 }
 
 .adoptNoData{
@@ -353,7 +375,7 @@ export default{
     background: #9A9DA2;
     border-radius: 20px;
     font-size: 40px;
-    margin-right:25%;
+    margin-left:10%;
 }
 
 .editBtn{
@@ -361,6 +383,6 @@ export default{
     background: #114ABA;
     border-radius: 20px;
     font-size: 40px;
-    
+    margin-left:10%;
 }
 </style>
