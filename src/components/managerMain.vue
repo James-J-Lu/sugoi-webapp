@@ -75,6 +75,7 @@ export default {
 .managerMain {
     position: relative;
     display: flex;
+    background-color: gray;
 }
 .leftSideBar {
     position: absolute;
@@ -89,6 +90,6 @@ export default {
     right: 2%;
     width: 72.5%;
     height: 93%;
-    background-color: bisque;
+    background-color: white;
 }
 </style>
