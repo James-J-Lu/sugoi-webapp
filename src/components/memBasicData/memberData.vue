@@ -91,7 +91,7 @@
 </template>
 
 <script>
-
+import { format } from "date-fns";
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -116,7 +116,7 @@ export default {
             email_t: null,
             address: "桃園市中壢區中大路300號",
             address_t: null,
-            date: "12.01.2022",
+            date: "2022-10-13",
             date_t: null,
             visibility: true,//是否為overview，true為overview
             pop: false,//是否顯示更改成功資訊
@@ -145,7 +145,7 @@ export default {
                 this.phonenumber = phonenumber_t
                 this.email = email_t
                 this.address = address_t
-                this.date = date_t
+                this.date=format(this.date_t, "yyyy-MM-dd")
                 this.pop = true
                 this.visibility = true
                 this.now=new Date()
