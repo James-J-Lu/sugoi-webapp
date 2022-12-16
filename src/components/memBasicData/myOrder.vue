@@ -160,7 +160,7 @@
 <script>
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-
+import { format } from "date-fns";
 export default {
     data() {
         return {
