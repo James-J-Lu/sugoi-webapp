@@ -17,9 +17,7 @@
                 <br>
                 <div v-for="nurseryOrder in nurseryOrders" :key="nurseryOrder.id">
                     <div class="eachOrder" @click="goToDetailPage">
-                        <div class="imgInEachOrder">
-                            rrr
-                        </div>
+                        <div class="imgInEachOrder"></div>
                         <div class="orderId">
                             <!-- &emsp; 全形空格 排版用 -->
                             <p>訂單編號：{{nurseryOrder.id}}&emsp;</p>
@@ -33,12 +31,30 @@
                     </div>
                     <br>
                 </div>
+                <br>
             </tabNurseryData>
 
 
 
             <tabAdpotData v-if="currentTab == '領養訂單'">
-                <p>adpot test</p>
+                <br>
+                <div v-for="adoptOrder in adoptOrders" :key="adoptOrder.id">
+                    <div class="eachOrder" @click="goToDetailPage">
+                        <div class="imgInEachOrder"></div>
+                        <div class="orderId">
+                            <!-- &emsp; 全形空格 排版用 -->
+                            <p>訂單編號：{{adoptOrder.id}}&emsp;</p>
+                        </div>
+                        <div class="petNameInEachOrder">
+                                {{adoptOrder.petName}}
+                        </div>
+                        <div class="timeInEachOrder">
+                                領養時間：{{adoptOrder.sTime}}
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <br>
             </tabAdpotData>
         </div>
     </div>
@@ -138,6 +154,7 @@ export default {
             //是在orders overview page還是特定order detail page
             //atOrdersPage: false,
             atOrdersPage: true,
+
             editOrdertime: false,
             date_t:null,
             test:null,
@@ -145,13 +162,13 @@ export default {
             tabs: ['托兒訂單', '領養訂單'],
 
             nurseryOrders: [
-                { id: 123, petName: 'cookie' },
-                { id: 124, petName: 'apple' },
+                { id: 123, petName: 'cookie', sTime: '2022/5/6 19:00'},
+                { id: 124, petName: '彭德', sTime: '2022/4/3 13:00'},
             ],
             adoptOrders: [
-                { id: 333, petName: 'mandy' },
-                { id: 444, petName: 'teddy' },
-                { id: 555, petName: 'gina' },
+                { id: 333, petName: 'mandy', aTime: '2022/7/14 09:00'},
+                { id: 444, petName: '鯊鯊', aTime: '2022/4/14 15:00' },
+                { id: 555, petName: 'gina', aTime: '2022/3/4 19:00' },
             ],
 
             detailNOrderId: 123,
@@ -189,18 +206,22 @@ export default {
         },
         editAOrder() {
             this.editOrdertime = true
-    },
-    canceledit(){
-        this.editOrdertime=false
-    },
-    confirm(){
-        this.editOrdertime=false
-        if(this.date_t!=null){
+        },
+        canceledit(){
+            this.editOrdertime=false
+        },
+        confirm(){
+            this.editOrdertime=false
+            if(this.date_t!=null){
             this.detailAOrderAppointTime=this.date_t
-    }
+            }
+        },
+        goToDetailPage() {
+            this.atOrdersPage=false
+        }
     }
 }
-}
+
 </script>
 
 <style>
@@ -250,6 +271,7 @@ export default {
     border-color: #114ABA;
     border-width: 10px;
     float: left;
+    border-radius: 10px;
 }
 
 .petNameInEachOrder{
