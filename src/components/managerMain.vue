@@ -75,7 +75,6 @@ export default {
 .managerMain {
     position: relative;
     display: flex;
-    background-color: gray;
 }
 .leftSideBar {
     position: absolute;

@@ -1,9 +1,9 @@
 <template>
     <div class="MadoptOrder">
         <div v-if="!flag" class="Morderlist">
-        <p>管理者*領養訂單</p>
+        <p class="tabletitle">領養訂單列表</p>
          <table class="table table-striped table-sm tableType">
-            <thead>
+            <thead class="tablehead">
                 <tr>
                     <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
                     <th>訂單編號</th>
@@ -30,7 +30,7 @@
                 <button @click="editflag=!editflag" class="editbutton">修改</button>
                 <table>
                     <tbody>
-                        <div class="card mb-4" style="width: 30rem;">
+                        <div class="card mb-4" style="width: 100%;">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">領養訂單編號：{{orders[selectorder].orderID}}</li>
                                 <li class="list-group-item">會員帳號：{{orders[selectorder].Maccount}}</li>
@@ -119,16 +119,19 @@ import '@vuepic/vue-datepicker/dist/main.css'
     background-color: white
 }
 
+.tabletitle {
+    text-align: left;
+}
 
+.tablehead {
+    background-color:rgb(218,217,217);
+}
 
 td, th {
   border: 1px solid #706D6D;
   text-align: center;
   padding: 8px;
 }
-
-
-
 
 .workspace{
     position: absolute;
@@ -147,6 +150,11 @@ td, th {
 .editbutton {
     position: relative;
     left: 39%;
+}
+
+.card mb-4 {
+    position: relative;
+    left: 50%;
 }
 
 .orderdetail {
