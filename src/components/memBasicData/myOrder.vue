@@ -118,14 +118,25 @@
                     <button type="button" class="navBtn" v-on:click="navigation">查看狗狗檔案</button>
                 </div>
             </div>
+            
+            <div v-if="!editOrdertime" class="content">
+                <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
+                    class="image">
+                <div class="text">
+                    <p>狗狗：{{ detailAOrderPetName }}</p>
+                    <p>領養時間：{{ detailAOrderAppointTime }}</p>
+                    <br>
+                    <button type="button" class="navBtn" v-on:click="navigation">查看狗狗檔案</button>
+                </div>
+            </div>
             <div v-if="editOrdertime" class="content">
                 <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
                     class="image">
                 <div class="text">
                     <p>狗狗：{{ detailAOrderPetName }}</p>
                     <p>領養時間：</p>
-                    <DatePicker v-model="date_t" :enable-time-picker="false"
-                            :clearable="false" class="input2"></DatePicker>
+                    <DatePicker v-model="date_t" :enable-time-picker="false" :clearable="false" class="input2">
+                    </DatePicker>
                     <br>
                     <button type="button" class="canceledit" v-on:click="canceledit">取消修改</button>
                     <button type="button" class="confirm" v-on:click="confirm">確認修改</button>
@@ -154,10 +165,8 @@ export default {
             //是在orders overview page還是特定order detail page
             //atOrdersPage: false,
             atOrdersPage: true,
-
             editOrdertime: false,
             date_t:null,
-            test:null,
             currentTab: "托兒訂單",
             tabs: ['托兒訂單', '領養訂單'],
 
@@ -206,6 +215,7 @@ export default {
         },
         editAOrder() {
             this.editOrdertime = true
+            this.date_t = this.detailAOrderAppointTime
         },
         canceledit(){
             this.editOrdertime=false
@@ -213,7 +223,7 @@ export default {
         confirm(){
             this.editOrdertime=false
             if(this.date_t!=null){
-            this.detailAOrderAppointTime=this.date_t
+                this.detailAOrderAppointTime = format(this.date_t, "yyyy-MM-dd")
             }
         },
         goToDetailPage() {
