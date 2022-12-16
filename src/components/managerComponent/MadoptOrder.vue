@@ -46,54 +46,46 @@
         </div>
 
         <div v-if="editflag">
-            <p>測試</p>
-            <tr>
-                        <div class="card">
-                            <div class="card-body">
-                                <p>領養訂單編號：{{orders[selectorder].orderID}}</p>
-                            </div>
-                        </div>
-                    </tr>
-                    <tr>
-                        <div class="card">
-                            <div class="card-body">
-                                <p>會員帳號：{{orders[selectorder].Maccount}}</p>
-                            </div>
-                        </div>
-                    </tr>
-                    <tr>
-                        <div class="card">
-                            <div class="card-body">
-                                <p>會員姓名：{{orders[selectorder].Mname}}</p>
-                            </div>
-                        </div>
-                    </tr>
-                    <tr>
-                        <div class="card">
-                            <div class="card-body">
-                                <label for="progress">約看時間：</label>
-                                <select name="progress" id="state">
-                                    <option value="尚未預約">尚未預約</option>
-                                    <option value="約看中">約看中</option>
-                                    <option value="預約完成">預約完成</option>
-                                </select>
-                                <!-- <input type="submit" value="Submit"></input> -->
-                            </div>
-                        </div>
-                    </tr>
-                    <tr>
-                        <div class="card">
-                            <div class="card-body">
-                                <p>建立日期：</p>
-                            </div>
-                        </div>
-                    </tr>
+            <h1>修改頁面測試</h1>
+            <!-- <div class="card">
+            <div class="card-body"> -->
+                <tr>
+                    <p>領養訂單編號：{{orders[selectorder].orderID}}</p>
+                </tr>
+                <tr>
+                    <p>會員編號：{{orders[selectorder].Maccount}}</p>
+                </tr>
+                <tr>
+                    <p>狗狗編號：{{orders[selectorder].Mname}}</p>
+                </tr>
+                <tr>
+                    <p>約看日期：</p>
+                    <DatePicker v-model="date" format="dd-MM-yyyy"></DatePicker>
+                </tr>
+                <tr>
+                    <label for="progress">領養進度：</label>
+                    <select name="progress" id="state">
+                        <option value="提出申請">提出申請</option>
+                        <option value="約看中">約看中</option>
+                        <option value="領養完成">領養完成</option>
+                    </select>
+                    <!-- <input type="submit" value="Submit"></input> -->
+                </tr>
+                <tr>
+                    <p>建立日期：{{orders[selectorder].createDate}}</p>
+                </tr>
+            <!-- </div>
+            </div> -->
         </div>
     </div>
 </template>
 
 <script>
+import DatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
     export default {
+        components: { DatePicker },
         data () {
             return {
                 orders: [
@@ -108,6 +100,7 @@
             flag: false,
             selectorder: null,
             editflag: false,
+            date: null,
             }
         },
 
@@ -118,8 +111,6 @@
                 }
             }
         }
-    
-
 </script>
 
 <style>

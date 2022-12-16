@@ -69,7 +69,7 @@ export default {
         logIn () {
             this.name = 'kelly'
             this.isMember = 'manager' //管理者
-            //this.isMember = 'member' //會員
+            // this.isMember = 'member' //會員
             this.back2Main(1)
             // var data = {
             //     id: null,
