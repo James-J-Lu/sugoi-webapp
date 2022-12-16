@@ -82,7 +82,9 @@
                 </div>
             </div>
             <br>
-            <button type="button" class="cancel" v-on:click="cancel">取消此筆訂單</button>
+            <div>
+                <button type="button" class="deleteNBtn" v-on:click="deleteOrder">取消此筆訂單</button>
+            </div>       
         </tabNurseryData>
 
         <tabAdpotData v-if="currentTab == '領養訂單'">
@@ -123,17 +125,6 @@
                         <button type="button" class="navBtn" v-on:click="navigation">查看狗狗檔案</button>
                     </div>
                 </div>
-
-                <div v-if="!editOrdertime" class="content">
-                    <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
-                        class="image">
-                    <div class="text">
-                        <p>狗狗：{{ detailAOrderPetName }}</p>
-                        <p>領養時間：{{ detailAOrderAppointTime }}</p>
-                        <br>
-                        <button type="button" class="navBtn" v-on:click="navigation">查看狗狗檔案</button>
-                    </div>
-                </div>
                 <div v-if="editOrdertime" class="content">
                     <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
                         class="image">
@@ -159,7 +150,8 @@
 
 <script>
 import DatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import '@vuepic/vue-datepicker/dist/main.css';
+import { format } from "date-fns";
 
 export default {
     data() {
@@ -209,9 +201,6 @@ export default {
         edit() {
             this.editable = true
         },
-        cancel() {
-
-        },
         navigation() {
 
         },
@@ -228,7 +217,7 @@ export default {
         confirm() {
             this.editOrdertime = false
             if (this.date_t != null) {
-                // this.detailAOrderAppointTime = format(this.date_t, "yyyy-MM-dd")
+                this.detailAOrderAppointTime = format(this.date_t, "yyyy-MM-dd")
             }
         },
         goToDetailPage() {
@@ -342,20 +331,18 @@ export default {
     text-align: left;
 }
 
+.deleteNBtn{
+    color: white;
+    background: #9A9DA2;
+    border-radius: 20px;
+    font-size: 30px;
+}
+
 .content {
     position: relative;
     width: 85%;
     display: inline-flex;
 }
-
-.cancel {
-    color: white;
-    background: #9A9DA2;
-    border-radius: 20px;
-    font-size: 40px;
-}
-
-
 
 .container {
     position: relative;
