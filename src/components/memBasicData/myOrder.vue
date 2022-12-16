@@ -262,6 +262,7 @@ export default {
     display: inline-block;
     /* 置中 */
     margin:10px auto;
+    cursor: pointer;
 }
 
 .imgInEachOrder{
