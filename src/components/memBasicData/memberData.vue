@@ -145,7 +145,9 @@ export default {
                 this.phonenumber = phonenumber_t
                 this.email = email_t
                 this.address = address_t
-                this.date=format(this.date_t, "yyyy-MM-dd")
+                if(date_t!=null){
+                    this.date=format(this.date_t, "yyyy-MM-dd")
+                }
                 this.pop = true
                 this.visibility = true
                 this.now=new Date()
