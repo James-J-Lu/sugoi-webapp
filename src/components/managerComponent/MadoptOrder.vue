@@ -87,7 +87,8 @@
         </div>
 
         <div v-if="editflag">
-            <h1>修改頁面測試</h1>
+            <button @click="flag=!flag" class="backbutton">返回</button>
+            <button @click="editflag=!editflag" class="editbutton">確認</button>
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row">
