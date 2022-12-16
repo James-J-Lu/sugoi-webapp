@@ -13,28 +13,26 @@
         </div>
 
         <div v-if="!noOrders" class="workspace">
-            <tabNurseryData v-if="currentTab == '托兒訂單'" >
+            <tabNurseryData v-if="currentTab == '托兒訂單'">
                 <br>
                 <div v-for="nurseryOrder in nurseryOrders" :key="nurseryOrder.id">
                     <div class="eachOrder" @click="goToDetailPage">
                         <div class="imgInEachOrder"></div>
                         <div class="orderId">
                             <!-- &emsp; 全形空格 排版用 -->
-                            <p>訂單編號：{{nurseryOrder.id}}&emsp;</p>
+                            <p>訂單編號：{{ nurseryOrder.id }}&emsp;</p>
                         </div>
                         <div class="petNameInEachOrder">
-                                {{nurseryOrder.petName}}
+                            {{ nurseryOrder.petName }}
                         </div>
                         <div class="timeInEachOrder">
-                                入住時間：{{nurseryOrder.sTime}}
+                            入住時間：{{ nurseryOrder.sTime }}
                         </div>
                     </div>
                     <br>
                 </div>
                 <br>
             </tabNurseryData>
-
-
 
             <tabAdpotData v-if="currentTab == '領養訂單'">
                 <br>
@@ -43,13 +41,13 @@
                         <div class="imgInEachOrder"></div>
                         <div class="orderId">
                             <!-- &emsp; 全形空格 排版用 -->
-                            <p>訂單編號：{{adoptOrder.id}}&emsp;</p>
+                            <p>訂單編號：{{ adoptOrder.id }}&emsp;</p>
                         </div>
                         <div class="petNameInEachOrder">
-                                {{adoptOrder.petName}}
+                            {{ adoptOrder.petName }}
                         </div>
                         <div class="timeInEachOrder">
-                                領養時間：{{adoptOrder.sTime}}
+                            領養時間：{{ adoptOrder.aTime }}
                         </div>
                     </div>
                     <br>
@@ -60,39 +58,46 @@
     </div>
 
     <div v-if="!atOrdersPage" class="myOrder">
-        <p>托兒訂單詳細資料</p>
-        <div class="workspace">
-            <div class="orderId">
-                <!-- &emsp; 全形空格 排版用 -->
-                <p>訂單編號：{{ detailNOrderId }}&emsp;</p>
+        <tabNurseryData v-if="currentTab == '托兒訂單'">
+            <p>托兒訂單詳細資料</p>
+            <div>
+                <button type="button" class="backBtn" v-on:click="back">返回</button>
             </div>
+            <div class="workspace">
+                <div class="orderId">
+                    <!-- &emsp; 全形空格 排版用 -->
+                    <p>訂單編號：{{ detailNOrderId }}&emsp;</p>
+                </div>
 
-            <div class="content">
-                <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
-                    class="image">
-                <div class="text">
-                    <p>狗狗：{{ detailNOrderPetName }}</p>
-                    <p>床位：{{ detailNOrderRoomNum }}</p>
-                    <p>入住時間：{{ detailNOrderSTime }}</p>
-                    <p>退房時間：{{ detailNOrderETime }}</p>
-                    <p>總金額：$ {{ detailNOrderPrice }}</p>
+                <div class="content">
+                    <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
+                        class="image">
+                    <div class="text">
+                        <p>狗狗：{{ detailNOrderPetName }}</p>
+                        <p>床位：{{ detailNOrderRoomNum }}</p>
+                        <p>入住時間：{{ detailNOrderSTime }}</p>
+                        <p>退房時間：{{ detailNOrderETime }}</p>
+                        <p>總金額：$ {{ detailNOrderPrice }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <button type="button" class="cancel" v-on:click="cancel">取消此筆訂單</button>
-    </div>
+            <br>
+            <button type="button" class="cancel" v-on:click="cancel">取消此筆訂單</button>
+        </tabNurseryData>
 
-    <div class="myOrder">
-        <p>領養訂單詳細資料</p>
-        <div class="workspace">
-            <div class="orderId">
-                <!-- &emsp; 全形空格 排版用 -->
-                <p>訂單編號：{{ detailAOrderId }}&emsp;</p>
+        <tabAdpotData v-if="currentTab == '領養訂單'">
+            <p>領養訂單詳細資料</p>
+            <div>
+                <button type="button" class="backBtn" v-on:click="back">返回</button>
             </div>
+            <div class="workspace">
+                <div class="orderId">
+                    <!-- &emsp; 全形空格 排版用 -->
+                    <p>訂單編號：{{ detailAOrderId }}&emsp;</p>
+                </div>
 
-            <!-- 進度條: refer to https://ithelp.ithome.com.tw/articles/10200843 and https://codepen.io/yuski/pen/VEPxbO -->
-            <!-- <div class="container">
+                <!-- 進度條: refer to https://ithelp.ithome.com.tw/articles/10200843 and https://codepen.io/yuski/pen/VEPxbO -->
+                <!-- <div class="container">
                 <ul class="progress">
                     <li class="active">step1</li>
                     <li>step2</li>
@@ -100,54 +105,55 @@
                 </ul>
             </div> -->
 
-            <div class="container">
-                <ul class="progress2">
-                    <li class="done">受理中<br>2022/7/1 21:22</li>
-                    <li class="active">配對成功，請於指定時間辦理領養手續<br>2022/7/2 14:45</li>
-                    <li class="">領養完成</li>
-                </ul>
-            </div>
+                <div class="container">
+                    <ul class="progress2">
+                        <li class="done">受理中<br>2022/7/1 21:22</li>
+                        <li class="active">配對成功，請於指定時間辦理領養手續<br>2022/7/2 14:45</li>
+                        <li class="">領養完成</li>
+                    </ul>
+                </div>
 
-            <div v-if="!editOrdertime" class="content">
-                <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
-                    class="image">
-                <div class="text">
-                    <p>狗狗：{{ detailAOrderPetName }}</p>
-                    <p>領養時間：{{ detailAOrderAppointTime }}</p>
-                    <br>
-                    <button type="button" class="navBtn" v-on:click="navigation">查看狗狗檔案</button>
+                <div v-if="!editOrdertime" class="content">
+                    <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
+                        class="image">
+                    <div class="text">
+                        <p>狗狗：{{ detailAOrderPetName }}</p>
+                        <p>領養時間：{{ detailAOrderAppointTime }}</p>
+                        <br>
+                        <button type="button" class="navBtn" v-on:click="navigation">查看狗狗檔案</button>
+                    </div>
+                </div>
+
+                <div v-if="!editOrdertime" class="content">
+                    <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
+                        class="image">
+                    <div class="text">
+                        <p>狗狗：{{ detailAOrderPetName }}</p>
+                        <p>領養時間：{{ detailAOrderAppointTime }}</p>
+                        <br>
+                        <button type="button" class="navBtn" v-on:click="navigation">查看狗狗檔案</button>
+                    </div>
+                </div>
+                <div v-if="editOrdertime" class="content">
+                    <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
+                        class="image">
+                    <div class="text">
+                        <p>狗狗：{{ detailAOrderPetName }}</p>
+                        <p>領養時間：</p>
+                        <DatePicker v-model="date_t" :enable-time-picker="false" :clearable="false" class="input2">
+                        </DatePicker>
+                        <br>
+                        <button type="button" class="canceledit" v-on:click="canceledit">取消修改</button>
+                        <button type="button" class="confirm" v-on:click="confirm">確認修改</button>
+                    </div>
                 </div>
             </div>
-            
-            <div v-if="!editOrdertime" class="content">
-                <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
-                    class="image">
-                <div class="text">
-                    <p>狗狗：{{ detailAOrderPetName }}</p>
-                    <p>領養時間：{{ detailAOrderAppointTime }}</p>
-                    <br>
-                    <button type="button" class="navBtn" v-on:click="navigation">查看狗狗檔案</button>
-                </div>
+            <br>
+            <div class="btns">
+                <button type="button" class="deleteBtn" v-on:click="deleteOrder">刪除領養訂單</button>
+                <button type="button" class="editBtn" v-on:click="editAOrder">修改領養時間</button>
             </div>
-            <div v-if="editOrdertime" class="content">
-                <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
-                    class="image">
-                <div class="text">
-                    <p>狗狗：{{ detailAOrderPetName }}</p>
-                    <p>領養時間：</p>
-                    <DatePicker v-model="date_t" :enable-time-picker="false" :clearable="false" class="input2">
-                    </DatePicker>
-                    <br>
-                    <button type="button" class="canceledit" v-on:click="canceledit">取消修改</button>
-                    <button type="button" class="confirm" v-on:click="confirm">確認修改</button>
-                </div>
-            </div>
-        </div>
-        <br>
-
-        <button type="button" class="deleteBtn" v-on:click="deleteOrder">刪除領養訂單</button>
-        <button type="button" class="editBtn" v-on:click="editAOrder">修改領養時間</button>
-
+        </tabAdpotData>
     </div>
 </template>
 
@@ -163,20 +169,19 @@ export default {
             //noOrders: true,
 
             //是在orders overview page還是特定order detail page
-            //atOrdersPage: false,
             atOrdersPage: true,
             editOrdertime: false,
-            date_t:null,
+            date_t: null,
             currentTab: "托兒訂單",
             tabs: ['托兒訂單', '領養訂單'],
 
             nurseryOrders: [
-                { id: 123, petName: 'cookie', sTime: '2022/5/6 19:00'},
-                { id: 124, petName: '彭德', sTime: '2022/4/3 13:00'},
+                { id: 123, petName: 'cookie', sTime: '2022/5/6 19:00' },
+                { id: 124, petName: '彭德', sTime: '2022/4/3 13:00' },
             ],
             adoptOrders: [
-                { id: 333, petName: 'mandy', aTime: '2022/7/14 09:00'},
-                { id: 444, petName: '鯊鯊', aTime: '2022/4/14 15:00' },
+                { id: 333, petName: '鯊鯊', aTime: '2022/7/14 09:00' },
+                { id: 444, petName: 'mandy', aTime: '2022/4/14 15:00' },
                 { id: 555, petName: 'gina', aTime: '2022/3/4 19:00' },
             ],
 
@@ -217,17 +222,20 @@ export default {
             this.editOrdertime = true
             this.date_t = this.detailAOrderAppointTime
         },
-        canceledit(){
-            this.editOrdertime=false
+        canceledit() {
+            this.editOrdertime = false
         },
-        confirm(){
-            this.editOrdertime=false
-            if(this.date_t!=null){
-                this.detailAOrderAppointTime = format(this.date_t, "yyyy-MM-dd")
+        confirm() {
+            this.editOrdertime = false
+            if (this.date_t != null) {
+                // this.detailAOrderAppointTime = format(this.date_t, "yyyy-MM-dd")
             }
         },
         goToDetailPage() {
-            this.atOrdersPage=false
+            this.atOrdersPage = false
+        },
+        back() {
+            this.atOrdersPage = true
         }
     }
 }
@@ -271,11 +279,11 @@ export default {
     border-color: #000;
     display: inline-block;
     /* 置中 */
-    margin:10px auto;
+    margin: 10px auto;
     cursor: pointer;
 }
 
-.imgInEachOrder{
+.imgInEachOrder {
     background-color: rgb(205, 81, 81);
     width: 200px;
     height: 200px;
@@ -285,7 +293,7 @@ export default {
     border-radius: 10px;
 }
 
-.petNameInEachOrder{
+.petNameInEachOrder {
     width: 70%;
     text-align: left;
     float: right;
@@ -294,7 +302,7 @@ export default {
     color: #f6e298ef;
 }
 
-.timeInEachOrder{
+.timeInEachOrder {
     width: 70%;
     text-align: left;
     float: right;
@@ -309,13 +317,21 @@ export default {
     top: 200px;
 }
 
+.backBtn {
+    color: white;
+    background: #114ABA;
+    border-radius: 20px;
+    font-size: 30px;
+    margin-right: 65%;
+}
+
 .orderId {
     position: relative;
     text-align: right;
     height: 85%;
 }
 
-.image{
+.image {
     width: 200px;
     height: 200px;
 }
@@ -325,11 +341,13 @@ export default {
     font-size: 40px;
     text-align: left;
 }
+
 .content {
     position: relative;
     width: 85%;
     display: inline-flex;
 }
+
 .cancel {
     color: white;
     background: #9A9DA2;
@@ -456,13 +474,13 @@ export default {
 
 .navBtn {
     color: white;
-    background: #114ABA;
+    background: #f6e298ef;
     border-radius: 20px;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .btns {
-    display: inline-flex;
+    display: inline-block;
     width: 70%;
 }
 
@@ -470,23 +488,24 @@ export default {
     color: white;
     background: #9A9DA2;
     border-radius: 20px;
-    font-size: 40px;
-    margin-left: 10%;
+    font-size: 30px;
+    float: left;
 }
 
 .editBtn {
     color: white;
     background: #114ABA;
     border-radius: 20px;
-    font-size: 40px;
-    margin-left: 10%;
+    font-size: 30px;
+    float: right;
 }
+
 .canceledit {
     float: left;
     color: white;
     background: #9A9DA2;
     border-radius: 20px;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .confirm {
@@ -494,6 +513,6 @@ export default {
     color: white;
     background: #114ABA;
     border-radius: 20px;
-    font-size: 40px;
+    font-size: 30px;
 }
 </style>
