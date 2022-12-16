@@ -88,7 +88,8 @@
 
         <div v-if="editflag">
             <button @click="flag=!flag" class="backbutton">返回</button>
-            <button @click="editflag=!editflag" class="editbutton">確認</button>
+            <button @click="editflag=!editflag" class="savebutton">儲存</button>
+            <!-- <input type="button" value="儲存" @click="modify(x)"> -->
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row">
@@ -177,6 +178,10 @@ import '@vuepic/vue-datepicker/dist/main.css'
                 handleClick(ID){
                     this.flag = !this.flag
                     this.selectorder = ID
+                },
+
+                modify() {
+                    this.x = this.progress
                 }
             }
         }
@@ -223,12 +228,21 @@ td, th {
 .backbutton {
     position: relative;
     left: 37%;
+    border-radius: 50px;
 }
 
 .editbutton {
     position: relative;
     left: 39%;
-    background-color: #DA7314;
+    background-color: #FC9A3F;
+    border-radius: 50px;
+}
+
+.savebutton {
+    position: relative;
+    left: 39%;
+    background-color: #FA8560;
+    border-radius: 50px;
 }
 
 .card mb-4 {
