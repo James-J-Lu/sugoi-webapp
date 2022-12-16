@@ -13,16 +13,28 @@
         </div>
 
         <div v-if="!noOrders" class="workspace">
-            <tabNurseryData v-if="currentTab == '托兒訂單'">
+            <tabNurseryData v-if="currentTab == '托兒訂單'" >
                 <br>
                 <div v-for="nurseryOrder in nurseryOrders" :key="nurseryOrder.id">
-                    <div class="eachOrder">
-                        {{ nurseryOrder.id }}
-                        {{ nurseryOrder.petName }}
+                    <div class="eachOrder" @click="goToDetailPage">
+                        <div class="imgInEachOrder">
+                            rrr
+                        </div>
+                        <div class="orderId">
+                            <!-- &emsp; 全形空格 排版用 -->
+                            <p>訂單編號：{{nurseryOrder.id}}&emsp;</p>
+                        </div>
+                        <div class="petNameInEachOrder">
+                                {{nurseryOrder.petName}}
+                        </div>
+                        <div class="timeInEachOrder">
+                                入住時間：{{nurseryOrder.sTime}}
+                        </div>
                     </div>
                     <br>
                 </div>
             </tabNurseryData>
+
 
 
             <tabAdpotData v-if="currentTab == '領養訂單'">
@@ -160,10 +172,7 @@ export default {
     components: {
         'tabNurseryNoData': <div>目前還沒有任何托兒訂單噢！</div>,
         'tabAdpotNoData': <div>目前還沒有任何領養訂單噢！</div>,
-        // 'tabNurseryData': <div></div>,
-        // 'tabAdpotData': <div></div>,
-        // 'nOrder': <li></li>,
-        // 'aOrder': <li></li>,
+        'DatePicker': DatePicker,
     },
     methods: {
         edit() {
@@ -225,16 +234,38 @@ export default {
 
 .eachOrder {
     background-color: #fff;
+    position: relative;
     width: 90%;
-    height: 70%;
     border-radius: 10px;
     border-color: #000;
-    margin: 0px auto;
+    display: inline-block;
+    /* 置中 */
+    margin:10px auto;
 }
 
-.space {
-    background-color: rgb(220, 15, 15);
-    height: 70%;
+.imgInEachOrder{
+    background-color: rgb(205, 81, 81);
+    width: 200px;
+    height: 200px;
+    border-color: #114ABA;
+    border-width: 10px;
+    float: left;
+}
+
+.petNameInEachOrder{
+    width: 70%;
+    text-align: left;
+    float: right;
+    font-size: 70px;
+    font-weight: bold;
+    color: #f6e298ef;
+}
+
+.timeInEachOrder{
+    width: 70%;
+    text-align: left;
+    float: right;
+    font-size: 30px;
 }
 
 .adoptNoData {
@@ -251,9 +282,7 @@ export default {
     height: 85%;
 }
 
-
-
-.image {
+.image{
     width: 200px;
     height: 200px;
 }
