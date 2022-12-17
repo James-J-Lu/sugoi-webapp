@@ -32,51 +32,51 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">領養訂單編號</p>
+                                <div class="col-sm-6">
+                                    <p class="mb-0">訂單編號</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-3">
                                     <p class="text-muted mb-0">{{orders[selectorder].orderID}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <p class="mb-0">會員帳號</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-3">
                                     <p class="text-muted mb-0">{{orders[selectorder].Maccount}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <p class="mb-0">會員姓名</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-3">
                                     <p class="text-muted mb-0">{{orders[selectorder].Mname}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <p class="mb-0">約看時間</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-3">
                                     <p class="text-muted mb-0">{{orders[selectorder].appointment}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <p class="mb-0">領養進度</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-3">
                                     <p class="text-muted mb-0">{{orders[selectorder].progress}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <p class="mb-0">建立時間</p>
                                 </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{orders[selectorder].createDate}}</p>
+                                <div class="col-sm-3">
+                                    <p class="text-muted-mb-0">{{orders[selectorder].createDate}}</p>
                                 </div>
                             </div>
                         </div>
@@ -90,48 +90,48 @@
                 <div v-if="editflag">
                 <p class="tabletitle">領養訂單資訊</p>
                 <button @click="editflag=!editflag" class="backbutton">返回</button>
-                <button @click="modify(x)" class="savebutton">儲存</button>
+                <button @click="modify(s_date,s_progress)" class="savebutton">儲存</button>
                 <!-- <input type="button" value="儲存" @click="modify(x)"> -->
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">領養訂單編號</p>
+                                <div class="col-sm-6">
+                                    <p class="mb-0">訂單編號</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-3">
                                     <p class="text-muted mb-0">{{orders[selectorder].orderID}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <p class="mb-0">會員帳號</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-3">
                                     <p class="text-muted mb-0">{{orders[selectorder].Maccount}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <p class="mb-0">會員姓名</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-3">
                                     <p class="text-muted mb-0">{{orders[selectorder].Mname}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <p class="mb-0">約看時間</p>
                                 </div>
-                                <div class="col-sm-9">
-                                    <DatePicker v-model="date"></DatePicker>
+                                <div class="col-sm-3">
+                                    <DatePicker v-model="s_date" class="datepicker"></DatePicker>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <label for="progress">領養進度</label>
                                 </div>
-                                <div class="col-sm-9">
-                                        <select name="progress" id="state">
+                                <div class="col-sm-3">
+                                        <select name="progress" id="state" v-model="s_progress">
                                             <option value="提出申請">提出申請</option>
                                             <option value="約看中">約看中</option>
                                             <option value="領養完成">領養完成</option>
@@ -139,10 +139,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <p class="mb-0">建立時間</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-3">
                                     <p class="text-muted mb-0">{{orders[selectorder].createDate}}</p>
                                 </div>
                             </div>
@@ -176,6 +176,8 @@ import '@vuepic/vue-datepicker/dist/main.css'
             editflag: false,
             saveflag: false,
             date: null,
+            s_date: null,
+            s_progress: null,
             }
         },
 
@@ -185,8 +187,9 @@ import '@vuepic/vue-datepicker/dist/main.css'
                     this.selectorder = ID
                 },
 
-                modify() {
-                    this.x = this.progress
+                modify(s_date,s_progress) {
+                    this.date = s_date
+                    this.progress = s_progress
                     this.editflag=!this.editflag
                 }
             }
@@ -212,10 +215,6 @@ import '@vuepic/vue-datepicker/dist/main.css'
     font-size: 28px;
 }
 
-.mb-0 {
-    text-align: center;
-}
-
 td, th {
   border: 1px solid #706D6D;
   text-align: center;
@@ -234,21 +233,22 @@ td, th {
 .backbutton {
     position: relative;
     left: 37%;
-    border-radius: 50px;
+    border-radius: 30px;
+    background: rgba(148, 148, 148, 0.5);
 }
 
 .editbutton {
     position: relative;
     left: 39%;
-    background-color: #FC9A3F;
-    border-radius: 50px;
+    background: rgb(255, 228, 181);
+    border-radius: 30px;
 }
 
 .savebutton {
     position: relative;
     left: 39%;
-    background-color: #FA8560;
-    border-radius: 50px;
+    background-color: rgb(244, 164, 96);
+    border-radius: 30px;
 }
 
 .card mb-4 {
@@ -264,6 +264,15 @@ td, th {
 .card-body {
     background-color: white;
 }
+
+.datepicker {
+    width: 100%;
+    margin-left: 120px;
+}
+.mb-0 {
+    text-align: center;
+}
+
 </style>
 
 
