@@ -26,11 +26,10 @@
         <div v-if="!editflag" class="Morderlist">
             <div>
                 <div v-if="flag">
-                    <p class="tabletitle">托兒訂單資訊</p>
-                    <div class="button">
+                    <p class="tabletitle">托兒訂單資訊
                         <button @click="flag=!flag" class="backbutton">返回</button>
                         <button @click="editflag=!editflag" class="editbutton">修改</button>
-                    </div>
+                    </p>
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
@@ -114,12 +113,10 @@
         <div v-if="!saveflag">
             <div>
                 <div v-if="editflag">
-                <p class="tabletitle">托兒訂單資訊</p>
-                <div>
+                <p class="tabletitle">托兒訂單資訊
                     <button @click="editflag=!editflag" class="backbutton">返回</button>
                     <button @click="modify(s_startTime,s_endTime,s_amount,s_roomID,s_status)" class="savebutton">確認</button>
-                </div>
-                <!-- <input type="button" value="儲存" @click="modify(x)"> -->
+                </p>
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
@@ -159,7 +156,7 @@
                                     <p class="mb-0">日期區間</p>
                                 </div>
                                 <div class="col-sm-1">
-                                    <p><DatePicker v-model="s_startTime" class="datepicker"></DatePicker> <DatePicker v-model="s_endTime" class="datepicker"></DatePicker></p><br>
+                                    <p><DatePicker v-model="s_startTime" class="datepicker" placeholder="起始時間"></DatePicker> <DatePicker v-model="s_endTime" class="datepicker" placeholder="結束時間"></DatePicker></p><br>
                                     <!-- <p><input type="date" size="5" placeholder="起始時間" v-model="s_startTime">  ~  <input type="date" size="5" placeholder="結束時間" style="text-align: left" v-model="s_endTime"></p><br> -->
                                 </div>
                             </div>
@@ -270,7 +267,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 }
 
 .datepicker {
-    width: 350%;
+    width: 200px;
 }
 
 .form-control {
@@ -283,21 +280,21 @@ import '@vuepic/vue-datepicker/dist/main.css'
 
 .backbutton {
     position: relative;
-    left: 37%;
+    left: 55%;
     border-radius: 30px;
     background: rgba(148, 148, 148, 0.5);
 }
 
 .editbutton {
     position: relative;
-    left: 39%;
+    left: 57%;
     background: rgb(255, 228, 181);
     border-radius: 30px;
 }
 
 .savebutton {
     position: relative;
-    left: 39%;
+    left: 57%;
     background-color: rgb(244, 164, 96);
     border-radius: 30px;
 }

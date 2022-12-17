@@ -26,9 +26,10 @@
         <div v-if="!editflag" class="Morderlist">
             <div>
                 <div v-if="flag">
-                    <p class="tabletitle">領養訂單資訊</p>
+                    <p class="tabletitle">領養訂單資訊
                     <button @click="flag=!flag" class="backbutton">返回</button>
                     <button @click="editflag=!editflag" class="editbutton">修改</button>
+                    </p>
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
@@ -88,10 +89,12 @@
         <div v-if="!saveflag">
             <div>
                 <div v-if="editflag">
-                <p class="tabletitle">領養訂單資訊</p>
+                <p class="tabletitle">領養訂單資訊
                 <button @click="editflag=!editflag" class="backbutton">返回</button>
                 <button @click="modify(s_date,s_progress)" class="savebutton">儲存</button>
                 <!-- <input type="button" value="儲存" @click="modify(x)"> -->
+                </p>
+                
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
@@ -123,12 +126,12 @@
                                     <p class="mb-0">約看時間</p>
                                 </div>
                                 <div class="col-sm-4">
-                                    <DatePicker v-model="s_date" class="datepickers"></DatePicker>
+                                    <DatePicker v-model="s_date" class="datepickers" placeholder="選擇時間"></DatePicker>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="progress" >領養進度</label>
+                                    <label for="progress">領養進度</label>
                                 </div>
                                 <div class="col-sm-1">
                                         <select v-model="s_progress">
@@ -232,21 +235,21 @@ td, th {
 
 .backbutton {
     position: relative;
-    left: 37%;
+    left: 55%;
     border-radius: 30px;
     background: rgba(148, 148, 148, 0.5);
 }
 
 .editbutton {
     position: relative;
-    left: 39%;
+    left: 57%;
     background: rgb(255, 228, 181);
     border-radius: 30px;
 }
 
 .savebutton {
     position: relative;
-    left: 39%;
+    left: 57%;
     background-color: rgb(244, 164, 96);
     border-radius: 30px;
 }
@@ -266,7 +269,7 @@ td, th {
 }
 
 .datepickers {
-    width: 50%;
+    width: 200px;
 }
 
 .progresser {
