@@ -90,7 +90,8 @@
         <tabAdpotData v-if="currentTab == '領養訂單'">
             <p>領養訂單詳細資料</p>
             <div>
-                <button type="button" class="backBtn" v-on:click="back">返回</button>
+                 <!--訂單編輯介面已經有一個取消編輯會回到查閱介面了-->
+                 <button v-if="!editOrdertime" type="button" class="backBtn" v-on:click="back">返回</button>
             </div>
             <div class="workspace">
                 <div class="orderId">
@@ -147,8 +148,10 @@
 
                 <br>
                 <div class="btns">
+                     <!-- 如果訂單狀態還在受理中且未被刪過才能刪除訂單，一定要在查閱訂單介面才能刪（用來防呆＋畫面比較好看）-->
                     <button v-if="orderstatus != 3 && !editOrdertime && orderstatus == 0" type="button" class="deleteBtn"
                         v-on:click="deleteOrder">刪除領養訂單</button>
+                        <!-- 如果訂單未被刪過且尚未領養成功才能編輯訂單（用來防呆＋畫面比較好看）-->
                     <button v-if="orderstatus != 3 && !editOrdertime && orderstatus != 2" type="button" class="editBtn"
                         v-on:click="editAOrder">修改領養時間</button>
                 </div>
@@ -175,7 +178,7 @@ export default {
             atOrdersPage: true,
             editOrdertime: false,
             date_t: null,
-            orderstatus: null,//訂單狀態
+            orderstatus: null,//訂單狀態<0：受理中、1：配對成功、2：領養成功、3：訂單被取消>
             currentTab: "托兒訂單",
             tabs: ['托兒訂單', '領養訂單'],
 
@@ -207,7 +210,7 @@ export default {
         'tabAdpotNoData': <div>目前還沒有任何領養訂單噢！</div>,
         'DatePicker': DatePicker,
     },
-    created() {//create進度條
+    created() {//進度條
         this.orderstatus = 0//假資料，正常是去資料庫撈狀態
     },
     methods: {
@@ -529,6 +532,8 @@ export default {
     background: #9A9DA2;
     border-radius: 20px;
     font-size: 30px;
+    position: relative;
+    left: 0%;
 }
 
 .confirm {
@@ -537,5 +542,7 @@ export default {
     background: #114ABA;
     border-radius: 20px;
     font-size: 30px;
+    position: relative;
+    left: 60%;
 }
 </style>
