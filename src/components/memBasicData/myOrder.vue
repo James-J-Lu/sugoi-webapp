@@ -6,53 +6,59 @@
             {{ tab }}
         </button>
 
-        <div v-if="noOrders" class="workspace">
-            <tabNurseryNoData v-if="currentTab == '托兒訂單'" class="nurseryNoData"></tabNurseryNoData>
-            <tabAdpotNoData v-if="currentTab == '領養訂單'" class="nurseryNoData"></tabAdpotNoData>
-            <br><br><br><br><br><br><br><br><br>
-        </div>
-
-        <div v-if="!noOrders" class="workspace">
+        <div  class="workspace">
             <tabNurseryData v-if="currentTab == '托兒訂單'">
-                <br>
-                <div v-for="nurseryOrder in nurseryOrders" :key="nurseryOrder.id">
-                    <div class="eachOrder" @click="goToDetailPage">
-                        <div class="imgInEachOrder"></div>
-                        <div class="orderId">
-                            <!-- &emsp; 全形空格 排版用 -->
-                            <p>訂單編號：{{ nurseryOrder.id }}&emsp;</p>
+                <div v-if="noNOrders" class="noOrders">
+                    <p>目前還沒有任何托兒訂單噢！</p>
+                    <br><br><br><br><br><br><br><br><br>
+                </div>               
+                <div v-else>
+                    <br>
+                    <div v-for="nurseryOrder in nurseryOrders" :key="nurseryOrder.id">
+                        <div class="eachOrder" @click="goToDetailPage">
+                            <div class="imgInEachOrder"></div>
+                            <div class="orderId">
+                                <!-- &emsp; 全形空格 排版用 -->
+                                <p>訂單編號：{{ nurseryOrder.id }}&emsp;</p>
+                            </div>
+                            <div class="petNameInEachOrder">
+                                {{ nurseryOrder.petName }}
+                            </div>
+                            <div class="timeInEachOrder">
+                                入住時間：{{ nurseryOrder.sTime }}
+                            </div>
                         </div>
-                        <div class="petNameInEachOrder">
-                            {{ nurseryOrder.petName }}
-                        </div>
-                        <div class="timeInEachOrder">
-                            入住時間：{{ nurseryOrder.sTime }}
-                        </div>
+                        <br>
                     </div>
                     <br>
                 </div>
-                <br>
             </tabNurseryData>
 
             <tabAdpotData v-if="currentTab == '領養訂單'">
-                <br>
-                <div v-for="adoptOrder in adoptOrders" :key="adoptOrder.id">
-                    <div class="eachOrder" @click="goToDetailPage">
-                        <div class="imgInEachOrder"></div>
-                        <div class="orderId">
-                            <!-- &emsp; 全形空格 排版用 -->
-                            <p>訂單編號：{{ adoptOrder.id }}&emsp;</p>
+                <div v-if="noAOrders" class="noOrders">
+                    <p>目前還沒有任何領養訂單噢！</p>
+                    <br><br><br><br><br><br><br><br><br>
+                </div>
+                <div v-else>
+                    <br>
+                    <div v-for="adoptOrder in adoptOrders" :key="adoptOrder.id">
+                        <div class="eachOrder" @click="goToDetailPage">
+                            <div class="imgInEachOrder"></div>
+                            <div class="orderId">
+                                <!-- &emsp; 全形空格 排版用 -->
+                                <p>訂單編號：{{ adoptOrder.id }}&emsp;</p>
+                            </div>
+                            <div class="petNameInEachOrder">
+                                {{ adoptOrder.petName }}
+                            </div>
+                            <div class="timeInEachOrder">
+                                領養時間：{{ adoptOrder.aTime }}
+                            </div>
                         </div>
-                        <div class="petNameInEachOrder">
-                            {{ adoptOrder.petName }}
-                        </div>
-                        <div class="timeInEachOrder">
-                            領養時間：{{ adoptOrder.aTime }}
-                        </div>
+                        <br>
                     </div>
                     <br>
                 </div>
-                <br>
             </tabAdpotData>
         </div>
     </div>
@@ -180,8 +186,8 @@
                     <button v-if="orderAStatus != 0 && !editOrderTime && orderAStatus == 1" type="button"
                         class="deleteBtn" v-on:click="deleteAOrder">刪除領養訂單</button>
                     <!-- 如果訂單未被刪過且尚未領養成功才能編輯訂單（用來防呆＋畫面比較好看）-->
-                    <button v-if="orderAStatus != 0 && !editOrderTime && orderAStatus != 3" type="button" class="editBtn"
-                        v-on:click="editAOrder">修改領養時間</button>
+                    <button v-if="orderAStatus != 0 && !editOrderTime && orderAStatus != 3" type="button"
+                        class="editBtn" v-on:click="editAOrder">修改領養時間</button>
                 </div>
             </div>
         </tabAdpotData>
@@ -196,16 +202,16 @@ import { format } from "date-fns";
 export default {
     data() {
         return {
-            noOrders: false,
-            //當沒有任何訂單時
-            //noOrders: true,
-
+            noNOrders: false,
+            noAOrders: false,
             //是在orders overview page還是特定order detail page
             atOrdersPage: true,
             editOrderTime: false,
             date_t: null,
-            orderNStatus: 1,//托兒訂單狀態<0: deleted by member, 1: normal, 2: deleted by manager>
-            orderAStatus: null,//領養訂單狀態<1：受理中、2：配對成功、3：領養成功、0：訂單被取消>
+            //托兒訂單狀態<0: deleted by member, 1: normal, 2: deleted by manager>
+            orderNStatus: 1,
+            //領養訂單狀態<1：受理中、2：配對成功、3：領養成功、0：訂單被取消>
+            orderAStatus: null,
             currentTab: "托兒訂單",
             tabs: ['托兒訂單', '領養訂單'],
 
@@ -234,8 +240,6 @@ export default {
         }
     },
     components: {
-        'tabNurseryNoData': <div>目前還沒有任何托兒訂單噢！</div>,
-        'tabAdpotNoData': <div>目前還沒有任何領養訂單噢！</div>,
         'DatePicker': DatePicker,
     },
     created() {//進度條
@@ -317,7 +321,7 @@ export default {
     border-top-right-radius: 20px;
 }
 
-.nurseryNoData {
+.noOrders {
     position: relative;
     left: 15%;
     width: 70%;
@@ -361,14 +365,6 @@ export default {
     text-align: left;
     float: right;
     font-size: 30px;
-}
-
-.adoptNoData {
-    position: relative;
-    left: 15%;
-    width: 70%;
-    height: 85%;
-    top: 200px;
 }
 
 .backBtn {
