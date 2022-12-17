@@ -1,8 +1,7 @@
 <template>
     <div v-if="atOrdersPage" class="myOrder">
         <p>我的訂單</p>
-        <button v-for="tab in tabs" :key="tab" :class="['tab-button', { active: currentTab === tab }]"
-            @click="currentTab = tab">
+        <button v-for="tab in tabs" :key="tab" :class="['tab-button', { active: currentTab === tab }]" @click="currentTab = tab">
             {{ tab }}
         </button>
 
@@ -83,7 +82,8 @@
             </div>
             <br>
             <div>
-                <button type="button" class="deleteNBtn" v-on:click="deleteOrder">取消此筆訂單</button>
+                <!-- 訂單的入住時間早於現在時間則不顯示取消訂單的btn -->
+                <button v-if="Date.parse(detailNOrderSTime) > new Date()" type="button" class="deleteNBtn" v-on:click="deleteOrder">取消此筆訂單</button>
             </div>
         </tabNurseryData>
 
@@ -91,7 +91,7 @@
             <p>領養訂單詳細資料</p>
             <div>
                  <!--訂單編輯介面已經有一個取消編輯會回到查閱介面了-->
-                 <button v-if="!editOrdertime" type="button" class="backBtn" v-on:click="back">返回</button>
+                 <button v-if="!editOrderTime" type="button" class="backBtn" v-on:click="back">返回</button>
             </div>
             <div class="workspace">
                 <div class="orderId">
@@ -99,40 +99,37 @@
                     <p>訂單編號：{{ detailAOrderId }}&emsp;</p>
                 </div>
 
-                <!-- 進度條: refer to https://ithelp.ithome.com.tw/articles/10200843 and https://codepen.io/yuski/pen/VEPxbO -->
                 <!-- 進度條：鈺倫版本-->
                 <div class="createorder_top">
                     <div class="createorder_top_left">
                         <span class=""
-                            :class="orderstatus == 0 || orderstatus == 1 || orderstatus == 2 ? 'activeSet' : ''">受理中—</span>
+                            :class="orderStatus == 1 || orderStatus == 2 || orderStatus == 3 ? 'activeSet' : ''">受理中—</span>
 
-                        <span class="" :class="orderstatus == 1 || orderstatus == 2 ? 'activeSet' : ''">—配對成功—</span>
+                        <span class="" :class="orderStatus == 2 || orderStatus == 3 ? 'activeSet' : ''">—配對成功—</span>
 
-                        <span class="" :class="orderstatus == 2 ? 'activeSet' : ''">—領養完成</span>
+                        <span class="" :class="orderStatus == 3 ? 'activeSet' : ''">—領養完成</span>
                     </div>
 
                 </div>
                 <div class="createorder_bott">
-                    <div class="createorder_bott_one" v-if="orderstatus == 0">受理中：已接受您的申請</div>
-                    <div class="createorder_bott_one" v-if="orderstatus == 1">配對成功：司狗意托兒所已您聯繫，請於指定時間辦理領養手續</div>
-                    <div class="createorder_bott_one" v-if="orderstatus == 2">領養完成：恭喜收穫寶貝狗勾～</div>
+                    <div class="createorder_bott_one" v-if="orderStatus == 1">受理中：已接受您的申請</div>
+                    <div class="createorder_bott_one" v-if="orderStatus == 2">配對成功：思狗意托兒所已與您聯繫，請於指定時間辦理領養手續</div>
+                    <div class="createorder_bott_one" v-if="orderStatus == 3">領養完成：恭喜收穫寶貝狗勾～</div>
                 </div>
                 <p> </p>
-                <div v-if="!editOrdertime" class="content">
+                <div v-if="!editOrderTime" class="content">
                     <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
                         class="image">
 
                     <div class="text">
                         <p>狗狗：{{ detailAOrderPetName }}</p>
                         <p>領養時間：{{ detailAOrderAppointTime }}</p>
-                        <div class="cancelstatus" v-if="orderstatus == 3">訂單編號：{{ detailAOrderId }} 已取消</div>
-                        <button v-if="orderstatus != 3" type="button" class="navBtn"
-                            v-on:click="navigation">查看狗狗檔案</button>
-
+                        <div class="cancelstatus" v-if="orderStatus == 0">訂單編號：{{ detailAOrderId }} 已取消</div>
+                        <button v-if="orderStatus != 0" type="button" class="navBtn" v-on:click="navigation">查看狗狗檔案</button>
                     </div>
 
                 </div>
-                <div v-if="editOrdertime" class="content">
+                <div v-if="editOrderTime" class="content">
                     <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
                         class="image">
                     <div class="text">
@@ -149,10 +146,10 @@
                 <br>
                 <div class="btns">
                      <!-- 如果訂單狀態還在受理中且未被刪過才能刪除訂單，一定要在查閱訂單介面才能刪（用來防呆＋畫面比較好看）-->
-                    <button v-if="orderstatus != 3 && !editOrdertime && orderstatus == 0" type="button" class="deleteBtn"
+                    <button v-if="orderStatus != 0 && !editOrderTime && orderStatus == 1" type="button" class="deleteBtn"
                         v-on:click="deleteOrder">刪除領養訂單</button>
-                        <!-- 如果訂單未被刪過且尚未領養成功才能編輯訂單（用來防呆＋畫面比較好看）-->
-                    <button v-if="orderstatus != 3 && !editOrdertime && orderstatus != 2" type="button" class="editBtn"
+                    <!-- 如果訂單未被刪過且尚未領養成功才能編輯訂單（用來防呆＋畫面比較好看）-->
+                    <button v-if="orderStatus != 0 && !editOrderTime && orderStatus != 3" type="button" class="editBtn"
                         v-on:click="editAOrder">修改領養時間</button>
                 </div>
             </div>
@@ -176,9 +173,9 @@ export default {
 
             //是在orders overview page還是特定order detail page
             atOrdersPage: true,
-            editOrdertime: false,
+            editOrderTime: false,
             date_t: null,
-            orderstatus: null,//訂單狀態<0：受理中、1：配對成功、2：領養成功、3：訂單被取消>
+            orderStatus: null,//訂單狀態<1：受理中、2：配對成功、3：領養成功、0：訂單被取消>
             currentTab: "托兒訂單",
             tabs: ['托兒訂單', '領養訂單'],
 
@@ -196,13 +193,14 @@ export default {
             detailNOrderPetName: 'cookie',
             detailNOrderRoomNum: '506',
             detailNOrderSTime: '2022/5/6 19:00',
+            //換這個可以顯示刪除托兒訂單btn
+            //detailNOrderSTime: '2023/5/6 19:00',
             detailNOrderETime: '2022/5/9 19:00',
             detailNOrderPrice: 4000,
 
             detailAOrderId: 555,
             detailAOrderPetName: 'gina',
             detailAOrderAppointTime: '2022/7/14 09:00',
-            detailAOrderStatus: '處理中',
         }
     },
     components: {
@@ -211,28 +209,27 @@ export default {
         'DatePicker': DatePicker,
     },
     created() {//進度條
-        this.orderstatus = 0//假資料，正常是去資料庫撈狀態
+        this.orderStatus = 3//假資料，正常是去資料庫撈狀態
     },
     methods: {
         navigation() {
 
         },
         deleteOrder() {
-            if (this.orderstatus == 0) {//如果還在受理中才能刪除訂單
-                this.editOrdertime = false //回到查看頁面
-                this.orderstatus = 3//更改訂單狀態
+            if (this.orderStatus == 1) {//如果還在受理中才能刪除訂單
+                this.editOrderTime = false //回到查看頁面
+                this.orderStatus = 0//更改訂單狀態
             }
-
         },
         editAOrder() {
-            this.editOrdertime = true
+            this.editOrderTime = true
             this.date_t = this.detailAOrderAppointTime
         },
         canceledit() {
-            this.editOrdertime = false
+            this.editOrderTime = false
         },
         confirm() {
-            this.editOrdertime = false
+            this.editOrderTime = false
             if (this.date_t != null) {
                 this.detailAOrderAppointTime = format(this.date_t, "yyyy-MM-dd")
             }
@@ -243,7 +240,6 @@ export default {
         back() {
             this.atOrdersPage = true
         },
-
     }
 }
 
@@ -379,121 +375,6 @@ export default {
     position: relative;
     width: 85%;
     display: inline-flex;
-}
-
-.container {
-    position: relative;
-    width: 100%;
-    height: 150px;
-}
-
-/*沒有icon的樣式 */
-/* .progress {
-  counter-reset:step;
-}
-.progress li {
-  list-style-type: none;
-  float:left;
-  width: 33.33%;
-  position:relative;
-  text-align:center;
-}
-.progress li:before {
-  content:counter(step);
-  counter-increment: step;
-  width: 30px;
-  height: 30px;
-  line-height:30px;
-  border:1px solid #ddd;
-  display:block;
-  text-align:center;
-  margin:0 auto 10px auto;
-  border-radius:50%;
-  background-color: #fff;
-}
-.progress li:after {
-  content:"";
-  position:absolute;
-  width: 100%;
-  height:1px;
-  background-color: #ddd;
-  top: 15px;
-  left: -50%;
-  z-index:-1;
-}
-.progress li:first-child:after {
-  content:none;
-}
-.progress li.active {
-  color:green;
-}
-.progress li.active:before {
-  border-color:green;
-}
-.progress li.active + li:after {
-  background-color: green;
-} */
-
-
-
-
-.progress2 li {
-    list-style-type: none;
-    float: left;
-    width: 33.33%;
-    position: relative;
-    text-align: center;
-}
-
-.progress2 li:before {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    content: "\f111";
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border: 1px solid #ddd;
-    display: block;
-    text-align: center;
-    margin: 0 auto 10px auto;
-    border-radius: 50%;
-    background-color: #fff;
-}
-
-.progress2 li.done:before {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    content: "\f00c";
-}
-
-.progress2 li:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background-color: #ddd;
-    top: 15px;
-    left: -50%;
-    z-index: -1;
-}
-
-.progress2 li:first-child:after {
-    content: none;
-}
-
-.progress2 li.active,
-.progress2 li.done {
-    color: rgba(9, 170, 20);
-}
-
-.progress2 li.active:before,
-.progress2 li.done:before {
-    border-color: rgba(9, 170, 20);
-}
-
-.progress2 li.active+li:after,
-.progress2 li.done+li:after {
-    background-color: rgba(9, 170, 20);
 }
 
 .navBtn {
