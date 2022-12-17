@@ -23,10 +23,10 @@
                     </tbody>
                 </table>
         </div>
-
         <div v-if="!editflag" class="Morderlist">
             <div>
                 <div v-if="flag">
+                    <p class="tabletitle">領養訂單資訊</p>
                     <button @click="flag=!flag" class="backbutton">返回</button>
                     <button @click="editflag=!editflag" class="editbutton">修改</button>
                     <div class="card mb-4">
@@ -79,7 +79,6 @@
                                     <p class="text-muted mb-0">{{orders[selectorder].createDate}}</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -89,8 +88,9 @@
         <div v-if="!saveflag">
             <div>
                 <div v-if="editflag">
+                <p class="tabletitle">領養訂單資訊</p>
                 <button @click="editflag=!editflag" class="backbutton">返回</button>
-                <button @click="saveflag=!saveflag" class="savebutton">儲存</button>
+                <button @click="modify(x)" class="savebutton">儲存</button>
                 <!-- <input type="button" value="儲存" @click="modify(x)"> -->
                     <div class="card mb-4">
                         <div class="card-body">
@@ -187,6 +187,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 
                 modify() {
                     this.x = this.progress
+                    this.editflag=!this.editflag
                 }
             }
         }
