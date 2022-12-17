@@ -1,7 +1,8 @@
 <template>
     <div v-if="atOrdersPage" class="myOrder">
         <p>我的訂單</p>
-        <button v-for="tab in tabs" :key="tab" :class="['tab-button', { active: currentTab === tab }]" @click="currentTab = tab">
+        <button v-for="tab in tabs" :key="tab" :class="['tab-button', { active: currentTab === tab }]"
+            @click="currentTab = tab">
             {{ tab }}
         </button>
 
@@ -68,30 +69,48 @@
                     <p>訂單編號：{{ detailNOrderId }}&emsp;</p>
                 </div>
 
-                <div class="content">
-                    <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
-                        class="image">
-                    <div class="text">
-                        <p>狗狗：{{ detailNOrderPetName }}</p>
-                        <p>床位：{{ detailNOrderRoomNum }}</p>
-                        <p>入住時間：{{ detailNOrderSTime }}</p>
-                        <p>退房時間：{{ detailNOrderETime }}</p>
-                        <p>總金額：$ {{ detailNOrderPrice }}</p>
+                <div v-if="orderNStatus == 1">
+                    <div class="content">
+                        <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
+                            class="image">
+                        <div class="text">
+                            <p>狗狗：{{ detailNOrderPetName }}</p>
+                            <p>床位：{{ detailNOrderRoomNum }}</p>
+                            <p>入住時間：{{ detailNOrderSTime }}</p>
+                            <p>退房時間：{{ detailNOrderETime }}</p>
+                            <p>總金額：$ {{ detailNOrderPrice }}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- 訂單的入住時間早於現在時間則不顯示取消訂單的btn -->
+                        <button v-if="Date.parse(detailNOrderSTime) > new Date()" type="button" class="deleteNBtn"
+                            v-on:click="deleteNOrder">刪除此筆訂單</button>
+                    </div>
+                </div>
+
+                <div v-if="orderNStatus == 0">
+                    <div class="content">
+                        <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
+                            class="image">
+                        <div class="text">
+                            <p>狗狗：{{ detailNOrderPetName }}</p>
+                            <p>床位：{{ detailNOrderRoomNum }}</p>
+                            <p>入住時間：{{ detailNOrderSTime }}</p>
+                            <p>退房時間：{{ detailNOrderETime }}</p>
+                            <p>總金額：$ {{ detailNOrderPrice }}</p>
+                            <div class="cancelstatus">訂單編號：{{ detailNOrderId }} 已取消</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <br>
-            <div>
-                <!-- 訂單的入住時間早於現在時間則不顯示取消訂單的btn -->
-                <button v-if="Date.parse(detailNOrderSTime) > new Date()" type="button" class="deleteNBtn" v-on:click="deleteOrder">取消此筆訂單</button>
-            </div>
+
         </tabNurseryData>
 
         <tabAdpotData v-if="currentTab == '領養訂單'">
             <p>領養訂單詳細資料</p>
             <div>
-                 <!--訂單編輯介面已經有一個取消編輯會回到查閱介面了-->
-                 <button v-if="!editOrderTime" type="button" class="backBtn" v-on:click="back">返回</button>
+                <!--訂單編輯介面已經有一個取消編輯會回到查閱介面了-->
+                <button v-if="!editOrderTime" type="button" class="backBtn" v-on:click="back">返回</button>
             </div>
             <div class="workspace">
                 <div class="orderId">
@@ -103,18 +122,18 @@
                 <div class="createorder_top">
                     <div class="createorder_top_left">
                         <span class=""
-                            :class="orderStatus == 1 || orderStatus == 2 || orderStatus == 3 ? 'activeSet' : ''">受理中—</span>
+                            :class="orderAStatus == 1 || orderAStatus == 2 || orderAStatus == 3 ? 'activeSet' : ''">受理中—</span>
 
-                        <span class="" :class="orderStatus == 2 || orderStatus == 3 ? 'activeSet' : ''">—配對成功—</span>
+                        <span class="" :class="orderAStatus == 2 || orderAStatus == 3 ? 'activeSet' : ''">—配對成功—</span>
 
-                        <span class="" :class="orderStatus == 3 ? 'activeSet' : ''">—領養完成</span>
+                        <span class="" :class="orderAStatus == 3 ? 'activeSet' : ''">—領養完成</span>
                     </div>
 
                 </div>
                 <div class="createorder_bott">
-                    <div class="createorder_bott_one" v-if="orderStatus == 1">受理中：已接受您的申請</div>
-                    <div class="createorder_bott_one" v-if="orderStatus == 2">配對成功：思狗意托兒所已與您聯繫，請於指定時間辦理領養手續</div>
-                    <div class="createorder_bott_one" v-if="orderStatus == 3">領養完成：恭喜收穫寶貝狗勾～</div>
+                    <div class="createorder_bott_one" v-if="orderAStatus == 1">受理中：已接受您的申請</div>
+                    <div class="createorder_bott_one" v-if="orderAStatus == 2">配對成功：思狗意托兒所已與您聯繫，請於指定時間辦理領養手續</div>
+                    <div class="createorder_bott_one" v-if="orderAStatus == 3">領養完成：恭喜收穫寶貝狗勾～</div>
                 </div>
                 <p> </p>
                 <div v-if="!editOrderTime" class="content">
@@ -124,8 +143,9 @@
                     <div class="text">
                         <p>狗狗：{{ detailAOrderPetName }}</p>
                         <p>領養時間：{{ detailAOrderAppointTime }}</p>
-                        <div class="cancelstatus" v-if="orderStatus == 0">訂單編號：{{ detailAOrderId }} 已取消</div>
-                        <button v-if="orderStatus != 0" type="button" class="navBtn" v-on:click="navigation">查看狗狗檔案</button>
+                        <div class="cancelstatus" v-if="orderAStatus == 0">訂單編號：{{ detailAOrderId }} 已取消</div>
+                        <button v-if="orderAStatus != 0" type="button" class="navBtn"
+                            v-on:click="navigation">查看狗狗檔案</button>
                     </div>
 
                 </div>
@@ -145,18 +165,16 @@
 
                 <br>
                 <div class="btns">
-                     <!-- 如果訂單狀態還在受理中且未被刪過才能刪除訂單，一定要在查閱訂單介面才能刪（用來防呆＋畫面比較好看）-->
-                    <button v-if="orderStatus != 0 && !editOrderTime && orderStatus == 1" type="button" class="deleteBtn"
-                        v-on:click="deleteOrder">刪除領養訂單</button>
+                    <!-- 如果訂單狀態還在受理中且未被刪過才能刪除訂單，一定要在查閱訂單介面才能刪（用來防呆＋畫面比較好看）-->
+                    <button v-if="orderAStatus != 0 && !editOrderTime && orderAStatus == 1" type="button"
+                        class="deleteBtn" v-on:click="deleteAOrder">刪除領養訂單</button>
                     <!-- 如果訂單未被刪過且尚未領養成功才能編輯訂單（用來防呆＋畫面比較好看）-->
-                    <button v-if="orderStatus != 0 && !editOrderTime && orderStatus != 3" type="button" class="editBtn"
+                    <button v-if="orderAStatus != 0 && !editOrderTime && orderAStatus != 3" type="button" class="editBtn"
                         v-on:click="editAOrder">修改領養時間</button>
                 </div>
             </div>
         </tabAdpotData>
     </div>
-
-
 </template>
 
 <script>
@@ -167,15 +185,16 @@ import { format } from "date-fns";
 export default {
     data() {
         return {
-            //此mamber有沒有任何訂單
             noOrders: false,
+            //當沒有任何訂單時
             //noOrders: true,
 
             //是在orders overview page還是特定order detail page
             atOrdersPage: true,
             editOrderTime: false,
             date_t: null,
-            orderStatus: null,//訂單狀態<1：受理中、2：配對成功、3：領養成功、0：訂單被取消>
+            orderNStatus: 1,//托兒訂單狀態<0: deleted by member, 1: normal, 2: deleted by manager>
+            orderAStatus: null,//領養訂單狀態<1：受理中、2：配對成功、3：領養成功、0：訂單被取消>
             currentTab: "托兒訂單",
             tabs: ['托兒訂單', '領養訂單'],
 
@@ -192,10 +211,10 @@ export default {
             detailNOrderId: 123,
             detailNOrderPetName: 'cookie',
             detailNOrderRoomNum: '506',
-            detailNOrderSTime: '2022/5/6 19:00',
-            //換這個可以顯示刪除托兒訂單btn
-            //detailNOrderSTime: '2023/5/6 19:00',
-            detailNOrderETime: '2022/5/9 19:00',
+            //換這個可以隱藏刪除托兒訂單btn
+            //detailNOrderSTime: '2022/5/6 19:00',
+            detailNOrderSTime: '2023/5/6 19:00',
+            detailNOrderETime: '2023/5/9 19:00',
             detailNOrderPrice: 4000,
 
             detailAOrderId: 555,
@@ -209,16 +228,19 @@ export default {
         'DatePicker': DatePicker,
     },
     created() {//進度條
-        this.orderStatus = 3//假資料，正常是去資料庫撈狀態
+        this.orderAStatus = 1//假資料，正常是去資料庫撈狀態
     },
     methods: {
         navigation() {
 
         },
-        deleteOrder() {
-            if (this.orderStatus == 1) {//如果還在受理中才能刪除訂單
+        deleteNOrder() {
+            this.orderNStatus = 0
+        },
+        deleteAOrder() {
+            if (this.orderAStatus == 1) {//如果還在受理中才能刪除訂單
                 this.editOrderTime = false //回到查看頁面
-                this.orderStatus = 0//更改訂單狀態
+                this.orderAStatus = 0//更改訂單狀態
             }
         },
         editAOrder() {
@@ -242,7 +264,6 @@ export default {
         },
     }
 }
-
 </script>
 
 <style>
