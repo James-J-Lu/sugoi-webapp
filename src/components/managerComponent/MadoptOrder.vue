@@ -36,7 +36,7 @@
                                     <p class="mb-0">訂單編號</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p class="text-muted mb-0">{{orders[selectorder].orderID}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].orderID}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -44,7 +44,7 @@
                                     <p class="mb-0">會員帳號</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p class="text-muted mb-0">{{orders[selectorder].Maccount}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].Maccount}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -52,15 +52,15 @@
                                     <p class="mb-0">會員姓名</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p class="text-muted mb-0">{{orders[selectorder].Mname}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].Mname}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <p class="mb-0">約看時間</p>
                                 </div>
-                                <div class="col-sm-3">
-                                    <p class="text-muted mb-0">{{orders[selectorder].appointment}}</p>
+                                <div class="col-sm-4">
+                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].appointment}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -68,15 +68,15 @@
                                     <p class="mb-0">領養進度</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p class="text-muted mb-0">{{orders[selectorder].progress}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].progress}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <p class="mb-0">建立時間</p>
                                 </div>
-                                <div class="col-sm-3">
-                                    <p class="text-muted-mb-0">{{orders[selectorder].createDate}}</p>
+                                <div class="col-sm-4">
+                                    <p class="text-muted-mb-0" style="text-align: left">{{orders[selectorder].createDate}}</p>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                                     <p class="mb-0">訂單編號</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p class="text-muted mb-0">{{orders[selectorder].orderID}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].orderID}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -107,7 +107,7 @@
                                     <p class="mb-0">會員帳號</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p class="text-muted mb-0">{{orders[selectorder].Maccount}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].Maccount}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -115,23 +115,23 @@
                                     <p class="mb-0">會員姓名</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p class="text-muted mb-0">{{orders[selectorder].Mname}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].Mname}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <p class="mb-0">約看時間</p>
                                 </div>
-                                <div class="col-sm-3">
-                                    <DatePicker v-model="s_date" class="datepicker"></DatePicker>
+                                <div class="col-sm-4">
+                                    <DatePicker v-model="s_date" class="datepickers"></DatePicker>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="progress">領養進度</label>
+                                    <label for="progress" >領養進度</label>
                                 </div>
-                                <div class="col-sm-3">
-                                        <select name="progress" id="state" v-model="s_progress">
+                                <div class="col-sm-1">
+                                        <select v-model="s_progress">
                                             <option value="提出申請">提出申請</option>
                                             <option value="約看中">約看中</option>
                                             <option value="領養完成">領養完成</option>
@@ -142,8 +142,8 @@
                                 <div class="col-sm-6">
                                     <p class="mb-0">建立時間</p>
                                 </div>
-                                <div class="col-sm-3">
-                                    <p class="text-muted mb-0">{{orders[selectorder].createDate}}</p>
+                                <div class="col-sm-4">
+                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].createDate}}</p>
                                 </div>
                             </div>
                         </div>
@@ -265,13 +265,18 @@ td, th {
     background-color: white;
 }
 
-.datepicker {
-    width: 100%;
-    margin-left: 120px;
+.datepickers {
+    width: 50%;
 }
+
+.progresser {
+    margin-left: 0px;
+}
+
 .mb-0 {
     text-align: center;
 }
+
 
 </style>
 
