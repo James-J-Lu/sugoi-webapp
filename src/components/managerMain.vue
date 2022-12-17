@@ -89,6 +89,6 @@ export default {
     right: 2%;
     width: 72.5%;
     height: 93%;
-    background-color: rgb(229,229,229);
+    background-color: white;
 }
 </style>
