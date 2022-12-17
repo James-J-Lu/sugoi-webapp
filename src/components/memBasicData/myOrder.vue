@@ -102,8 +102,21 @@
                         </div>
                     </div>
                 </div>
+                <div v-if="orderNStatus == 2">
+                    <div class="content">
+                        <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
+                            class="image">
+                        <div class="text">
+                            <p>狗狗：{{ detailNOrderPetName }}</p>
+                            <p>床位：{{ detailNOrderRoomNum }}</p>
+                            <p>入住時間：{{ detailNOrderSTime }}</p>
+                            <p>退房時間：{{ detailNOrderETime }}</p>
+                            <p>總金額：$ {{ detailNOrderPrice }}</p>
+                            <div class="cancelstatus">訂單編號：{{ detailNOrderId }} 已被思狗意取消，如有任何問題請聯繫我們！</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </tabNurseryData>
 
         <tabAdpotData v-if="currentTab == '領養訂單'">
@@ -128,7 +141,6 @@
 
                         <span class="" :class="orderAStatus == 3 ? 'activeSet' : ''">—領養完成</span>
                     </div>
-
                 </div>
                 <div class="createorder_bott">
                     <div class="createorder_bott_one" v-if="orderAStatus == 1">受理中：已接受您的申請</div>
@@ -147,7 +159,6 @@
                         <button v-if="orderAStatus != 0" type="button" class="navBtn"
                             v-on:click="navigation">查看狗狗檔案</button>
                     </div>
-
                 </div>
                 <div v-if="editOrderTime" class="content">
                     <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
