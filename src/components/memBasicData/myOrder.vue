@@ -102,10 +102,11 @@
                 <!-- 進度條：鈺倫版本-->
                 <div class="createorder_top">
                     <div class="createorder_top_left">
-                        <span class="" :class="orderstatus == 0 || orderstatus == 1 || orderstatus == 2 ? 'activeSet' : ''">受理中—</span>
-                        
+                        <span class=""
+                            :class="orderstatus == 0 || orderstatus == 1 || orderstatus == 2 ? 'activeSet' : ''">受理中—</span>
+
                         <span class="" :class="orderstatus == 1 || orderstatus == 2 ? 'activeSet' : ''">—配對成功—</span>
-                        
+
                         <span class="" :class="orderstatus == 2 ? 'activeSet' : ''">—領養完成</span>
                     </div>
 
@@ -115,15 +116,18 @@
                     <div class="createorder_bott_one" v-if="orderstatus == 1">配對成功：司狗意托兒所已您聯繫，請於指定時間辦理領養手續</div>
                     <div class="createorder_bott_one" v-if="orderstatus == 2">領養完成：恭喜收穫寶貝狗勾～</div>
                 </div>
-                <p>     </p>
+                <p> </p>
                 <div v-if="!editOrdertime" class="content">
                     <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
                         class="image">
-                    
+
                     <div class="text">
                         <p>狗狗：{{ detailAOrderPetName }}</p>
                         <p>領養時間：{{ detailAOrderAppointTime }}</p>
-                        <button type="button" class="navBtn" v-on:click="navigation">查看狗狗檔案</button>
+                        <div class="cancelstatus" v-if="orderstatus == 3">訂單編號：{{ detailAOrderId }} 已取消</div>
+                        <button v-if="orderstatus != 3" type="button" class="navBtn"
+                            v-on:click="navigation">查看狗狗檔案</button>
+
                     </div>
 
                 </div>
@@ -143,8 +147,10 @@
 
                 <br>
                 <div class="btns">
-                    <button type="button" class="deleteBtn" v-on:click="deleteOrder">刪除領養訂單</button>
-                    <button type="button" class="editBtn" v-on:click="editAOrder">修改領養時間</button>
+                    <button v-if="orderstatus != 3 && !editOrdertime && orderstatus == 0" type="button" class="deleteBtn"
+                        v-on:click="deleteOrder">刪除領養訂單</button>
+                    <button v-if="orderstatus != 3 && !editOrdertime && orderstatus != 2" type="button" class="editBtn"
+                        v-on:click="editAOrder">修改領養時間</button>
                 </div>
             </div>
         </tabAdpotData>
@@ -169,7 +175,7 @@ export default {
             atOrdersPage: true,
             editOrdertime: false,
             date_t: null,
-            orderstatus:null,//訂單狀態
+            orderstatus: null,//訂單狀態
             currentTab: "托兒訂單",
             tabs: ['托兒訂單', '領養訂單'],
 
@@ -202,13 +208,17 @@ export default {
         'DatePicker': DatePicker,
     },
     created() {//create進度條
-        this.orderstatus = 2//假資料，正常是去資料庫撈狀態
+        this.orderstatus = 0//假資料，正常是去資料庫撈狀態
     },
     methods: {
         navigation() {
 
         },
         deleteOrder() {
+            if (this.orderstatus == 0) {//如果還在受理中才能刪除訂單
+                this.editOrdertime = false //回到查看頁面
+                this.orderstatus = 3//更改訂單狀態
+            }
 
         },
         editAOrder() {
@@ -244,11 +254,16 @@ export default {
 }
 
 .createorder_top .createorder_top_left .activeSet {
-    color: 	#0072E3	;
+    color: #0072E3;
 }
 
 .createorder_bott {
     color: brown;
+}
+
+.cancelstatus {
+    color: red;
+    font-weight: bold;
 }
 
 .myOrder {
@@ -480,7 +495,7 @@ export default {
 
 .navBtn {
     position: relative;
- left:20%;
+    left: 20%;
     color: white;
     background: brown;
     border-radius: 20px;
