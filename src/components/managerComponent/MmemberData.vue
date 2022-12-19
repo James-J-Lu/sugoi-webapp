@@ -8,7 +8,7 @@
         <thead class="MtableHead">
           <tr>
             <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
-            <th>會員ID</th>
+            <th style="width:20%">會員ID</th>
             <th>帳號</th>
             <th>姓名</th>
           </tr>
@@ -24,37 +24,30 @@
       </table>
     </div>
     <div v-if="gocheck">
-      <div class="card mb-4">
+      <div class="card">
         <div class="card-body">
-          <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-              <div class="col col-lg-6 mb-4 mb-lg-0">
-                <div class="card mb-3" style="border-radius: .5rem;">
-                  <div class="row g-0">
-                    <div class="col-md-4 gradient-custom text-center text-white"
-                      style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                        alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-                      <h5>Marie Horwitz</h5>
-                      <p>Web Designer</p>
-                      <i class="far fa-edit mb-5"></i>
-                    </div>
-                    <div class="col-md-8">
-                      <div class="card-body p-4">
-                        <div class="row pt-1">
-                          <div class="col-6 mb-3">
-                            <h4>會員編號</h4>
-                            <p class="text-muted">{{members[selectMember].id}}</p>
-                            <h4>會員帳號</h4>
-                            <p class="text-muted">{{members[selectMember].account}}</p>
-                          </div>
-                        </div>
+          <div class="container">
+            <div class="card w-50" style="border-radius: .5rem;">
+              <div class="row g-0">
+                <div class="col-md-4 gradient-custom text-center text-white"
+                  style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                    alt="Avatar" class="img-fluid my-5" style="width: 200px;" />                      
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body p-4">
+                    <div class="row pt-1">
+                      <div class="col-6 mb-3">
+                        <p>會員編號</p>
+                        <p class="text-muted">{{members[selectMember].id}}</p>
+                        <p>會員帳號</p>
+                        <p class="text-muted">{{members[selectMember].account}}</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </div>              
           </div>
           <div class="row">
             <div class="col-sm-3">

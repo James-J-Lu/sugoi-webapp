@@ -11,7 +11,7 @@
               <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
               <th>狗狗編號</th>
               <th>狗狗名字</th>
-              <th>說明</th>
+              <th style="width:50%">說明</th>
             </tr>
           </thead>
           <tbody class="PtableBody">
@@ -25,31 +25,24 @@
         </table>
       </div>
     <div v-if="gocheck">
-        <div class="card mb-4">
+        <div class="card">
         <div class="card-body">
-          <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-              <div class="col col-lg-6 mb-4 mb-lg-0">
-                <div class="card mb-3" style="border-radius: .5rem;">
-                  <div class="row g-0">
-                    <div class="col-md-4 gradient-custom text-center text-white"
-                      style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                        alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-                      <h5>Marie Horwitz</h5>
-                      <p>Web Designer</p>
-                      <i class="far fa-edit mb-5"></i>
-                    </div>
-                    <div class="col-md-8">
-                      <div class="card-body p-4">
-                        <div class="row pt-1">
-                          <div class="col-6 mb-3">
-                            <h4>狗狗編號</h4>
-                            <p class="text-muted">{{adoptPets[selectPet].id}}</p>
-                            <h4>狗狗名字</h4>
-                            <p class="text-muted">{{adoptPets[selectPet].name}}</p>
-                          </div>
-                        </div>
+          <div class="container">
+            <div class="card w-50" style="border-radius: .5rem;">
+              <div class="row g-0">
+                <div class="col-md-4 gradient-custom text-center text-white"
+                  style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                    alt="Avatar" class="img-fluid my-5" style="width: 200px;" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body p-4">
+                    <div class="row pt-1">
+                      <div class="col-6 mb-3">
+                        <p>狗狗編號</p>
+                        <p class="text-muted">{{adoptPets[selectPet].id}}</p>
+                        <p>狗狗名字</p>
+                        <p class="text-muted">{{adoptPets[selectPet].name}}</p>
                       </div>
                     </div>
                   </div>
@@ -123,7 +116,114 @@
       </div>
     </div>
     <div class="table-responsive" v-if="gonew">
-      <div class="container py-5 h-100 Pform">
+      <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">狗狗名字：</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">體型：</p>
+                                </div>
+                                <div class="col-sm-7">
+                                  <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions">
+                                  <label class="form-check-label" for="inlineRadio1">大型犬</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions">
+                                  <label class="form-check-label" for="inlineRadio2">中型犬</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions">
+                                  <label class="form-check-label" for="inlineRadio3">小型犬</label>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">年齡：</p>
+                                </div>
+                                <div class="col-sm-7">
+                                  <input type="number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">毛色：</p>
+                                </div>
+                                <div class="col-sm-7">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions">
+                                    <label class="form-check-label" for="inlineRadio1">黑色</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions">
+                                    <label class="form-check-label" for="inlineRadio2">黃色系</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions">
+                                    <label class="form-check-label" for="inlineRadio3">花花色</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions">
+                                    <label class="form-check-label" for="inlineRadio3">白色</label>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">毛的長度：</p>
+                                </div>
+                                <div class="col-sm-7">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions">
+                                    <label class="form-check-label" for="inlineRadio1">長毛</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions">
+                                    <label class="form-check-label" for="inlineRadio2">短毛</label>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">性別：</p>
+                                </div>
+                                <div class="col-sm-7">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions">
+                                    <label class="form-check-label" for="inlineRadio1">男生</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions">
+                                    <label class="form-check-label" for="inlineRadio2">女生</label>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">品種：</p>
+                                </div>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">介紹：</p>
+                                    <textarea name="info" id="info" cols="30" rows="10" class="form-control"></textarea>
+                                </div>
+                            </div>
+                              <button class="w-30 btn btn-primary btn-lg" type="submit">確認</button>
+                        </div>
+                      </div>
+      <!-- <div class="container py-5 h-100 Pform">
         <form class="needs-validation">
           <div class="row g-3">
             <div class="row mb-3">
@@ -215,7 +315,7 @@
             <button class="w-100 btn btn-primary btn-lg" type="submit">確認</button>
           </div>
         </form>
-      </div>
+      </div> -->
       </div>
   </div>
 </template>
@@ -280,6 +380,12 @@
 </script>
 
 <style>
+.test1 {
+  margin: 0 !important;
+}
+.MadoptPet {
+  text-align: left;
+}
 .Ptop {
     text-align: left;
 }

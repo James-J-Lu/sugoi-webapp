@@ -69,11 +69,17 @@
 }
 
 .roomDisplay {
-    font-size: 40px;
+    font-size: 32px;
     margin-top: 20%;
+    text-align: left;
 }
 .inputDisplay {
     font-size: 28px;
     text-align: center;
 }
+.container {
+  display: flex;
+  justify-content: center;
+}
+
 </style>
