@@ -27,22 +27,41 @@ export default {
                 {id: 5, name:'甜甜', img:"../../assets/Pet/6.jpg"},
                 {id: 6, name:'黑黑', img:"../../assets/Pet/6.jpg"}
             ],
+            AdoptPets: [],
         }
     },
     methods: {
         getAdoptPet() {
             console.log('Get Adoption Pet')
-            // AdoptionPetDataService.getAll()
-            //     .then(response => {
-            //         console.log(response.data)
-            //     })
-            //     .catch(e => {
-            //         console.log(e)
-            //     })
+            AdoptionPetDataService.getAll()
+                .then(response => {
+                    var a = ["id", "adoPetName", "adoPetFigure", "adoPetAge", "adpPetColor", "adoPetFur", "adpPetGender", "adoPetBreed", "adoPetDisease", "humanFriendly", "dogFriendly", "adoPetIntro"];
+                    a.forEach(function() {
+                        for(var i = 0; i < length(response.data); i++) {
+                            var singlePet = {};
+                            singlePet['id'] = length(this.AdoptPets);
+                            singlePet['adoPetName'] = response.data[i].adoPetName;
+                            singlePet['adoPetFigure'] = response.data[i].adoPetFigure;
+                            singlePet['adoPetAge'] = response.data[i].adoPetAge;
+                            singlePet['adoPetColor'] = response.data[i].adoPetColor;
+                            singlePet['adoPetFur'] = response.data[i].adoPetFur;
+                            singlePet['adoPetGender'] = response.data[i].adoPetGender;
+                            singlePet['adoPetBreed'] = response.data[i].adoPetBreed;
+                            singlePet['adoPetDiseases'] = response.data[i].adoPetDiseases;
+                            singlePet['huamnFriendly'] = response.data[i].huamnFriendly;
+                            singlePet['dogFriendly'] = response.data[i].dogFriendly;
+                            singlePet['adoPetInfo'] = response.data[i].adoPetInfo;
+                            this.AdoptPets.push(singlePet);
+                        }
+                    });
+                })
+                .catch(e => {
+                    console.log(e)
+                })
         },
     },
     mounted() {
-        this.getAdoptPet()
+        // this.getAdoptPet()
     },
 }
 </script>
@@ -69,9 +88,8 @@ export default {
     font-size: 30px;
     font-weight: bold;
     color: black !important;
-    /* background-color: rgb(182, 127, 255); */
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(400px, 400px);
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(550px, auto);
 }
 </style>

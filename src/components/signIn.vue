@@ -49,7 +49,7 @@
                     <input v-model="memberData.memberPhone" type="text" class="input2">
                 </li>
                 <li>
-                    <button type="button" class="submitBtn">取消</button>
+                    <button type="button" class="submitBtn" @click="CancelSignin('defaultMain')">取消</button>
                     <button type="button" class="submitBtn" @click="CreateMember">完成</button>
                 </li>
             </ul>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import MemberDataService from "../services/MemberDataService";
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -84,12 +85,56 @@ export default {
     },
     methods: {
         CreateMember() { //backend的create要負責retrive last memberId
-            console.log(this.memberData.memberGender)
+            this.Checkinput()
+            var data = { //傳給後端的登入資料
+                account: this.memberData.memberAccount,
+                pw: this.memberData.memberPassword
+            };
+
+            this.CancelSignin('logIn')
+            //check whether sign in
+            
+            // MemberDataService.logIn(data)
+            //     .then(response => {
+            //         console.log(response.data)
+            //         if(response.data == 'can sign in') {
+            //             console.log('可以註冊')
+            //             //create member
+            //             MemberDataService.create(this.memberData)
+            //                 .then(response => {
+            //                     if(response.data.length != 0) {
+            //                         this.CancelSignin('logIn')
+            //                     }
+
+            //                 })
+            //                 .catch(e => {
+            //                     console.log(e);
+            //                 });
+            //         }
+            //         else
+            //             console.log('已經有帳號了')
+            //     })
+            //     .catch(e => {
+            //         console.log(e);
+            //     });
+        },
+
+        CancelSignin(where) {
+            var _value = {
+                id: null,
+                desTination: null,
+                name: null,
+                petCheck: null,
+                adoptCheck: null
+            }
+            _value.desTination = where
+            this.$emit('getChild', _value)
         },
 
         //檢查input值
         Checkinput() {
-
+            //name, password, account要有值
+            //time的格式要再調
         },
     },
 }   

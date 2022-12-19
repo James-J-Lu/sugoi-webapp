@@ -9,6 +9,11 @@ export default {
 </script>
 
 <style>
+img {
+    width: 100%; /* or any custom size */
+    height: 100%; 
+    object-fit: contain;
+}
 #app {
   /* font-family: Avenir, Helvetica, Arial, sans-serif, "ChenYuluoyan-Thin"; */
   font-family: "ChenYuluoyan-Thin";

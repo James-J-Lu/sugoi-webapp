@@ -67,7 +67,7 @@ export default {
             MemberPetDataService.findByMID(memberId)
                 .then(response => {
                     var a = ["id", "name"];
-                    a.forEach(function(entry) {
+                    a.forEach(function() {
                         for(var i = 0; i < length(response.data); i++) {
                             var singlePet = {};
                             singlePet['id'] = length(this.pets);

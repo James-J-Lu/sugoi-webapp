@@ -281,7 +281,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .createorder_top .createorder_top_left {
     font-weight: bold;
     font-size: 35px;

@@ -3,15 +3,23 @@
         <div class="imgdiv">
             <img :src="src"  alt="??" class="img">
         </div>
-        <div class="detail" @click="click()">
-            <ul>
+        <div class="detail">
+            <ul class="dropdown-menu position-static d-grid gap-1 mx-0 w-220px">
                 <li>
-                    {{ pet.name }}
+                    <p class="dropdown-item rounded-2 active">{{ pet.name }}</p>
                 </li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li>
+                    <p class="dropdown-item rounded-2 active"></p>
+                </li>
+                <li>
+                    <p class="dropdown-item rounded-2 active">{{ pet.name }} </p>
+                </li>
+                <li>
+                    <p class="dropdown-item rounded-2 active">{{ pet.name }}</p>
+                </li>
+                <li @click="click">
+                    <p class="dropdown-item rounded-2 active">{{ pet.name }}</p>
+                </li>
             </ul>
         </div>
     </div>
@@ -26,13 +34,17 @@ export default {
     },
     methods: {
         click() {
-            console.log(this.pet.img)
+            console.log(this.src)
         }
     },
     data() {
         return {
-            src: require('../../assets/Pet/5.jpg'),
+
+            src: require('../../assets/Pet/1.jpg'),
         }
+    },
+    mounted() {
+        // this.click()
     }
 }
 
@@ -57,12 +69,37 @@ export default {
 }
 .detail {
     position: absolute;
-    background-color: rgb(255, 255, 255);
     bottom: 0;
     width: 60%;
     height: 55%;
     left: 20%;
-    border-radius: 25px;
+}
+.detail ul {
+  height: 100%;
+  background-color: #ffffff;
+  --bs-dropdown-border-color: none;
+  --bs-dropdown-border-radius: none;
+  grid-template-rows: 20% 3% 20% 20% 20%;
+  border-radius: 15px;
+  padding-top: 2rem;
+}
+.detail li p{
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
+  display: flex;
+  align-items: center!important;
+  justify-content:center;
+  height: 100%;
+}
+.detail li {
+    display: flex;
+    align-items: center!important;
+    justify-content:center;
+}
+.detail li:nth-child(2) p{
+    background-color: crimson;
+    width: 70%;
 }
 
 </style>

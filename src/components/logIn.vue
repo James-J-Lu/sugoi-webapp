@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p id="title">會員登入</p>
+        <p id="_title">會員登入</p>
         <div class="login">
             <ul class="loginForm dropdown-menu position-static d-grid gap-1 mx-0 w-220px">
                 <li>
@@ -27,7 +27,7 @@
                     <button type="button" class="submitBtn" @click="logIn">確認</button>
                 </li>
                 <li>
-                    <p>註冊會員</p>
+                    <p @click="CancelSignin('signIn')">註冊會員</p>
                 </li>
             </ul>
         </div>
@@ -36,84 +36,107 @@
 
 <script>
 import MemberDataService from "../services/MemberDataService";
+import MemberPetDataService from "@/services/MemberPetDataService";
+import AdoptionDataService from "@/services/AdoptionDataService";
 
 export default {
     name: 'logIn',
     data () {
         return {
             isMember: null,
-            name: null,
-            account: 'jack',
+            account: 'kelly',
             password: '123',
+            memberData: [],
+            otherVal: {
+                desTination: null,
+                petCheck: null,
+                adoptCheck: null,
+            }
         }
     },
     methods: {
-        //回到default主頁
-        back2Main(_login) {
-            //要傳回parent的參數
+        CancelSignin(where) {
             var _value = {
+                id: null,
                 desTination: null,
                 name: null,
                 petCheck: null,
                 adoptCheck: null
             }
-            //單純回到上一頁
-            if(_login == 0) {
-                _value.name = null
-                _value.desTination = 'defaultMain'
-                this.$emit('getChild', _value)
+            _value.desTination = where
+            this.$emit('getChild', _value)
+        },
+
+        //回到default主頁
+        back2Main(_login) {
+            //是會員
+            if(this.isMember == 'member') {
+                this.otherVal.desTination = 'defaultMain'
+                Object.assign(this.memberData, this.otherVal);
+                this.$emit('getChild', this.memberData)
             }
-            //登入輸入的那個按鈕
-            else if (_login == 1) {
-                //是會員
-                if(this.isMember == 'member') {
-                    _value.name = this.name
-                    _value.desTination = 'defaultMain'
-                    _value.petCheck = true
-                    _value.adoptCheck = true
-                    this.$emit('getChild', _value)
-                }
-                //是管理員
-                else if (this.isMember == 'manager'){
-                    _value.name = 'manager'
-                    _value.desTination = 'managerMain'
-                    this.$emit('getChild', _value)
-                }
+            //是管理員
+            else if (this.isMember == 'manager'){
+                this.otherVal.desTination = 'defaultMain'
+                Object.assign(this.memberData, this.otherVal);
+                this.$emit('getChild', this.memberData)
             }
         },
 
         //登入submit
         logIn () {
-
-            this.name = 'kelly'
-            // this.isMember = 'manager' //管理者
-            this.isMember = 'member' //會員
-            this.back2Main(1)
-            // Checkinput()
-            // var data = {
-            //     id: null,
-            //     account: this.account,
-            //     pw: this.password,
-            //     name: null
-            // };
-            // MemberDataService.logIn(data)
-            //     .then(response => {
-            //         //登入成功
-            //         if(response.data != false) {
-            //             this.name = response.data.memberName
-            //             if(response.data.memberAccount != 'manager')
-            //                 this.isMember = 'member'
-            //             else if(response.data.memberAccount == 'manager')
-            //                 this.isMember = 'manager'
-            //             this.back2Main(1)
-            //         }
-            //         else
-            //             console.log('登入失敗')
-            //     })
-            //     .catch(e => {
-            //         console.log(e);
-            //     });
+            this.Checkinput() //檢查輸入
+            var data = { //傳給後端的登入資料
+                account: this.account,
+                pw: this.password,
+            };
+            MemberDataService.logIn(data)
+                .then(response => {
+                    //登入成功
+                    if(response.data != false) {
+                        this.memberData = response.data
+                        if(response.data.memberAccount != 'manager') {
+                            this.isMember = 'member'
+                            this.ifAdopt_Pet(this.memberData.memberId)
+                        }
+                        else if(response.data.memberAccount == 'manager') {
+                            this.isMember = 'manager'
+                            this.back2Main(1)
+                        }
+                    }
+                    else
+                        console.log('登入失敗')
+                })
+                .catch(e => {
+                    console.log(e);
+                });
         },
+
+        ifAdopt_Pet(id) {
+            MemberPetDataService.findByMID(id)
+                .then(response => {
+                    if(response.data.length != 0)
+                        this.otherVal.petCheck = true
+                    else
+                        this.otherVal.petCheck = false
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+            
+            AdoptionDataService.findByMID(id)
+                .then(response => {
+                    if(response.data.length != 0)
+                        this.otherVal.adoptCheck = true
+                    else
+                        this.otherVal.adoptCheck = false
+                    this.back2Main(1)
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
         //檢查input值
         Checkinput() {
 
@@ -139,7 +162,7 @@ export default {
     border-radius: 15px;
     border-style: none !important;
 }
-#title {
+#_title {
     font-size: 50px;
     font-weight: bold;
     height: 10%;
