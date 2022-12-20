@@ -91,7 +91,7 @@
                 <div v-if="editflag">
                 <p class="tabletitle">領養訂單資訊
                 <button @click="editflag=!editflag" class="backbutton">返回</button>
-                <button @click="modify(s_date,s_progress)" class="savebutton">確認</button>
+                <button @click="modify(id,s_date,s_progress)" class="savebutton">確認</button>
                 <!-- <input type="button" value="儲存" @click="modify(x)"> -->
                 </p>
                 
@@ -190,7 +190,8 @@ import '@vuepic/vue-datepicker/dist/main.css'
                     this.selectorder = ID
                 },
 
-                modify(s_date,s_progress) {
+                modify(id,s_date,s_progress) {
+                    this.selectorder = id
                     this.date = s_date
                     this.progress = s_progress
                     this.editflag=!this.editflag
