@@ -91,7 +91,7 @@
                 <div v-if="editflag">
                 <p class="tabletitle">領養訂單資訊
                 <button @click="editflag=!editflag" class="backbutton">返回</button>
-                <button @click="modify(id,s_date,s_progress)" class="savebutton">確認</button>
+                <button @click="modify(s_date,s_progress)" class="savebutton">確認</button>
                 <!-- <input type="button" value="儲存" @click="modify(x)"> -->
                 </p>
                 
@@ -126,7 +126,7 @@
                                     <p class="mb-0">約看時間</p>
                                 </div>
                                 <div class="col-sm-4">
-                                    <DatePicker v-model="s_date" class="datepickers" placeholder="選擇時間"></DatePicker>
+                                    <DatePicker v-model="orders[selectorder].appointment" class="datepickers" placeholder="選擇時間"></DatePicker>
                                 </div>
                             </div>
                             <div class="row">
@@ -134,7 +134,7 @@
                                     <label for="progress">領養進度</label>
                                 </div>
                                 <div class="col-sm-1">
-                                        <select v-model="s_progress">
+                                        <select v-model="orders[selectorder].progress">
                                             <option value="提出申請">提出申請</option>
                                             <option value="約看中">約看中</option>
                                             <option value="領養完成">領養完成</option>
@@ -190,8 +190,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
                     this.selectorder = ID
                 },
 
-                modify(id,s_date,s_progress) {
-                    this.selectorder = id
+                modify(s_date,s_progress) {
                     this.date = s_date
                     this.progress = s_progress
                     this.editflag=!this.editflag

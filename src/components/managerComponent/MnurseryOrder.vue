@@ -148,7 +148,7 @@
                                     <p class="mb-0">房間編號</p>
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="number" class="form-control inputDisplay" v-model="s_roomID">
+                                    <input type="number" class="form-control inputDisplay" v-model="orders[selectorder].roomID">
                                 </div>
                             </div>
                             <div class="row">
@@ -156,7 +156,7 @@
                                     <p class="mb-0">日期區間</p>
                                 </div>
                                 <div class="col-sm-1">
-                                    <p><DatePicker v-model="s_startTime" class="datepicker" placeholder="起始時間"></DatePicker> <DatePicker v-model="s_endTime" class="datepicker" placeholder="結束時間"></DatePicker></p><br>
+                                    <p><DatePicker v-model="orders[selectorder].startTime" class="datepicker" placeholder="起始時間"></DatePicker> <DatePicker v-model="s_endTime" class="datepicker" placeholder="結束時間"></DatePicker></p><br>
                                     <!-- <p><input type="date" size="5" placeholder="起始時間" v-model="s_startTime">  ~  <input type="date" size="5" placeholder="結束時間" style="text-align: left" v-model="s_endTime"></p><br> -->
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                                     <label for="progress">訂單狀態</label>
                                 </div>
                                 <div class="col-sm-1">
-                                        <select name="" id="" v-model="s_status">
+                                        <select name="" id="" v-model="orders[selectorder].status">
                                             <option value="受理中">受理中</option>
                                             <option value="配對中">配對中</option>
                                             <option value="領養完成">領養完成</option>
