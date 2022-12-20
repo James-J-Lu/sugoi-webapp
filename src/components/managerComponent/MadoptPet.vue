@@ -10,7 +10,6 @@
         <table class="table table-striped table-sm tableType">
           <thead class="PtableHead">
             <tr>
-              <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
               <th>狗狗編號</th>
               <th>狗狗名字</th>
               <th style="width:50%">說明</th>
@@ -18,7 +17,6 @@
           </thead>
           <tbody class="PtableBody">
             <tr v-for="adoptPet in adoptPets" :key="adoptPet.id" @click="test(adoptPet.id)">
-              <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
               <td>{{adoptPet.id}}</td>
               <td>{{adoptPet.name}}</td>
               <td>{{adoptPet.description}}</td>
@@ -437,6 +435,7 @@
 
 .tableType {
   --bs-table-border-color: none !important;
+  text-align: center;
 }
 
 input[type=button] {

@@ -7,7 +7,6 @@
       <table class="table table-striped table-sm tableType" >
         <thead class="MtableHead">
           <tr>
-            <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
             <th style="width:20%">會員ID</th>
             <th>帳號</th>
             <th>姓名</th>
@@ -15,7 +14,6 @@
         </thead>
         <tbody class="MtableBody">
           <tr v-for="member in members" :key="member.id" @click="test(member.id)">
-            <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
             <td>{{member.id}}</td>
             <td>{{member.account}}</td>
             <td>{{member.name}}</td>
