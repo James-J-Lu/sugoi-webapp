@@ -44,7 +44,7 @@ export default {
     data () {
         return {
             isMember: null,
-            account: 'kelly',
+            account: 'manager',
             password: '123',
             memberData: [],
             otherVal: {
@@ -73,11 +73,12 @@ export default {
             if(this.isMember == 'member') {
                 this.otherVal.desTination = 'defaultMain'
                 Object.assign(this.memberData, this.otherVal);
+
                 this.$emit('getChild', this.memberData)
             }
             //是管理員
             else if (this.isMember == 'manager'){
-                this.otherVal.desTination = 'defaultMain'
+                this.otherVal.desTination = 'managerMain'
                 Object.assign(this.memberData, this.otherVal);
                 this.$emit('getChild', this.memberData)
             }

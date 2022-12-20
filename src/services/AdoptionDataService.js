@@ -17,6 +17,7 @@ class AdoptionDataService {
   }
 
   update(id, data) {
+    console.log(data)
     return http.put(`/adoption/${id}`, data);
   }
 

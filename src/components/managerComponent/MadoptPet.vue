@@ -8,18 +8,16 @@
         <table class="table table-striped table-sm tableType">
           <thead class="PtableHead">
             <tr>
-              <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
               <th>狗狗編號</th>
               <th>狗狗名字</th>
               <th>說明</th>
             </tr>
           </thead>
           <tbody class="PtableBody">
-            <tr v-for="adoptPet in adoptPets" :key="adoptPet.id" @click="test(adoptPet.id)">
-              <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
-              <td>{{adoptPet.id}}</td>
-              <td>{{adoptPet.name}}</td>
-              <td>{{adoptPet.description}}</td>
+            <tr v-for="(adoptPet, index) in adoptPets" :key="adoptPet.adoPetId" @click="test(index)">
+              <td>{{adoptPet.adoPetId}}</td>
+              <td>{{adoptPet.adoPetName}}</td>
+              <td>{{adoptPet.adoPetInfo}}</td>
             </tr>
           </tbody>
         </table>
@@ -45,9 +43,9 @@
                         <div class="row pt-1">
                           <div class="col-6 mb-3">
                             <h4>狗狗編號</h4>
-                            <p class="text-muted">{{adoptPets[selectPet].id}}</p>
+                            <p class="text-muted">{{adoptPets[selectPet].adoPetId}}</p>
                             <h4>狗狗名字</h4>
-                            <p class="text-muted">{{adoptPets[selectPet].name}}</p>
+                            <p class="text-muted">{{adoptPets[selectPet].adoPetName}}</p>
                           </div>
                         </div>
                       </div>
@@ -62,7 +60,7 @@
               <p class="mb-0">體型</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].petSize }}</p>
+              <p class="text-muted mb-0">{{ adoptPets[selectPet].adoPetFigure }}</p>
             </div>
           </div>
           <hr>
@@ -71,7 +69,7 @@
               <p class="mb-0">年齡</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].petAge }}</p>
+              <p class="text-muted mb-0">{{ adoptPets[selectPet].adoPetAge }}</p>
             </div>
           </div>
           <hr>
@@ -80,7 +78,7 @@
               <p class="mb-0">毛色</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].hairColor }}</p>
+              <p class="text-muted mb-0">{{ adoptPets[selectPet].adoPetColor }}</p>
             </div>
           </div>
           <hr>
@@ -89,7 +87,7 @@
               <p class="mb-0">毛的長度</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].hairLong }}</p>
+              <p class="text-muted mb-0">{{ adoptPets[selectPet].adoPetFur }}</p>
             </div>
           </div>
           <hr>
@@ -98,7 +96,7 @@
               <p class="mb-0">性別</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].petGender }}</p>
+              <p class="text-muted mb-0">{{ adoptPets[selectPet].adoPetGender }}</p>
             </div>
           </div>
           <hr>
@@ -107,7 +105,7 @@
               <p class="mb-0">品種</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].petType }}</p>
+              <p class="text-muted mb-0">{{ adoptPets[selectPet].adoPetBreed }}</p>
             </div>
           </div>
           <hr>
@@ -116,7 +114,7 @@
               <p class="mb-0">介紹</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].intro }}</p>
+              <p class="text-muted mb-0">{{ adoptPets[selectPet].adoPetInfo }}</p>
             </div>
           </div>
         </div>
@@ -210,7 +208,7 @@
             </div>
             <div class="form-group">
               <label for="info">介紹：</label>
-              <textarea name="info" id="info" cols="30" rows="10" class="form-control"></textarea>
+              <textarea adoPetName="info" id="info" cols="30" rows="10" class="form-control"></textarea>
             </div>
             <button class="w-100 btn btn-primary btn-lg" type="submit">確認</button>
           </div>
@@ -221,30 +219,16 @@
 </template>
 
 <script>
+import AdoptionPetDataService from '@/services/AdoptionPetDataService'
+
     export default {
-    name: 'MadoptPet',
+    adoPetName: 'MadoptPet',
     components: {
         
     },
     data () {
         return {
-            adoptPets: [
-                {id: 0, name:'Alice', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 1, name:'Bob', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 2, name:'Charlie', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 3, name:'Daisy', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 4, name:'Ella', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 5, name:'Flora', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 6, name:'George', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 7, name:'Hank', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 8, name:'Ivy', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 9, name:'Jack', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 10, name:'Kelly', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 11, name:'Lisa', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 12, name:'Mary', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 13, name:'Nora', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
-                {id: 14, name:'Olga', description:'', petSize:'', petAge:'', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''}
-            ],
+            adoptPets: [],
             gomain:true,
             gocheck:false,
             gonew:false,
@@ -253,12 +237,12 @@
         }
     },
     methods: {
-      test(id) {
+      test(index) {
         this.gocheck=true
         this.goback=true
         this.gomain=false
         this.gonew=false
-        this.selectPet = id
+        this.selectPet = index
       },
       back() {
         this.gomain=true
@@ -274,8 +258,22 @@
       },
       checkModify() {        
         this.gomodify=!this.gomodify
+      },
+      
+      getApotionPet() {
+        AdoptionPetDataService.getAll()
+          .then(response => {
+            console.log(response.data)
+            this.adoptPets = response.data
+          })
+          .catch(e => {
+            console.log(e);
+          });
       }
-    }
+    },
+    mounted() {
+      this.getApotionPet()
+    },
 }
 </script>
 

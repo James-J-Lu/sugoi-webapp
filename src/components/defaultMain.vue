@@ -2,7 +2,7 @@
     <div class="defaultMain">
         <p class="dropdown-item rounded-2 active">以下是可以被領養的狗狗</p>
         <div class="adoptpet">
-            <adoptPet v-for="pet in aPets" :key="pet.id" :pet="pet"/>
+            <adoptPet v-for="pet, in aPets" :key="pet.adoPetId" :pet="pet" />
         </div>
     </div>
 </template>
@@ -18,42 +18,17 @@ export default {
     },
     data () {
         return {
-            aPets: [
-                {id: 0, name:'cockie', img:"../../assets/Pet/1.jpg"},
-                {id: 1, name:'rock', img:"../../assets/Pet/2.jpg"},
-                {id: 2, name:'mabao', img:"../../assets/Pet/3.jpg"},
-                {id: 3, name:'rick', img:"../../assets/Pet/4.jpg"},
-                {id: 4, name:'sting', img:"../../assets/Pet/5.jpg"},
-                {id: 5, name:'甜甜', img:"../../assets/Pet/6.jpg"},
-                {id: 6, name:'黑黑', img:"../../assets/Pet/6.jpg"}
-            ],
-            AdoptPets: [],
+            aPets: [],
+            prefer: {
+                status: 1,
+            },
         }
     },
     methods: {
         getAdoptPet() {
-            console.log('Get Adoption Pet')
-            AdoptionPetDataService.getAll()
+            AdoptionPetDataService.getPrefer(this.prefer)
                 .then(response => {
-                    var a = ["id", "adoPetName", "adoPetFigure", "adoPetAge", "adpPetColor", "adoPetFur", "adpPetGender", "adoPetBreed", "adoPetDisease", "humanFriendly", "dogFriendly", "adoPetIntro"];
-                    a.forEach(function() {
-                        for(var i = 0; i < length(response.data); i++) {
-                            var singlePet = {};
-                            singlePet['id'] = length(this.AdoptPets);
-                            singlePet['adoPetName'] = response.data[i].adoPetName;
-                            singlePet['adoPetFigure'] = response.data[i].adoPetFigure;
-                            singlePet['adoPetAge'] = response.data[i].adoPetAge;
-                            singlePet['adoPetColor'] = response.data[i].adoPetColor;
-                            singlePet['adoPetFur'] = response.data[i].adoPetFur;
-                            singlePet['adoPetGender'] = response.data[i].adoPetGender;
-                            singlePet['adoPetBreed'] = response.data[i].adoPetBreed;
-                            singlePet['adoPetDiseases'] = response.data[i].adoPetDiseases;
-                            singlePet['huamnFriendly'] = response.data[i].huamnFriendly;
-                            singlePet['dogFriendly'] = response.data[i].dogFriendly;
-                            singlePet['adoPetInfo'] = response.data[i].adoPetInfo;
-                            this.AdoptPets.push(singlePet);
-                        }
-                    });
+                    this.aPets = response.data
                 })
                 .catch(e => {
                     console.log(e)
@@ -61,7 +36,7 @@ export default {
         },
     },
     mounted() {
-        // this.getAdoptPet()
+        this.getAdoptPet()
     },
 }
 </script>

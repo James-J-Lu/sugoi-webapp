@@ -88,7 +88,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 
 
 export default {
-    name: 'MmemberData',
+    name: 'memberData',
     components: {
         'DatePicker': DatePicker,
     },

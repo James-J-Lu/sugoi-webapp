@@ -3,7 +3,7 @@
         <div>
             <img src="" alt="">
         </div>
-        <p>{{ pet.name }}</p>
+        <p>{{ pet.petName }}</p>
     </div>
 </template>
 

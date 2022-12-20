@@ -107,7 +107,6 @@ export default {
       this.memberStatus.id = null
       this.memberStatus.pet = null
       this.memberStatus.adopt = null
-      this.memberStatus.gender = null
       this.genderCall = null
       this.currentComponent = 'defaultMain'
     },
@@ -120,9 +119,9 @@ export default {
         this.memberStatus.pet = _value.petCheck
         this.memberStatus.adopt = _value.adoptCheck
         if(_value.memberGender == 0)
-          this.genderCall == '先生'
+          this.genderCall = '先生'
         else if (_value.memberGender == 1)
-          this.genderCall == '小姐'
+          this.genderCall = '小姐'
       this.currentComponent = _value.desTination
     },
 

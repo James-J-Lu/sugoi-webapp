@@ -19,7 +19,7 @@
                 </li>
             </ul>
         </div>
-        <component v-bind:is="currentComponent" class="workSpace" />
+        <component :memberStatus="memberStatus_copy" v-bind:is="currentComponent" class="workSpace" />
     </div>
 </template>
 
@@ -32,6 +32,9 @@ import MroomAmount from "../components/managerComponent/MroomAmount.vue"
 
 export default {
     name: 'managerMain',
+    props: {
+        memberStatus: Object,
+    },
     components: {
         'MadoptOrder': MadoptOrder,
         'MadoptPet': MadoptPet,
@@ -42,6 +45,7 @@ export default {
     data () {
         return {
             currentComponent: 'MmemberData',
+            memberStatus_copy: this.memberStatus,
         }
     },
     methods: {
