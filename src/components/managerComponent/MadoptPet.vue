@@ -121,18 +121,18 @@
       <div class="card">
       <div class="card-body">
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">狗狗名字：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
                 <input type="text" class="form-control">
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">體型：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-9">
               <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions">
               <label class="form-check-label" for="inlineRadio1">大型犬</label>
@@ -148,18 +148,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">年齡：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-3">
               <input type="number" class="form-control">
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">毛色：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-9">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions">
                 <label class="form-check-label" for="inlineRadio1">黑色</label>
@@ -179,10 +179,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">毛的長度：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions">
                 <label class="form-check-label" for="inlineRadio1">長毛</label>
@@ -194,10 +194,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">性別：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions">
                 <label class="form-check-label" for="inlineRadio1">男生</label>
@@ -209,19 +209,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">品種：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
               <input type="text" class="form-control">
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">介紹：</p>
             </div>
-            <div class="col-sm-7">
-                <textarea name="info" id="info" cols="50" rows="10" class="form-control"></textarea>
+            <div class="col-sm-9">
+                <textarea name="info" id="info" cols="50" rows="5" class="form-control introText"></textarea>
             </div>
         
           <button class="w-30 btn btn-primary btn-lg" type="submit">確認</button>
@@ -233,18 +233,18 @@
       <div class="card">
       <div class="card-body">
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">狗狗名字：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
               <input type="text" class="form-control inputDisplay" v-model="adoptPets[selectPet].name">
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">體型：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-9">
               <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions">
               <label class="form-check-label" for="inlineRadio1">大型犬</label>
@@ -260,18 +260,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">年齡：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-3">
               <input type="number" class="form-control inputDisplay" v-model="adoptPets[selectPet].petAge">
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">毛色：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-9">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions">
                 <label class="form-check-label" for="inlineRadio1">黑色</label>
@@ -291,10 +291,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">毛的長度：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions">
                 <label class="form-check-label" for="inlineRadio1">長毛</label>
@@ -306,10 +306,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">性別：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions">
                 <label class="form-check-label" for="inlineRadio1">男生</label>
@@ -321,19 +321,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">品種：</p>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
               <input type="text" class="form-control inputDisplay" v-model="adoptPets[selectPet].petType">
             </div>
         </div>
           <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <p class="mb-0">介紹：</p>
             </div>
-            <div class="col-sm-7">
-                <textarea name="info" id="info" cols="50" rows="10" class="form-control"></textarea>
+            <div class="col-sm-9">
+                <textarea name="info" id="info" cols="50" rows="5" class="form-control introText" v-model="adoptPets[selectPet].intro"></textarea>
             </div>
         
           <button class="w-30 btn btn-primary btn-lg" type="submit">確認</button>
@@ -353,7 +353,7 @@
     data () {
         return {
             adoptPets: [
-                {id: 0, name:'Alice', description:'', petSize:'', petAge:'2', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
+                {id: 0, name:'Alice', description:'', petSize:'', petAge:'2', hairColor:'', hairLong:'', petGender:'', petType:'', intro:'會咬人'},
                 {id: 1, name:'Bob', description:'', petSize:'', petAge:'3', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
                 {id: 2, name:'Charlie', description:'', petSize:'', petAge:'1', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
                 {id: 3, name:'Daisy', description:'', petSize:'', petAge:'11', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
@@ -452,5 +452,7 @@ input[type=button] {
   text-align: left;
   font-size: 28px;
 }
-
+.introText {
+  font-size: 32px;
+}
 </style>
