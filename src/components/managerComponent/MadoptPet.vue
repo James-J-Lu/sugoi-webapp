@@ -1,10 +1,9 @@
 <template>   
   <div class="MadoptPet">
-      <p class="Ptop">待領養狗狗
+      <p>待領養狗狗
         <input v-if="!gomain" @click="back(gocheck)" class="backButton" type="button" value="返回">
         <input v-if="gomain" @click="checkNew(gonew)" type="button" value="新增">
         <input v-if="gocheck" @click="checkModify(gomodify)" type="button" value="修改">
-        <!-- <input v-if="gomodify" @click="SubmitEvent" type="button" value="確認"> -->
       </p>
       <div class="table-responsive" v-if="gomain">
         <table class="table table-striped table-sm tableType">
@@ -86,78 +85,78 @@
             <ul class="newForm dropdown-menu position-static d-grid gap-1 mx-0 w-220px">
                 <li>
                     <p>狗狗名字：</p>
-                    <input type="text" class="input">
+                    <input type="text" class="input" v-model="newName">
                 </li>
                 <li>
                     <p>體型：&emsp;&emsp;</p>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault">
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="size" id="大型犬" value="大型犬" v-model="newPetSize">
+                    <label class="form-check-label">
                         大型犬
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault" >
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="size" id="中型犬" value="中型犬" v-model="newPetSize">
+                    <label class="form-check-label">
                         中型犬
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault" >
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="size" id="小型犬" value="小型犬" v-model="newPetSize">
+                    <label class="form-check-label">
                         小型犬
                     </label>
                 </li>
                 <li>
                     <p>年齡：&emsp;&emsp;</p>
-                    <input type="number">
+                    <input type="number" v-model="newPetAge">
                 </li>
                 <li>
                     <p>毛色：&emsp;&emsp;</p>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="color" id="黑色" value="黑色" v-model="newHairColor">
+                    <label class="form-check-label">
                         黑色
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" >
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="color" id="黃色" value="黃色" v-model="newHairColor">
+                    <label class="form-check-label">
                         黃色
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" >
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="color" id="白色" value="白色" v-model="newHairColor">
+                    <label class="form-check-label">
                         白色
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" >
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="color" id="花花系" value="花花系" v-model="newHairColor">
+                    <label class="form-check-label">
                         花花系
                     </label>
                 </li>
                 <li>
                     <p>毛的長度：</p>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2" >
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="length" id="長毛" value="長毛" v-model="newHairLong">
+                    <label class="form-check-label">
                         長毛
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2" >
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="length" id="短毛" value="短毛" v-model="newHairLong">
+                    <label class="form-check-label">
                         短毛
                     </label>
                 </li>
                 <li>
                     <p>性別：&emsp;&emsp;</p>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault3">
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="gender" id="男生" value="男生" v-model="newPetGender">
+                    <label class="form-check-label">
                         男生
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault3" >
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="gender" id="女生" value="女生" v-model="newPetGender">
+                    <label class="form-check-label">
                         女生
                     </label>
                 </li>                
                 <li>
                     <p>品種：&emsp;&emsp;</p>
-                    <input type="text">
+                    <input type="text" v-model="newPetType">
                 </li>                
                 <li>
                     <p>介紹：&emsp;&emsp;</p>
-                    <textarea name="info" id="info" cols="50" rows="5" class="form-control introText"></textarea>
+                    <textarea name="info" id="info" cols="50" rows="5" class="form-control introText" v-model="newIntro"></textarea>
                 </li>
                 <li>
-                    <button type="button" class="submitBtn">完成</button>
+                    <button type="button" class="submitBtn" @click="addItem(newName)">完成</button>
                 </li>
             </ul>
         </div>
@@ -171,16 +170,16 @@
                 </li>
                 <li>
                     <p>體型：&emsp;&emsp;</p>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="大型犬" value="大型犬" v-model="adoptPets[selectPet].petSize">
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="size" id="大型犬" value="大型犬" v-model="adoptPets[selectPet].petSize">
+                    <label class="form-check-label">
                         大型犬
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="中型犬" value="中型犬" v-model="adoptPets[selectPet].petSize">
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="size" id="中型犬" value="中型犬" v-model="adoptPets[selectPet].petSize">
+                    <label class="form-check-label">
                         中型犬
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="小型犬" value="小型犬" v-model="adoptPets[selectPet].petSize">
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="size" id="小型犬" value="小型犬" v-model="adoptPets[selectPet].petSize">
+                    <label class="form-check-label">
                         小型犬
                     </label>
                 </li>
@@ -190,42 +189,42 @@
                 </li>
                 <li>
                     <p>毛色：&emsp;&emsp;</p>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="黑色" value="黑色" v-model="adoptPets[selectPet].hairColor">
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="color" id="黑色" value="黑色" v-model="adoptPets[selectPet].hairColor">
+                    <label class="form-check-label">
                         黑色
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="黃色" value="黃色" v-model="adoptPets[selectPet].hairColor">
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="color" id="黃色" value="黃色" v-model="adoptPets[selectPet].hairColor">
+                    <label class="form-check-label">
                         黃色
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="白色" value="白色" v-model="adoptPets[selectPet].hairColor">
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="color" id="白色" value="白色" v-model="adoptPets[selectPet].hairColor">
+                    <label class="form-check-label">
                         白色
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="花花系" value="花花系" v-model="adoptPets[selectPet].hairColor">
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="color" id="花花系" value="花花系" v-model="adoptPets[selectPet].hairColor">
+                    <label class="form-check-label">
                         花花系
                     </label>
                 </li>
                 <li>
                     <p>毛的長度：</p>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault2" id="長毛" value="長毛" v-model="adoptPets[selectPet].hairLong">
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="length" id="長毛" value="長毛" v-model="adoptPets[selectPet].hairLong">
+                    <label class="form-check-label">
                         長毛
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault2" id="短毛" value="短毛" v-model="adoptPets[selectPet].hairLong">
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="length" id="短毛" value="短毛" v-model="adoptPets[selectPet].hairLong">
+                    <label class="form-check-label">
                         短毛
                     </label>
                 </li>
                 <li>
                     <p>性別：&emsp;&emsp;</p>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault3" id="男生" value="男生" v-model="adoptPets[selectPet].petGender">
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="gender" id="男生" value="男生" v-model="adoptPets[selectPet].petGender">
+                    <label class="form-check-label">
                         男生
                     </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault3" id="女生" value="女生" v-model="adoptPets[selectPet].petGender">
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" name="gender" id="女生" value="女生" v-model="adoptPets[selectPet].petGender">
+                    <label class="form-check-label">
                         女生
                     </label>
                 </li>                
@@ -271,6 +270,15 @@
                 {id: 13, name:'Nora', description:'', petSize:'', petAge:'3', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''},
                 {id: 14, name:'Olga', description:'', petSize:'', petAge:'8', hairColor:'', hairLong:'', petGender:'', petType:'', intro:''}
             ],
+            newName:'',
+            newDescription:'', 
+            newPetSize:'', 
+            newPetAge:'',
+            newHairColor:'',
+            newHairLong:'',
+            newPetGender:'',
+            newPetType:'',
+            newIntro:'',
             gomain:true,
             gocheck:false,
             gonew:false,
@@ -294,6 +302,15 @@
         this.gonew=false
         this.goback=false
         this.gomodify=false
+        this.newName = ''
+        this.newDescription = ''
+        this.newPetSize =''
+        this.newPetAge =''
+        this.newHairColor = ''
+        this.newHairLong = ''
+        this.newPetGender = ''
+        this.newPetType = ''
+        this.newIntro = ''
       },
       checkNew() {
         this.gomain=false
@@ -308,22 +325,43 @@
         this.goback=false
         this.gonew=false
         this.gomodify=true
-      }
+      },
+      addItem() {
+      this.adoptPets.push({
+        id: this.adoptPets.length,
+        name: this.newName,
+        description: this.newDescription,
+        petSize: this.newPetSize,
+        petAge: this.newPetAge,
+        hairColor: this.newHairColor,
+        hairLong: this.newHairLong,
+        petGender: this.newPetGender,
+        petType: this.newPetType,
+        intro: this.newIntro
+      });
+      this.newName = ''
+      this.newDescription = ''
+      this.newPetSize =''
+      this.newPetAge =''
+      this.newHairColor = ''
+      this.newHairLong = ''
+      this.newPetGender = ''
+      this.newPetType = ''
+      this.newIntro = ''
+      this.gomain=true
+      this.gocheck=false
+      this.gonew=false
+      this.goback=false
+      this.gomodify=false
+    },
     }
 }
 </script>
 
 <style>
-.test1 {
-  margin: 0 !important;
-}
 .MadoptPet {
   text-align: left;
 }
-.Ptop {
-    text-align: left;
-}
-
 .MadoptPet {
     font-size: 40px;
 }
@@ -342,15 +380,6 @@
   text-align: center;
 }
 
-input[type=button] {
-  background-color: #bdbdbd;
-  border: none;
-  color: black;
-  padding: 10px;
-  float:right; 
-  font-size: 20px;
-  margin: 4px 2px;
-}
 .Pform {
   text-align: left;
   font-size: 28px;
