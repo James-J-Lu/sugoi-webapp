@@ -1,4 +1,4 @@
-<template>
+<template>   
   <div class="MadoptPet">
       <p class="Ptop">待領養狗狗
         <input v-if="!gomain" @click="back(gocheck)" class="backButton" type="button" value="返回">
@@ -25,320 +25,227 @@
         </table>
       </div>
     <div v-if="gocheck">
-        <div class="card">
-        <div class="card-body">
-          <div class="container">
-            <div class="card w-50" style="border-radius: .5rem;">
-              <div class="row g-0">
-                <div class="col-md-4 gradient-custom text-center text-white"
-                  style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                    alt="Avatar" class="img-fluid my-5" style="width: 200px;" />
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body p-4">
-                    <div class="row pt-1">
-                      <div class="col-6 mb-3">
-                        <p>狗狗編號</p>
-                        <p class="text-muted">{{adoptPets[selectPet].id}}</p>
-                        <p>狗狗名字</p>
-                        <p class="text-muted">{{adoptPets[selectPet].name}}</p>
-                      </div>
-                    </div>
+      <div class="container">
+        <div class="card w-50" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center text-white"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                alt="Avatar" class="img-fluid my-5" style="width: 200px;" />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <p>狗狗編號</p>
+                    <p class="text-muted">{{adoptPets[selectPet].id}}</p>
+                    <p>狗狗名字</p>
+                    <p class="text-muted">{{adoptPets[selectPet].name}}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">體型</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].petSize }}</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">年齡</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].petAge }}</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">毛色</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].hairColor }}</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">毛的長度</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].hairLong }}</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">性別</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].petGender }}</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">品種</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].petType }}</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">介紹</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ adoptPets[selectPet].intro }}</p>
-            </div>
-          </div>
         </div>
+      </div>
+      <div class="check">
+        <ul class="checkForm dropdown-menu position-static d-grid gap-1 mx-0 w-220px">
+            <li>
+                <p>體型：&emsp;&emsp;</p>
+                <p class="text-muted">{{adoptPets[selectPet].petSize}}</p>
+            </li>
+            <li>
+                <p>年齡：&emsp;&emsp;</p>
+                <p class="text-muted">{{adoptPets[selectPet].petAge}}</p>
+            </li>
+            <li>
+                <p>毛色：&emsp;&emsp;</p>
+                <p class="text-muted">{{adoptPets[selectPet].hairColor}}</p>
+            </li>
+            <li>
+                <p>毛的長度：</p>
+                <p class="text-muted">{{adoptPets[selectPet].hairLong}}</p>
+            </li>
+            <li>
+                <p>性別：&emsp;&emsp;</p>
+                <p class="text-muted">{{adoptPets[selectPet].petGender}}</p>
+            </li>                
+            <li>
+                <p>品種：&emsp;&emsp;</p>
+                <p class="text-muted">{{adoptPets[selectPet].petType}}</p>
+            </li>                
+            <li>
+                <p>介紹：&emsp;&emsp;</p>
+                <textarea name="info" id="info" cols="50" rows="5" class="form-control introText"></textarea>
+            </li>
+            <li>
+                <button type="button" class="submitBtn">完成</button>
+            </li>
+        </ul>
       </div>
     </div>
     <div class="table-responsive" v-if="gonew">
-      <div class="card">
-      <div class="card-body">
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">狗狗名字：</p>
-            </div>
-            <div class="col-sm-4">
-                <input type="text" class="form-control">
-            </div>
+      <div class="new">
+            <ul class="newForm dropdown-menu position-static d-grid gap-1 mx-0 w-220px">
+                <li>
+                    <p>狗狗名字：</p>
+                    <input type="text" class="input">
+                </li>
+                <li>
+                    <p>體型：&emsp;&emsp;</p>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        大型犬
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault" >
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        中型犬
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault" >
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        小型犬
+                    </label>
+                </li>
+                <li>
+                    <p>年齡：&emsp;&emsp;</p>
+                    <input type="number">
+                </li>
+                <li>
+                    <p>毛色：&emsp;&emsp;</p>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        黑色
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        黃色
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        白色
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        花花系
+                    </label>
+                </li>
+                <li>
+                    <p>毛的長度：</p>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        長毛
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        短毛
+                    </label>
+                </li>
+                <li>
+                    <p>性別：&emsp;&emsp;</p>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault3">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        男生
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault3" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        女生
+                    </label>
+                </li>                
+                <li>
+                    <p>品種：&emsp;&emsp;</p>
+                    <input type="text">
+                </li>                
+                <li>
+                    <p>介紹：&emsp;&emsp;</p>
+                    <textarea name="info" id="info" cols="50" rows="5" class="form-control introText"></textarea>
+                </li>
+                <li>
+                    <button type="button" class="submitBtn">完成</button>
+                </li>
+            </ul>
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">體型：</p>
-            </div>
-            <div class="col-sm-9">
-              <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions">
-              <label class="form-check-label" for="inlineRadio1">大型犬</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions">
-              <label class="form-check-label" for="inlineRadio2">中型犬</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions">
-              <label class="form-check-label" for="inlineRadio3">小型犬</label>
-            </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">年齡：</p>
-            </div>
-            <div class="col-sm-3">
-              <input type="number" class="form-control">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">毛色：</p>
-            </div>
-            <div class="col-sm-9">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio1">黑色</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio2">黃色系</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio3">花花色</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio3">白色</label>
-              </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">毛的長度：</p>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio1">長毛</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio2">短毛</label>
-              </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">性別：</p>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio1">男生</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio2">女生</label>
-              </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">品種：</p>
-            </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">介紹：</p>
-            </div>
-            <div class="col-sm-9">
-                <textarea name="info" id="info" cols="50" rows="5" class="form-control introText"></textarea>
-            </div>
-        
-          <button class="w-30 btn btn-primary btn-lg" type="submit">確認</button>
-          </div>
-    </div>
-  </div>
       </div>
     <div class="table-responsive" v-if="gomodify">
-      <div class="card">
-      <div class="card-body">
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">狗狗名字：</p>
-            </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control inputDisplay" v-model="adoptPets[selectPet].name">
-            </div>
+        <div class="modify">
+            <ul class="modifyForm dropdown-menu position-static d-grid gap-1 mx-0 w-220px">
+                <li>
+                    <p>狗狗名字：</p>
+                    <input type="text" v-model="adoptPets[selectPet].name">
+                </li>
+                <li>
+                    <p>體型：&emsp;&emsp;</p>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        大型犬
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault" >
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        中型犬
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault" >
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        小型犬
+                    </label>
+                </li>
+                <li>
+                    <p>年齡：&emsp;&emsp;</p>
+                    <input type="number" v-model="adoptPets[selectPet].petAge">
+                </li>
+                <li>
+                    <p>毛色：&emsp;&emsp;</p>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        黑色
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        黃色
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        白色
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        花花系
+                    </label>
+                </li>
+                <li>
+                    <p>毛的長度：</p>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        長毛
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        短毛
+                    </label>
+                </li>
+                <li>
+                    <p>性別：&emsp;&emsp;</p>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault3">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        男生
+                    </label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault3" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        女生
+                    </label>
+                </li>                
+                <li>
+                    <p>品種：&emsp;&emsp;</p>
+                    <input type="text" v-model="adoptPets[selectPet].petType">
+                </li>                
+                <li>
+                    <p>介紹：&emsp;&emsp;</p>
+                    <textarea name="info" id="info" cols="50" rows="5" class="form-control introText" v-model="adoptPets[selectPet].intro"></textarea>
+                </li>
+                <li>
+                    <button type="button" class="submitBtn">完成</button>
+                </li>
+            </ul>
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">體型：</p>
-            </div>
-            <div class="col-sm-9">
-              <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions">
-              <label class="form-check-label" for="inlineRadio1">大型犬</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions">
-              <label class="form-check-label" for="inlineRadio2">中型犬</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions">
-              <label class="form-check-label" for="inlineRadio3">小型犬</label>
-            </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">年齡：</p>
-            </div>
-            <div class="col-sm-3">
-              <input type="number" class="form-control inputDisplay" v-model="adoptPets[selectPet].petAge">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">毛色：</p>
-            </div>
-            <div class="col-sm-9">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio1">黑色</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio2">黃色系</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio3">花花色</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio3">白色</label>
-              </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">毛的長度：</p>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio1">長毛</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio2">短毛</label>
-              </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">性別：</p>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio1">男生</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions">
-                <label class="form-check-label" for="inlineRadio2">女生</label>
-              </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">品種：</p>
-            </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control inputDisplay" v-model="adoptPets[selectPet].petType">
-            </div>
-        </div>
-          <div class="row">
-            <div class="col-sm-3">
-                <p class="mb-0">介紹：</p>
-            </div>
-            <div class="col-sm-9">
-                <textarea name="info" id="info" cols="50" rows="5" class="form-control introText" v-model="adoptPets[selectPet].intro"></textarea>
-            </div>
-        
-          <button class="w-30 btn btn-primary btn-lg" type="submit">確認</button>
-          </div>
     </div>
-  </div>
-</div>
   </div>
 </template>
 
@@ -453,5 +360,48 @@ input[type=button] {
 }
 .introText {
   font-size: 32px;
+}
+.newForm li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 40px;
+}
+
+.newForm {
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 4fr 1fr;
+    width: 100%;
+    height: 95%;
+    --bs-dropdown-border-color: none;
+    --bs-dropdown-border-radius: none;
+}
+.modifyForm li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 40px;
+}
+
+.modifyForm {
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 4fr 1fr;
+    width: 100%;
+    height: 95%;
+    --bs-dropdown-border-color: none;
+    --bs-dropdown-border-radius: none;
+}
+
+.checkForm li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 40px;
+}
+
+.checkForm {
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 4fr 1fr;
+    width: 100%;
+    height: 95%;
+    --bs-dropdown-border-color: none;
+    --bs-dropdown-border-radius: none;
 }
 </style>
