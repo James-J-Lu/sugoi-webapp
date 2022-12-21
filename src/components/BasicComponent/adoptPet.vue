@@ -1,7 +1,7 @@
 <template>
     <div class="petComp">
         <div class="imgdiv">
-            <img src=""  alt="??" class="img">
+            <img src="@/assets/Pet/5.jpg"  alt="??" class="img">
         </div>
         <div class="detail">
             <ul class="dropdown-menu position-static d-grid gap-1 mx-0 w-220px">

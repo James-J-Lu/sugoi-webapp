@@ -9,8 +9,8 @@ class NurserypetorderDataService {
     return http.get(`/nurserypetorder/${id}`);
   }
 
-  create(data) {
-    return http.post("/nurserypetorder", data);
+  create(size, data) {
+    return http.post(`/nurserypetorder/${size}`, data);
   }
 
   update(id, data) {

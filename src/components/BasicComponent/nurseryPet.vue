@@ -1,7 +1,7 @@
 <template>
     <div class="nurseryPet">
         <div>
-            <img src="" alt="">
+            <img src="@/assets/Pet/2.jpg" alt="">
         </div>
         <p>{{ pet.petName }}</p>
     </div>

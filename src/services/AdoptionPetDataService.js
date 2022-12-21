@@ -6,7 +6,6 @@ class AdoptionPetDataService {
   }
 
   get(id) {
-    console.log(id);
     return http.get(`/adoptionpet/${id}`);
   }
 

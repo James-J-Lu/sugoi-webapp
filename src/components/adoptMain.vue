@@ -71,7 +71,6 @@ export default {
         //點擊完成申請
         submitNursery() {
             this.Order.appointmentTime = format(this.selectTime, 'yyyy-MM-dd') + ' ' + this.selectHour + ':00:00'
-            console.log(this.Order)
             AdoptionOrderDataService.create(this.Order)
                 .then(response => {
                     if(response.data == 'success') {

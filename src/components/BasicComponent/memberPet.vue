@@ -2,7 +2,7 @@
     <div class="memberPet">
         <div class="top-div">
             <p></p>
-            <img src="../../assets/Pet/2.jpg" alt="">
+            <img src="@/assets/Pet/3.jpg" alt="">
             <p></p>
             <div class="top-right-div">
                 <p class="name">{{ MPdataO.petName }}</p>

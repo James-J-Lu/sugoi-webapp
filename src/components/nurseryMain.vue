@@ -33,6 +33,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import MemberPetDataService from "../services/MemberPetDataService";
 import ReserveRoomDataService from '@/services/ReserveRoomDataService';
 import RoomInfoDataService from '@/services/RoomInfoDataService'
+import NurserypetorderDataService from '@/services/NurserypetorderDataService';
 
 export default {
     name: 'nurseryMain',
@@ -69,6 +70,16 @@ export default {
                 price: 0,
                 status: 1,
             },
+            reserveOrder: {
+                reserveId: null,
+                roomId: null,
+                orderId: null,
+                startTime: null,
+                endtime: null,
+                status: 0,
+                manager: 0,
+                roomSize: null,
+            },
         }
     },
     methods: {
@@ -95,6 +106,7 @@ export default {
                 .then(response => {
                     this.Timelist[this.cond.size - 1] = response.data
                     this.checkifBtotal(this.cond.size - 1)
+                    console.log(response.data)
                 })
                 .catch(e => {
                     console.log(e);
@@ -116,8 +128,35 @@ export default {
             this.order.petId_NPO =  this.Mpets[this.selectedPet].petId
             this.order.startTime =  format(this.selectedTime[0], 'yyyy-MM-dd')
             this.order.endTime =  format(this.selectedTime[1], 'yyyy-MM-dd')
+
+            this.reserveOrder.startTime = this.order.startTime
+            this.reserveOrder.endtime = this.order.endTime
+            this.reserveOrder.roomSize = this.cond.size
+            if(this.reserveOrder.roomSize == 1)
+                this.reserveOrder.roomId = 'R003'
+            else  if(this.reserveOrder.roomSize == 2)
+                this.reserveOrder.roomId = 'R006'
+            else  if(this.reserveOrder.roomSize == 3)
+                this.reserveOrder.roomId = 'R009'
+
             // create 托兒訂單 再 create 房間保留
-            console.log(this.order)
+            NurserypetorderDataService.create(this.cond.size, this.order)
+                .then(response => {
+                    if(response != 'fail') {
+                        // create 房間保留
+                        this.reserveOrder.orderId = response.data
+                        ReserveRoomDataService.create(this.reserveOrder)
+                            .then(response => {
+                                console.log(response.data)
+                            })
+                            .catch(e => {
+                                console.log(e);
+                            });
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
         },
         
         //取得會員的寵物資料
@@ -133,7 +172,6 @@ export default {
     },
     mounted() {
         this.getMemberPet()
-        // this.getChecklist()
     },
 }
 </script>
