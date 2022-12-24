@@ -4,8 +4,16 @@
         <div class="memberPet">
             <memberPet v-for="MPdata in MPdatas" :key="MPdata.petId" :MPdata="MPdata" :edit="editBool"/>
         </div>
-        <button v-if="!editBool" type="button" class="submitBtn0" @click="editPet"> 編輯或新增狗狗 </button>
-        <button v-if="editBool" type="button" class="submitBtn"> 確認 </button>
+        <div class="buttonBox">
+            <div>
+                <button v-if="editBool == 'false'" type="button" class="submitBtn0" @click="editPet"> 編輯或新增狗狗 </button>
+                <button v-if="editBool == 'true' && !newPetF" type="button" class="submitBtn0" @click="createPet"> 再新增一隻狗狗吧 </button>
+            </div>
+            <div>
+                <button v-if="editBool == 'true'" type="button" class="submitBtn1" @click="cancelEdit"> 取消更改 </button>
+                <button v-if="editBool == 'true'" type="button" class="submitBtn2" @click="submitPet"> 確認更改 </button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -23,25 +31,48 @@ export default {
     },
     data() {
         return {
-            editBool: false,
+            editBool: 'false',
             MPdatas: [],
+            nullPet: {
+                petId: null,
+                memberId: null,
+                petName: null,
+                petSize: null,
+                petGender: null,
+                petDisease: null,
+                isLigation: null,
+                dietaryHabit: null,
+            },
+
+            // flag
+            newPetF: false,
         }
     },
     methods: {
+        cancelEdit() {
+            if(this.newPetF == true)
+                this.MPdatas.pop()
+            this.editBool = 'false'
+            this.newPetF = false
+        },
+
+        submitPet() {
+            if(this.newPetF == true) 
+                this.editBool = 'false'
+            else if(this.newPetF == false)
+                this.editBool = 'false'
+        },
+
+        createPet() {
+            console.log(typeof(this.MPdatas))
+            this.MPdatas.push(this.nullPet)
+            this.newPetF = true
+        },
+
         editPet() {
-            this.editBool = true
+            this.editBool = 'true'
         },
-        addPet() {
-            var a = {
-                id: this.Mpets.length,
-                name: null,
-                gender: null,
-            }
-            console.log(this.Mpets)
-            this.Mpets.push(a)
-            this.editBool = true
-            console.log(this.Mpets)
-        },
+
         getMemberPet() {
             MemberPetDataService.findByMID(this.memberStatus.id)
                 .then(response => {
@@ -98,13 +129,49 @@ export default {
 }
 .submitBtn0 {
     display: inline-block;
-    margin-bottom:1rem;
-    width: 20%;
-    height: 10%;
-    bottom: 2%;
+    text-align: center;
+    width: 28%;
+    height: 100%;
     background-color: #114ABA;
     border-radius: 27px;
     font-size: 30px;
     color: white;
+}
+.submitBtn1 {
+    display: inline-block;
+    text-align: center;
+    width: 20%;
+    height: 100%;
+    background-color: #9A9DA2;
+    border-radius: 20px;
+    font-size: 30px;
+    color: white;
+}
+.submitBtn2 {
+    display: inline-block;
+    text-align: center;
+    width: 20%;
+    height: 100%;
+    background-color: #114ABA;
+    border-radius: 20px;
+    font-size: 30px;
+    color: white;
+}
+.buttonBox {
+    position: relative;
+    left: 10%;
+    width: 80%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+.buttonBox div:nth-child(1) {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.buttonBox div:nth-child(2) {
+    display: flex;
+    align-content: center;
+    justify-content:space-between;
 }
 </style>

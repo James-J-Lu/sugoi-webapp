@@ -11,10 +11,10 @@
                         </tr>
                     </thead>
                     <tbody class="tablebody">
-                        <tr v-for="(order, index) in orders" :key="order.id" @click="handleClick(index)">
+                        <tr v-for="(order, index) in orders" :key="order.nurseryPetOrderId" @click="handleClick(index)">
                             <td>{{order.nurseryPetOrderId}}</td>
-                            <td>{{order.Maccount}}</td>
-                            <td>{{order.Mname}}</td>
+                            <td>{{MemberD[index].memberName}}</td>
+                            <td>{{MemberD[index].memberName}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -25,7 +25,7 @@
                 <div v-if="flag">
                     <p class="tabletitle">托兒訂單資訊
                         <button @click="flag=!flag" class="backbutton">返回</button>
-                        <button @click="editflag=!editflag" class="editbutton">修改</button>
+                        <button @click="adjust(orders[selectorder].price, orders[selectorder].status)" class="editbutton">修改</button>
                     </p>
 
                     <div class="card mb-4">
@@ -75,7 +75,7 @@
                                     <p class="mb-0">金額</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p class="text-muted mb-0" style="text-align: left">${{orders[selectorder].price}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">${{ orders[selectorder].price }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -83,7 +83,7 @@
                                     <p class="mb-0">訂單狀態</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].status}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">{{ orderSta[orders[selectorder].status] }}</p>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">$</span>
                                         </div>
-                                        <input type="number" class="form-control-sm" aria-label="Amount (to the nearest dollar)" size="5" v-model="orders[selectorder].price">
+                                        <input type="number" class="form-control-sm" aria-label="Amount (to the nearest dollar)" size="5" v-model="price_T">
                                         </div>
                                     </div>
                                 </div>
@@ -159,10 +159,9 @@
                                     <label for="progress">訂單狀態</label>
                                 </div>
                                 <div class="col-sm-1">
-                                        <select name="" id="" v-model="orders[selectorder].status">
-                                            <option value=0>受理中</option>
-                                            <option value=1>配對中</option>
-                                            <option value=2>領養完成</option>
+                                        <select name="" id="" v-model="status_T">
+                                            <option value=1>正常</option>
+                                            <option value=2>管理者取消</option>
                                         </select>
                                 </div>
                             </div>
@@ -176,6 +175,7 @@
 
 <script>
 import NurserypetorderDataService from '@/services/NurserypetorderDataService';
+import MemberDataService from '@/services/MemberDataService';
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -184,6 +184,11 @@ import '@vuepic/vue-datepicker/dist/main.css'
         data () {
             return {
                 orders: [],
+                MemberD: [],
+                orderSta: ['使用者已刪除','正常','管理者已取消'],
+                status_T: null,
+                price_T: null,
+
                 flag: false,
                 selectorder: null,
                 editflag: false,
@@ -192,20 +197,51 @@ import '@vuepic/vue-datepicker/dist/main.css'
         },
 
         methods:{
+                //點擊某筆訂單
                 handleClick(index){
                     this.flag = !this.flag
                     this.selectorder = index
                 },
 
-                modify() {
+                //進入修改
+                adjust(P, S) {
                     this.editflag=!this.editflag
-                    console.log(this.orders[this.selectorder])
+                    this.status_T = S
+                    this.price_T = P
                 },
 
+                //確認修改
+                modify() {
+                    this.orders[this.selectorder].price = this.price_T
+                    this.orders[this.selectorder].status = this.status_T
+                    console.log(this.orders[this.selectorder])
+                    NurserypetorderDataService.update(this.orders[this.selectorder].nurseryPetOrderId, this.orders[this.selectorder])
+                        .then(response => {
+                            if(response.data == 'success') {
+                                this.editflag=!this.editflag
+                            }
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
+
+                },
+
+                //更新訂單資料
                 getNursery() {
+                    this.MemberD = []
                     NurserypetorderDataService.getAll()
                         .then(response => {
                             this.orders = response.data
+                            for(var i = 0; i< response.data.length; i++) {
+                                MemberDataService.get(response.data[i].memberId_NPO)
+                                    .then(response => {
+                                        this.MemberD.push(response.data)
+                                    })
+                                    .catch(e => {
+                                        console.log(e);
+                                    });
+                            }
                         })
                         .catch(e => {
                             console.log(e);

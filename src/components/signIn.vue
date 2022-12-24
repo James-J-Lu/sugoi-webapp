@@ -164,7 +164,7 @@ export default {
     color: white;
 }
 #title {
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     height: 10%;
     color: black;
@@ -194,7 +194,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
 }
 .signinForm li:nth-child(1)  p:nth-child(1){

@@ -180,6 +180,13 @@
                             <p>狗狗：{{ this.Apetnames[this.choseInd] }}</p>
                             <p>領養時間：</p>
                             <DatePicker v-model="date_t" :enable-time-picker="false" :clearable="false" class="input2"></DatePicker>
+                            <select v-model="date_H" class="choseHour">
+                                <option disabled value="">Please select time</option>
+                                <option>10</option>
+                                <option>13</option>
+                                <option>16</option>
+                                <option>19</option>
+                            </select>
                             <br>
                             <button type="button" class="canceledit" @click="canceledit">取消修改</button>
                             <button type="button" class="confirm" @click="confirm(this.choseInd)">確認修改</button>
@@ -194,7 +201,7 @@
                             class="deleteBtn" @click="deleteAOrder(this.choseInd)">刪除領養訂單</button>
                         <!-- 如果訂單未被刪過且尚未領養成功才能編輯訂單（用來防呆＋畫面比較好看）-->
                         <button v-if="this.adoptOrders[this.choseInd].status != 0 && !editOrderTime && this.adoptOrders[this.choseInd].status != 3" type="button"
-                            class="editBtn" @click="editAOrder(this.adoptOrders[this.choseInd].appointmentTime)">修改領養時間</button>
+                            class="editBtn" @click="editAOrder">修改領養時間</button>
                     </div>
                 </div>
             </div>
@@ -227,7 +234,7 @@ export default {
             //是在orders overview page還是特定order detail page
             atOrdersPage: true,
             editOrderTime: false,
-            date_t: null,
+            
             //托兒訂單狀態<0: deleted by member, 1: normal, 2: deleted by manager>
             orderNStatus: 1,
             //領養訂單狀態<1：受理中、2：配對成功、3：領養成功、0：訂單被取消>
@@ -254,6 +261,8 @@ export default {
             petnames: [],
             Apetnames: [],
             choseInd: null,
+            date_H: null,
+            date_t: null,
         }
     },
     created() {//進度條
@@ -270,7 +279,7 @@ export default {
 
         },
         
-        //刪除訂單 status = 0
+        //刪除托兒訂單 status = 0
         deleteNOrder() {
             this.nurseryOrders[this.choseInd].status = 0
             console.log(this.nurseryOrders[this.choseInd])
@@ -290,39 +299,74 @@ export default {
                     console.log(e);
                 });
         },
-
+        //刪除領養訂單 status = 0
         deleteAOrder(index) {
             this.adoptOrders[index].status = 0
-            // update adoptOrders
-            // ***還要改被領養狗狗的status***
-            this.editOrderTime = false //回到查看頁面
+            this.adoptOrders[index].appointmentTime = this.adoptOrders[index].appointmentTime.split('T')[0] + ' ' + this.adoptOrders[index].appointmentTime.split('T')[1].split('.')[0]
+            AdoptionOrderDataService.update(this.adoptOrders[index].adoptionOrderId, this.adoptOrders[index])
+                .then(response => {
+                    if(response.data == 'success')  {
+                        AdoptionPetDataService.update(this.adoptOrders[index].adoPetId_AO, { status: 1 })
+                            .then(response => {
+                                if(response.data == 'success')  {
+                                    this.getOrders()
+                                }
+                            })
+                            .catch(e => {
+                                console.log(e);
+                            });
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
         },
-        editAOrder(originTime) {
+
+        //進入修改領養時間
+        editAOrder() {
             this.editOrderTime = true
-            this.date_t = originTime
+            this.date_t = this.adoptOrders[this.choseInd].appointmentTime.split('T')[0]
+            this.date_H = this.adoptOrders[this.choseInd].appointmentTime.split('T')[1].split(':')[0]
         },
+
+        //取消修改領養時間
         canceledit() {
             this.editOrderTime = false
         },
 
+        //領養資料確認修改時間
         confirm(index) {
-            if (this.date_t != null) {
-                // 這邊介面還要+一格選hour，再做format處理，就update adoptOrders
-                // this.adoptOrders[index].appointmentTime = date_t
+            if (this.date_t != null && this.date_H != null) {
+                var tep = this.date_t + ' ' + this.date_H + ':00:00'
+                this.adoptOrders[index].appointmentTime = tep
+                console.log(this.adoptOrders[index])
+                AdoptionOrderDataService.update(this.adoptOrders[index].adoptionOrderId, this.adoptOrders[index])
+                    .then(response => {
+                        if(response.data == 'success')  {
+                            console.log('ok_修')
+                            this.getOrders()
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
             }
             this.editOrderTime = false
+            console.log('in')
         },
 
-        // 離開全局，看細節
+        // 離開全局，看細節 這邊要注意托兒或領養
         goToDetailPage(index) {
+            //紀錄選擇的index
             this.choseInd = index
+            //進到詳細資料
             this.atOrdersPage = false
         },
         //回到全局
         back() {
             this.atOrdersPage = true
         },
-
+        // 更新訂單資訊
         getOrders() {
             NurserypetorderDataService.findByMID(this.memberStatus.id)
                 .then(response => {
@@ -345,11 +389,11 @@ export default {
             AdoptionOrderDataService.findByMID(this.memberStatus.id)
                 .then(response => {
                     this.adoptOrders = response.data
-                    console.log(this.adoptOrders)
                     for(var j = 0; j < response.data.length; j++) {
                         AdoptionPetDataService.get(response.data[j].adoPetId_AO)
                             .then(response => {
                                 this.Apetnames.push(response.data.adoPetName)
+                                this.editOrderTime = false //回到查看頁面
                             })
                             .catch(e => {
                                 console.log(e);

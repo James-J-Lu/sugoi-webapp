@@ -15,8 +15,10 @@ img {
     object-fit: contain;
 }
 #app {
-  /* font-family: Avenir, Helvetica, Arial, sans-serif, "ChenYuluoyan-Thin"; */
-  font-family: "ChenYuluoyan-Thin";
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
+  /* font-family: "ChenYuluoyan-Thin"; */
+  font-family: "NaikaiFont";
+  /* font-family: "Iansui094"; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -28,5 +30,8 @@ html, body{
 }
 p {
   margin: 0 !important;
+}
+button {
+  border: none;
 }
 </style>

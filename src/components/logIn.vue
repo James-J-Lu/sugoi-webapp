@@ -44,7 +44,7 @@ export default {
     data () {
         return {
             isMember: null,
-            account: 'manager',
+            account: 'kelly',
             password: '123',
             memberData: [],
             otherVal: {
