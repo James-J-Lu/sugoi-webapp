@@ -7,7 +7,7 @@
         <div class="buttonBox">
             <div>
                 <button v-if="editBool == 'false'" type="button" class="submitBtn0" @click="editPet"> 編輯或新增狗狗 </button>
-                <button v-if="editBool == 'true' && !newPetF" type="button" class="submitBtn0" @click="createPet"> 再新增一隻狗狗吧 </button>
+                <button v-if="editBool == 'true' && !newPetF" type="button" class="submitBtn0" @click="pushPet"> 再新增一隻狗狗吧 </button>
             </div>
             <div>
                 <button v-if="editBool == 'true'" type="button" class="submitBtn1" @click="cancelEdit"> 取消更改 </button>
@@ -35,7 +35,7 @@ export default {
             MPdatas: [],
             nullPet: {
                 petId: null,
-                memberId: null,
+                memberId: this.memberStatus.id,
                 petName: null,
                 petSize: null,
                 petGender: null,
@@ -49,22 +49,54 @@ export default {
         }
     },
     methods: {
+        // 取消修改
         cancelEdit() {
+            // 如果有點新增寵物要記得pop out
             if(this.newPetF == true)
                 this.MPdatas.pop()
+            // 通知child要disable
             this.editBool = 'false'
             this.newPetF = false
         },
 
         submitPet() {
-            if(this.newPetF == true) 
+            if(this.newPetF == true) {
+                this.CreateData()
                 this.editBool = 'false'
-            else if(this.newPetF == false)
+            }
+            else if(this.newPetF == false) {
+                this.UpdateData()
                 this.editBool = 'false'
+            }
         },
 
-        createPet() {
-            console.log(typeof(this.MPdatas))
+        CreateData() {
+            MemberPetDataService.create(this.MPdatas)
+                .then(response => {
+                    this.getMemberPet()
+                    window.alert("新增寵物成功")
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
+        UpdateData() {
+            for(let i = 0; i < this.MPdatas.length; i++) {
+                MemberPetDataService.update(this.MPdatas[i].petId, this.MPdatas[i])
+                    .then(response => {
+                        if(response.data == 'success' && i == this.MPdatas.length-1) {
+                            this.getMemberPet()
+                            window.alert("修改寵物成功")
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+            }
+        },
+
+        pushPet() {
             this.MPdatas.push(this.nullPet)
             this.newPetF = true
         },
@@ -73,10 +105,26 @@ export default {
             this.editBool = 'true'
         },
 
+        resetNull() {
+            this.nullPet.petId = null
+            this.nullPet.memberId = this.memberStatus.id
+            this.nullPet.petName = null
+            this.nullPet.petSize = null
+            this.nullPet.petGender = null
+            this.nullPet.petDisease = null
+            this.nullPet.isLigation = null
+            this.nullPet.dietaryHabit = null
+        },
+
         getMemberPet() {
+            this.MPdatas = []
             MemberPetDataService.findByMID(this.memberStatus.id)
                 .then(response => {
+                    console.log(response.data)
                     this.MPdatas = response.data
+                    this.editBool = 'false'
+                    this.newPetF = false
+                    this.resetNull()
                 })
                 .catch(e => {
                     console.log(e);

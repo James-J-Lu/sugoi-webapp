@@ -15,7 +15,7 @@
                     <a href="#" @click="changeBody('MadoptOrder')" class="dropdown-item rounded-2 active">領養訂單</a>
                 </li>
                 <li>
-                    <a href="#" @click="changeBody('MroomAmount')" class="dropdown-item rounded-2 active">房間數量</a>
+                    <a href="#" @click="changeBody('MreserveRoomVue')" class="dropdown-item rounded-2 active">房間數量</a>
                 </li>
             </ul>
         </div>
@@ -28,7 +28,7 @@ import MadoptOrder from "../components/managerComponent/MadoptOrder.vue"
 import MadoptPet from "../components/managerComponent/MadoptPet.vue"
 import MmemberData from "../components/managerComponent/MmemberData.vue"
 import MnurseryOrder from "../components/managerComponent/MnurseryOrder.vue"
-import MroomAmount from "../components/managerComponent/MroomAmount.vue"
+import MreserveRoomVue from "./managerComponent/MreserveRoom.vue"
 
 export default {
     name: 'managerMain',
@@ -40,7 +40,7 @@ export default {
         'MadoptPet': MadoptPet,
         'MmemberData': MmemberData,
         'MnurseryOrder': MnurseryOrder,
-        'MroomAmount': MroomAmount
+        'MreserveRoomVue': MreserveRoomVue,
     },
     data () {
         return {

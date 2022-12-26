@@ -77,7 +77,7 @@ export default {
                 startTime: null,
                 endtime: null,
                 status: 0,
-                manager: 0,
+                managerId: null,
                 roomSize: null,
             },
         }

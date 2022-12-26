@@ -4,7 +4,7 @@
         <div class="workspace">
             <div v-if="pop && visibility" class="alert alert-warning alert-dismissible fade show" role="alert">
                 <!--更新成功提示-->
-                <strong>{{ members }}您好：</strong> 領養資料已更新<br>{{ now }}<!--儲存成功時間紀錄-->
+                <strong>{{ memberStatus.name }}您好：</strong> 領養資料已更新<br>{{ now }}<!--儲存成功時間紀錄-->
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                     v-on:click="popoff"></button>
             </div>
@@ -93,7 +93,7 @@
                             <label for="background" class="form-label">簡述家庭環境：{{ originData.space }}</label>
                         </div><br><br><br>
                         <li>
-                            <button type="button" class="edit" v-on:click="edit">編輯</button>
+                            <button type="button" class="edit" @click="edit">編輯</button>
                         </li>
                     </div>
 
@@ -168,7 +168,7 @@
                         <br>
                         <button type="button" class="cancel" v-on:click="cancel">取消更改</button><!--點了cancel回到overview-->
                         <button type="button" class="confirm"
-                            @click="modify()">確認更改</button>
+                            @click="modify">確認更改</button>
                         <!--點了confirm存入資料庫-->
 
                     </div>
@@ -206,7 +206,7 @@ export default {
 
         edit() {
             this.visibility = false
-            this.editData = this.originData
+            this.editData = Object.assign({}, this.originData)
         },
 
         modify() {
@@ -214,13 +214,7 @@ export default {
             //從adopt寫入領養資料 成功就將下列更新
             AdoptionDataService.update(this.memberStatus.memberId, this.editData)
                 .then(response => {
-                    this.originData.preferFigue = this.editData.preferFigue
-                    this.originData.preferAge = this.editData.preferAge
-                    this.originData.preferColor = this.editData.preferColor
-                    this.originData.preferFur = this.editData.preferFur
-                    this.originData.preferGender = this.editData.preferGender
-                    this.originData.preferBreed = this.editData.preferBreed
-                    this.originData.space = this.editData.space
+                    this.originData = this.editData
                     this.visibility = true
                     this.pop = true
                     this.now = new Date()

@@ -32,11 +32,10 @@
                         <br>
                         <label><span>地址：{{ originMdata.memberAddress }}</span></label>
                         <li>
-                            <button type="button" class="edit" v-on:click="edit">編輯</button>
+                            <button type="button" class="edit" @click="edit">編輯</button>
                         </li>
                     </div>
                     <div class="second" v-if="!visibility"><!--memberdataedit-->
-
                         <label><span>姓名：<input style="background-color:#F9ECBE" name="name" v-model="editMdata.memberName"
                                     class="form-control " placeholder="請輸入姓名"></span></label>
                         <br>
@@ -60,7 +59,7 @@
                                     v-model="editMdata.memberPhone" class="form-control " placeholder="請輸入手機" /></span></label>
                         <br>
                         <label><span>電子郵箱：<input style="background-color:#F9ECBE" type="originMdata.memberEmail" v-model="editMdata.memberEmail"
-                                    class="form-control " placeholder="請輸入電子郵箱" /></span></label>
+                                    class="form-control email" placeholder="請輸入電子郵箱" /></span></label>
                         <br>
                         <label><span>地址：</span></label>
                         <input style="background-color:#F9ECBE" type="text" class="form-control " placeholder="請輸入地址"
@@ -69,7 +68,7 @@
                         <li>
                             <button type="button" class="cancel" v-on:click="cancel">取消更改</button><!--點了cancel回到overview-->
                             <button type="button" class="confirm"
-                                v-on:click="modify">確認更改</button>
+                                v-on:click="Checkinput">確認更改</button>
                         <!--點了confirm存入資料庫-->
                             </li>
 
@@ -82,10 +81,9 @@
 
 <script scoped>
 import MemberDataService from "@/services/MemberDataService";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import DatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
-
+import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
     name: 'memberData',
@@ -105,20 +103,38 @@ export default {
         }},
     
     methods: {
+        Checkinput() {
+            var number = /^[0-9]*$/
+            var email = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+            
+            if(!number.test(this.editMdata.memberPhone) || !number.test(this.editMdata.memberTel)) {
+                window.alert("電話 或 手機只能輸入數字")
+                return;
+            }
+
+            if(!email.test(this.editMdata.memberEmail)) {
+                window.alert("Email格式錯誤")
+                return;
+            }
+
+            this.editMdata.memberBirth = format(parseISO(this.editMdata.memberBirth), "yyyy-MM-dd")
+            this.modify()
+        },
+
         cancel() {
             this.visibility = true
             this.pop = false
         },
         edit() {
             this.visibility = false
-            this.editMdata = this.originMdata
+            this.editMdata = Object.assign({}, this.originMdata)
         },
         modify() {
             MemberDataService.update(this.memberStatus.id, this.editMdata)
                 .then(response => {
                     this.originMdata = this.editMdata
                     if(this.editMdata.memberBirth!=null){
-                        this.originMdata.memberBirth=format(this.editMdata.memberBirth, "yyyy-MM-dd")
+                        this.originMdata.memberBirth=format(parseISO(this.editMdata.memberBirth), "yyyy-MM-dd")
                     }
                     this.pop = true
                     this.visibility = true
@@ -135,7 +151,6 @@ export default {
             MemberDataService.get(this.memberStatus.id)
                 .then(response => {
                     this.originMdata = response.data
-                    console.log(this.originMdata)
                 })
                 .catch(e => {
                     console.log(e);
@@ -149,6 +164,10 @@ export default {
 </script>
 
 <style scoped>
+.email {
+    position: relative;
+    width: 100%;
+}
 .first {
     font-size: 35px;
 }

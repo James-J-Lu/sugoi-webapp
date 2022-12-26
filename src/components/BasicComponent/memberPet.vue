@@ -6,7 +6,7 @@
             <p></p>
             <div class="top-right-div">
                 <p class="name" v-if="edit == 'false'">{{ MPdataO.petName }}</p>
-                <input v-model="name_T" type="text" v-if="edit == 'true'">
+                <input v-model="MPdataO.petName" type="text" v-if="edit == 'true'">
                 <div>
                     <p>狗狗性別：</p>
                     <input class="form-check-input" type="radio" value=0 v-model="MPdataO.petGender" :disabled="edit == 'false'">
@@ -35,10 +35,10 @@
         <div class="bottom-div">
             <p>特殊疾病 ( 有則描述，沒有則填無 )：</p>
             <p v-if="edit == 'false'">{{ MPdataO.petDisease }}</p>
-            <input v-model="disease_T" type="text" v-if="edit == 'true'">
-            <p @click="check">特殊飲食習慣：</p>
+            <input v-model="T_disease" type="text" v-if="edit == 'true'">
+            <p>特殊飲食習慣：</p>
             <p v-if="edit == 'false'">{{ MPdataO.dietaryHabit }}</p>
-            <input v-model="dietary_T" type="text" v-if="edit == 'true'">
+            <input v-model="T_dietary" type="text" v-if="edit == 'true'">
         </div>
     </div>    
 </template>
@@ -54,9 +54,13 @@ export default {
     data() {
         return {
             MPdataO: this.MPdata,
-            name_T: null,
-            disease_T: null,
-            dietary_T: null,
+            // 暫存修改前的資料
+            T_name: null,
+            T_gender: null,
+            T_ligation: null,
+            T_size: null,
+            T_disease: null,
+            T_dietary: null,
         }
     },
     methods: {
@@ -67,12 +71,20 @@ export default {
     watch: {
         edit(NV, OV) {
             if(NV == 'true') {
-                this.name_T = this.MPdataO.petName
-                this.disease_T = this.MPdataO.petDisease
-                this.dietary_T = this.MPdataO.dietaryHabit
+                this.T_name = this.MPdataO.petName
+                this.T_disease = this.MPdataO.petDisease
+                this.T_dietary = this.MPdataO.dietaryHabit
+                this.T_gender = this.MPdataO.petGender
+                this.T_ligation = this.MPdataO.isLigation
+                this.T_size = this.MPdataO.petSize
             }
             else if(NV == 'false') {
-                console.log('cancel')
+                this.MPdataO.petName = this.T_name
+                this.MPdataO.petDisease = this.T_disease
+                this.MPdataO.dietaryHabit = this.T_dietary
+                this.MPdataO.petGender = this.T_gender
+                this.MPdataO.isLigation = this.T_ligation
+                this.MPdataO.petSize = this.T_size
             }
         }
     }

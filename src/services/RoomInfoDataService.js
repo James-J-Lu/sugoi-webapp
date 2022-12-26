@@ -1,6 +1,10 @@
 import http from "../http-common";
 
 class RoomInfoDataService {
+  getAllroom(size) {
+    return http.get(`/roominfo/allroom/${size}`);
+  }
+
   getAll(data) {
     return http.post("/roominfo", data);
   }

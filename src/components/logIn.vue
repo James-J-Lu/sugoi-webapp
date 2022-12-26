@@ -51,6 +51,7 @@ export default {
                 desTination: null,
                 petCheck: null,
                 adoptCheck: null,
+                manager: null,
             }
         }
     },
@@ -72,13 +73,16 @@ export default {
             //是會員
             if(this.isMember == 'member') {
                 this.otherVal.desTination = 'defaultMain'
+                this.otherVal.manager = false
+                console.log(this.otherVal)
                 Object.assign(this.memberData, this.otherVal);
-
+                console.log(this.memberData)
                 this.$emit('getChild', this.memberData)
             }
             //是管理員
             else if (this.isMember == 'manager'){
                 this.otherVal.desTination = 'managerMain'
+                this.otherVal.manager = true
                 Object.assign(this.memberData, this.otherVal);
                 this.$emit('getChild', this.memberData)
             }
@@ -86,7 +90,14 @@ export default {
 
         //登入submit
         logIn () {
+            this.otherVal.desTination=null
+            this.otherVal.petCheck=null
+            this.otherVal.adoptCheck=null
+            this.otherVal.manager=null
+            this.memberData = []
+
             this.Checkinput() //檢查輸入
+
             var data = { //傳給後端的登入資料
                 account: this.account,
                 pw: this.password,
