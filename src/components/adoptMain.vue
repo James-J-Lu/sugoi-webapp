@@ -1,17 +1,34 @@
 <template>
     <div class="defaultMain">
         <p class="dropdown-item rounded-2 active">以下為符合領養條件的狗狗</p>
+
         <div class="adoptpet">
-            <adoptPet v-for="pet in aPets" :key="pet.id" :pet="pet" />
+            <adoptPet v-for="(pet, index) in aPets" :key="pet.adoPetId" :pet="pet" @click="ChosePet(index)" />
         </div>
-        <DatePicker v-model="date" :enable-time-picker="false" :clearable="false" class="choseTime"></DatePicker>
-        <button type="button" @click="submitNursery" class="submitBtn">完成領養申請</button>
+
+        <div class="functionpart">
+            <div>
+                <DatePicker v-model="selectTime" :clearable="false" class="choseTime" :min-date="new Date()" :enable-time-picker="false">
+                </DatePicker>
+                <select v-model="selectHour" class="choseHour">
+                    <option disabled value="">Please select time</option>
+                    <option>10</option>
+                    <option>13</option>
+                    <option>16</option>
+                    <option>19</option>
+                </select>
+            </div>
+            <button type="button" @click="submitNursery" class="submitBtn">完成領養申請</button>
+        </div>
     </div>
 </template>
 
 <script>
+import {format} from 'date-fns';
 import adoptPet from "../components/BasicComponent/adoptPet.vue"
 import AdoptionPetDataService from "../services/AdoptionPetDataService"
+import AdoptionDataService from "@/services/AdoptionDataService";
+import AdoptionOrderDataService from '@/services/AdoptionOrderDataService';
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -26,48 +43,102 @@ export default {
     },
     data () {
         return {
-            date: null,
-            aPets: [
-                {id: 0, name:'cockie', img:"../../assets/Pet/1.jpg"},
-                {id: 1, name:'rock', img:"../../assets/Pet/2.jpg"},
-                {id: 2, name:'mabao', img:"../../assets/Pet/3.jpg"},
-                {id: 3, name:'rick', img:"../../assets/Pet/4.jpg"},
-                {id: 4, name:'sting', img:"../../assets/Pet/5.jpg"},
-                {id: 5, name:'甜甜', img:"../../assets/Pet/6.jpg"},
-                {id: 6, name:'黑黑', img:"../../assets/Pet/6.jpg"}
-            ],
+            selectTime: null,
+            selectHour: null,
+            aPets: [],
+            Order: {
+                adoptionOrderId: null,
+                memberId_AO: this.memberStatus.id,
+                adoPetId_AO: null,
+                appointmentTime: null,
+                status: 1, //受理中
+            },
+            prefer: {
+                adoPetFigure: null,
+                adoPetAge: null,
+                adoPetColor: null,
+                adoPetFur: null,
+                adoPetGender: null,
+                adoPetBreed: null,
+                status: 1,
+            },
+            alterPet: {
+                status: 2
+            }
         }
     },
     methods: {
-        getAdoptPet() {
-            console.log('Get Adoption Pet')
-            // AdoptionPetDataService.getAll()
-            //     .then(response => {
-            //         console.log(response.data)
-            //     })
-            //     .catch(e => {
-            //         console.log(e)
-            //     })
+        //點擊完成申請
+        submitNursery() {
+            this.Order.appointmentTime = format(this.selectTime, 'yyyy-MM-dd') + ' ' + this.selectHour + ':00:00'
+            AdoptionOrderDataService.create(this.Order)
+                .then(response => {
+                    if(response.data == 'success') {
+                        AdoptionPetDataService.update(this.Order.adoPetId_AO, this.alterPet)
+                            .then(response => {
+                                if(response.data == 'success')
+                                    this.getMemberAopt()
+                            })
+                            .catch(e => {
+                                console.log(e)
+                            })
+                    }
+                })
+                .catch(e => {
+                    console.log(e)
+                })
         },
+
+        //click狗，紀錄index
+        ChosePet(index) {
+            this.Order.adoPetId_AO = this.aPets[index].adoPetId
+        },
+
+        //取得可以被領養且符合偏好的狗
+        getMemberAopt() {
+            AdoptionDataService.findByMID(this.memberStatus.id)
+                .then(response => {
+                    this.prefer.adoPetFigure = response.data[0].preferFigue
+                    this.prefer.adoPetAge = response.data[0].preferAge
+                    this.prefer.adoPetColor = response.data[0].preferColor
+                    this.prefer.adoPetFur = response.data[0].preferFur
+                    this.prefer.adoPetGender = response.data[0].preferGender
+                    this.prefer.adoPetBreed = response.data[0].preferBreed
+
+                    AdoptionPetDataService.getPrefer(this.prefer)
+                        .then(response => {
+                            this.aPets = response.data
+                        })
+                        .catch(e => {
+                            console.log(e)
+                        })
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        }
     },
     mounted() {
-        this.getAdoptPet()
+        this.getMemberAopt()
     },
 }
 
 </script>
 
 <style scoped>
-.choseTime {
-    position: relative;
-    margin: 2rem;
+.functionpart {
+    height: 30%;
+    display: grid;
+    grid-template-rows: 1fr 1.5fr
+}
+.functionpart div:nth-child(1) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 .submitBtn {
-    position: relative;
     display: inline-block;
     margin:0;
     width: 20%;
-    height: 10%;
     bottom: 2%;
     background-color: #FF3D00;
     border-radius: 27px;

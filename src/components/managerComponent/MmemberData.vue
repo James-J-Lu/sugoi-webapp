@@ -1,60 +1,150 @@
 <template>
-    <div class="MmemberData">
-      <p class="Mtop">會員資料表</p>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead class="MtableHead">
-            <tr>
-              <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
-              <th>會員ID</th>
-              <th>帳號</th>
-              <th>姓名</th>
-            </tr>
-          </thead>
-          <tbody class="MtableBody">
-            <tr v-for="member in members" :key="member.id">
-              <th width="100px"><input class="form-check-input me-1" type="checkbox"></th>
-              <td>{{member.id}}</td>
-              <td>{{member.account}}</td>
-              <td>{{member.name}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div>
+  <div class="MmemberData">
+    <p class="Mtop">會員資料表
+      <input v-if="gocheck" @click="back(gocheck)" class="backButton" type="button" value="返回">
+    </p>
+
+    <!-- 全局資料 -->
+    <div class="table-responsive" v-if="!gocheck">
+      <table class="table table-striped table-sm tableType" >
+        <thead class="MtableHead">
+          <tr>
+            <th style="width:20%">會員ID</th>
+            <th>帳號</th>
+            <th>姓名</th>
+          </tr>
+        </thead>
+        <tbody class="MtableBody">
+          <tr v-for="(member, index) in members" :key="member.memberId" @click="test(index)">
+            <td>{{member.memberId}}</td>
+            <td>{{member.memberAccount}}</td>
+            <td>{{member.memberName}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 會員詳細資料 -->
+    <div v-if="gocheck">
+      <div class="card card-body">
+        <div class="container card w-50" style="border-radius: .5rem;">
+          <p>會員編號</p>
+          <p class="text-muted">{{members[selectMember].memberId}}</p>
+          <p>會員帳號</p>
+          <p class="text-muted">{{members[selectMember].memberAccount}}</p>
+        </div>
         
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">姓名</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ members[selectMember].memberName }}</p>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">性別</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ genger[members[selectMember].memberGender] }}</p>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">Email</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ members[selectMember].memberEmail }}</p>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">生日</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ members[selectMember].memberBirth }}</p>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">電話</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ members[selectMember].memberTel }}</p>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">手機</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ members[selectMember].memberPhone }}</p>
+          </div>
+        </div>
+        <hr>
+        
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">地址</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ members[selectMember].memberAddress }}</p>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-    name: 'MmemberData',
-    components: {
-        
-    },
-    data () {
-        return {
-            members: [
-                {id: 0, account:'0001', name:'Alice'},
-                {id: 1, account:'0002', name:'Bob'},
-                {id: 2, account:'0003', name:'Charlie'},
-                {id: 3, account:'0004', name:'Daisy'},
-                {id: 4, account:'0005', name:'Ella'},
-                {id: 5, account:'0006', name:'Flora'},
-                {id: 6, account:'0007', name:'George'},
-                {id: 7, account:'0008', name:'Hank'},
-                {id: 8, account:'0009', name:'Ivy'},
-                {id: 9, account:'0010', name:'Jack'},
-                {id: 10, account:'0011', name:'Kelly'},
-                {id: 11, account:'0012', name:'Lisa'},
-                {id: 12, account:'0013', name:'Mary'},
-                {id: 13, account:'0014', name:'Nora'},
-                {id: 14, account:'0015', name:'Olga'}
-            ],
-        }
-    },
+import MemberDataService from '@/services/MemberDataService'
 
+export default {
+  memberName: 'MmemberData',
+  components: {
+      
+  },
+  data () {
+      return {
+          members: [],
+          genger: {0: '男', 1: '女'},
+          gocheck:false,
+          selectMember: null,
+      }
+  },
+  methods: {
+    test(index) {
+      this.gocheck=!this.gocheck
+      this.selectMember = index
+    },
+    back() {
+      this.gocheck=!this.gocheck
+    },
+    getData() {
+      MemberDataService.getAll()
+        .then(response => {
+          response.data.pop()
+          this.members = response.data
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    }
+  },
+  mounted() {
+    this.getData()
+  },
 }
 </script>
 
@@ -74,5 +164,19 @@
 .MtableBody {
     background-color:white;
     font-size: 28px;
+}
+
+.tableType {
+  --bs-table-border-color: none !important;
+}
+
+input[type=button] {
+  background-color: #bdbdbd;
+  border: none;
+  color: black;
+  padding: 10px;
+  float:right; 
+  font-size: 20px;
+  margin: 4px 2px;
 }
 </style>

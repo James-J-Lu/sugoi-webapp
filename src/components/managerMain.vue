@@ -15,11 +15,11 @@
                     <a href="#" @click="changeBody('MadoptOrder')" class="dropdown-item rounded-2 active">領養訂單</a>
                 </li>
                 <li>
-                    <a href="#" @click="changeBody('MroomAmount')" class="dropdown-item rounded-2 active">房間數量</a>
+                    <a href="#" @click="changeBody('MreserveRoomVue')" class="dropdown-item rounded-2 active">房間數量</a>
                 </li>
             </ul>
         </div>
-        <component v-bind:is="currentComponent" class="workSpace" />
+        <component :memberStatus="memberStatus_copy" v-bind:is="currentComponent" class="workSpace" />
     </div>
 </template>
 
@@ -28,20 +28,24 @@ import MadoptOrder from "../components/managerComponent/MadoptOrder.vue"
 import MadoptPet from "../components/managerComponent/MadoptPet.vue"
 import MmemberData from "../components/managerComponent/MmemberData.vue"
 import MnurseryOrder from "../components/managerComponent/MnurseryOrder.vue"
-import MroomAmount from "../components/managerComponent/MroomAmount.vue"
+import MreserveRoomVue from "./managerComponent/MreserveRoom.vue"
 
 export default {
     name: 'managerMain',
+    props: {
+        memberStatus: Object,
+    },
     components: {
         'MadoptOrder': MadoptOrder,
         'MadoptPet': MadoptPet,
         'MmemberData': MmemberData,
         'MnurseryOrder': MnurseryOrder,
-        'MroomAmount': MroomAmount
+        'MreserveRoomVue': MreserveRoomVue,
     },
     data () {
         return {
             currentComponent: 'MmemberData',
+            memberStatus_copy: this.memberStatus,
         }
     },
     methods: {
@@ -89,6 +93,6 @@ export default {
     right: 2%;
     width: 72.5%;
     height: 93%;
-    background-color: rgb(229,229,229);
+    background-color: white;
 }
 </style>

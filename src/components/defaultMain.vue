@@ -2,7 +2,7 @@
     <div class="defaultMain">
         <p class="dropdown-item rounded-2 active">以下是可以被領養的狗狗</p>
         <div class="adoptpet">
-            <adoptPet v-for="pet in aPets" :key="pet.id" :pet="pet"/>
+            <adoptPet v-for="pet, in aPets" :key="pet.adoPetId" :pet="pet" />
         </div>
     </div>
 </template>
@@ -18,27 +18,21 @@ export default {
     },
     data () {
         return {
-            aPets: [
-                {id: 0, name:'cockie', img:"../../assets/Pet/1.jpg"},
-                {id: 1, name:'rock', img:"../../assets/Pet/2.jpg"},
-                {id: 2, name:'mabao', img:"../../assets/Pet/3.jpg"},
-                {id: 3, name:'rick', img:"../../assets/Pet/4.jpg"},
-                {id: 4, name:'sting', img:"../../assets/Pet/5.jpg"},
-                {id: 5, name:'甜甜', img:"../../assets/Pet/6.jpg"},
-                {id: 6, name:'黑黑', img:"../../assets/Pet/6.jpg"}
-            ],
+            aPets: [],
+            prefer: {
+                status: 1,
+            },
         }
     },
     methods: {
         getAdoptPet() {
-            console.log('Get Adoption Pet')
-            // AdoptionPetDataService.getAll()
-            //     .then(response => {
-            //         console.log(response.data)
-            //     })
-            //     .catch(e => {
-            //         console.log(e)
-            //     })
+            AdoptionPetDataService.getPrefer(this.prefer)
+                .then(response => {
+                    this.aPets = response.data
+                })
+                .catch(e => {
+                    console.log(e)
+                })
         },
     },
     mounted() {
@@ -69,9 +63,8 @@ export default {
     font-size: 30px;
     font-weight: bold;
     color: black !important;
-    /* background-color: rgb(182, 127, 255); */
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(400px, 400px);
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(550px, auto);
 }
 </style>

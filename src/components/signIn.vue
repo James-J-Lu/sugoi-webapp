@@ -41,6 +41,8 @@
                 <li>
                     <p>&ensp;&emsp;&emsp;生日：&nbsp;</p>
                     <DatePicker v-model="memberData.memberBirth" :enable-time-picker="false" :clearable="false" class="input2"></DatePicker>
+                    <p>&ensp;&emsp;&emsp;Email：</p>
+                    <input v-model="memberData.memberEmail" type="text" class="input2">
                 </li>
                 <li>
                     <p>&ensp;&emsp;&emsp;電話：</p>
@@ -49,8 +51,8 @@
                     <input v-model="memberData.memberPhone" type="text" class="input2">
                 </li>
                 <li>
-                    <button type="button" class="submitBtn">取消</button>
-                    <button type="button" class="submitBtn" @click="CreateMember">完成</button>
+                    <button type="button" class="submitBtn" @click="CancelSignin('defaultMain')">取消</button>
+                    <button type="button" class="submitBtn" @click="Checkinput">完成</button>
                 </li>
             </ul>
         </div>
@@ -58,6 +60,7 @@
 </template>
 
 <script>
+import MemberDataService from "../services/MemberDataService";
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -83,13 +86,80 @@ export default {
         }
     },
     methods: {
-        CreateMember() { //backend的create要負責retrive last memberId
-            console.log(this.memberData.memberGender)
+        Checkinput() {
+            var re = new RegExp("[\u4E00-\u9FA5]+")
+            var number = new RegExp("[0-9]+")
+            var email = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+
+            if(re.test(this.memberData.memberAccount) || re.test(this.memberData.memberPassword)) {
+                window.alert("帳號 或 密碼請勿輸入中文")
+                return;
+            }
+                
+            if(this.memberData.memberAccount == null || this.memberData.memberPassword == null) {
+                window.alert("帳號 或 密碼請勿空白")
+                return;
+            }
+                
+            if(this.memberData.memberAccount.length < 8 || this.memberData.memberAccount.length > 20 || this.memberData.memberPassword.length < 8 || this.memberData.memberPassword.length > 20) {
+                window.alert("帳號 或 密碼請符合長度，8~20字元")
+                return;
+            }
+            
+            if(!number.test(this.memberData.memberPhone) || !number.test(this.memberData.memberTel)) {
+                window.alert("電話 或 手機只能輸入數字")
+                return;
+            }
+
+            if(!email.test(this.memberData.memberEmail)) {
+                window.alert("Email格式錯誤")
+                return;
+            }
+
+            this.CreateMember()
         },
 
-        //檢查input值
-        Checkinput() {
+        CreateMember() {
+            var data = { //傳給後端的登入資料
+                account: this.memberData.memberAccount,
+                pw: this.memberData.memberPassword
+            };
 
+            // 確認帳號是否已重複
+            MemberDataService.logIn(data)
+                .then(response => {
+                    // 沒有重複，所以新增會員
+                    if(response.data == 'can sign in') {
+                        MemberDataService.create(this.memberData)
+                            .then(response => {
+                                if(response.data.length != 0) {
+                                    window.alert("註冊成功瞜！")
+                                    // 跳轉到註冊
+                                    this.CancelSignin('logIn')
+                                }
+                            })
+                            .catch(e => {
+                                console.log(e);
+                            });
+                    }
+                    else
+                        window.alert("該帳號已被註冊瞜！")
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
+        CancelSignin(where) {
+            var _value = {
+                id: null,
+                desTination: null,
+                name: null,
+                petCheck: null,
+                adoptCheck: null
+            }
+            _value.desTination = where
+            this.$emit('getChild', _value)
         },
     },
 }   
@@ -119,7 +189,7 @@ export default {
     color: white;
 }
 #title {
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     height: 10%;
     color: black;
@@ -149,7 +219,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
 }
 .signinForm li:nth-child(1)  p:nth-child(1){

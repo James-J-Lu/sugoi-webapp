@@ -6,21 +6,19 @@ class MemberDataService {
   }
 
   get(id) {
-    console.log(id);
     return http.get(`/member/${id}`);
   }
 
   logIn(data) {
-    console.log(data)
     return http.post(`/member/login`, data);
   }
 
   create(data) {
-    console.log(data);
-    return http.post("/member", data);
+    return http.post("/member/create", data);
   }
 
   update(id, data) {
+    console.log(data)
     return http.put(`/member/${id}`, data);
   }
   /*

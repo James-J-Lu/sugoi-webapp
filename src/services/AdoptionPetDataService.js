@@ -6,13 +6,11 @@ class AdoptionPetDataService {
   }
 
   get(id) {
-    console.log(id);
     return http.get(`/adoptionpet/${id}`);
   }
 
-  logIn(data) {
-    console.log(data)
-    return http.post(`/adoptionpet/login`, data);
+  getPrefer(data) {
+    return http.post("/adoptionpet/prefer", data);
   }
 
   create(data) {

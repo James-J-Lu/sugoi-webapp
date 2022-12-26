@@ -20,7 +20,7 @@
         </li>
         <li>
           <div class="bar-right nav-link px-2">
-            <p v-if="memberStatus.Login" @mouseover="(sideBar = true)" class="nav-link px-2 link-dark">{{ memberStatus.name }}小姐</p>
+            <p v-if="memberStatus.Login" @mouseover="(sideBar = true)" class="nav-link px-2 link-dark">{{ memberStatus.name }} &ensp; {{ genderCall }}</p>
             <button v-if="!memberStatus.Login" type="button" @click="changeBody('signIn',0)" class="btn btn-outline-primary me-2">註冊</button>
             <button v-if="!memberStatus.Login" type="button" @click="changeBody('logIn',0)" class="btn btn-outline-primary me-2">登入</button>
           </div>
@@ -30,17 +30,20 @@
     <!--側邊的bar-->
     <div v-if="sideBar" class="userDrop">
       <ul class="dropdown-menu position-static d-grid gap-1 p-2 mx-0 shadow w-220px">
-        <li>
+        <li v-if="!isManager">
           <a href="#" @click="changeBody('memberData',0)" class="dropdown-item rounded-2 active">個人基本資料</a>
         </li>
-        <li>
+        <li v-if="!isManager">
           <a href="#" @click="changeBody('adoptData',0)" class="dropdown-item rounded-2 active">領養資料</a>
         </li>
-        <li>
+        <li v-if="!isManager">
           <a href="#" @click="changeBody('petData',0)" class="dropdown-item rounded-2 active">寵物資料</a>
         </li>
-        <li>
+        <li v-if="!isManager">
           <a href="#" @click="changeBody('myOrder',0)" class="dropdown-item rounded-2 active">我的訂單</a>
+        </li>
+        <li v-if="isManager">
+          <a href="#" @click="changeBody('managerMain',0)" class="dropdown-item rounded-2 active">管理主控台</a>
         </li>
         <li>
           <a v-if="memberStatus.Login" type="button" id="logOut" @click="logOut()" class="dropdown-item rounded-2 active">登出</a>
@@ -73,12 +76,16 @@ export default {
       currentComponent: 'defaultMain', //目前顯示的頁面，要到components註冊
       name: null, //bar上面顯示的名稱(會員or管理者)
       sideBar: false,
+      genderCall: null,
       memberStatus: {
+        id: null,
         name: null,
         Login: false, //是否為登入狀態，會同步給各component
         pet: null,
         adopt: null,
-      }
+      },
+      isManager: null,
+      memberData: []
     }
   },
   components: {
@@ -98,29 +105,41 @@ export default {
   methods: {
     //登出，回出初始化
     logOut() {
+      this.isManager = false
       this.memberStatus.Login = false
       this.sideBar = false
       this.memberStatus.name = null
+      this.memberStatus.id = null
+      this.memberStatus.pet = null
+      this.memberStatus.adopt = null
+      this.genderCall = null
       this.currentComponent = 'defaultMain'
     },
     //接收component回傳回來的指令，
     childBack(_value) {
-      if(_value.name) //如果是登入&登入成功
+      if(_value.memberName) //如果是登入&登入成功
         this.memberStatus.Login = true
-        this.memberStatus.name = _value.name
+        this.memberStatus.id = _value.memberId
+        this.memberStatus.name = _value.memberName
         this.memberStatus.pet = _value.petCheck
         this.memberStatus.adopt = _value.adoptCheck
+        if(_value.memberGender == 0)
+          this.genderCall = '先生'
+        else if (_value.memberGender == 1)
+          this.genderCall = '小姐'
+        this.isManager = _value.manager
       this.currentComponent = _value.desTination
     },
+
     //切換除bar以外的子頁面
     changeBody(id,log) {
       this.sideBar = false //讓sidebar消失
       if(log == 1) { //需要登入才能用的頁面
         if(this.memberStatus.Login == true) {
           if(id == 'nurseryMain' && this.memberStatus.pet != true)
-            console.log('no pet') //code=3 沒有狗狗提醒
+            window.alert("你沒有狗狗喔，到寵物資料新增"); //code=3 沒有狗狗提醒
           else if(id == 'adoptMain' && this.memberStatus.adopt != true)
-            console.log('no adoption file') //code=3 沒有領養資料提醒
+            window.alert("你沒有填領養喜好喔，到領養資料新增"); //code=3 沒有領養資料提醒
           else
             this.currentComponent = id
         }
@@ -139,7 +158,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .userDrop {
   z-index: 10;

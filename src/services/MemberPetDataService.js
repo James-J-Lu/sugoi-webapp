@@ -2,17 +2,14 @@ import http from "../http-common";
 
 class MemberpetDataService {
   getAll() {
-    console.log('0')
     return http.get("/memberpet");
   }
 
   get(id) {
-    console.log(id);
     return http.get(`/memberpet/${id}`);
   }
 
   create(data) {
-    console.log(data);
     return http.post("/memberpet", data);
   }
 
