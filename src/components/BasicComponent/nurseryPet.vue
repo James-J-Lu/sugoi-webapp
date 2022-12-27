@@ -1,7 +1,7 @@
 <template>
     <div class="nurseryPet">
         <div>
-            <img src="@/assets/Pet/2.jpg" alt="">
+            <img :src="pet.img" alt="">
         </div>
         <p>{{ pet.petName }}</p>
     </div>
@@ -29,7 +29,6 @@ export default {
     font-weight: bold;
 }
 .nurseryPet div {
-    background-color: rgb(177, 177, 177);
     margin: 0.5rem;
     border-radius: 10px;
 }

@@ -179,10 +179,8 @@ export default {
 <style scoped>
 .submitBtn {
     display: inline-block;
-    margin-top: 2%;
-    margin-left: 40%;
     width: 20%;
-    height: 70%;
+    height: 100%;
     background-color: #FF3D00;
     border-radius: 27px;
     font-size: 40px;
@@ -195,19 +193,20 @@ export default {
     border-radius: 27px;
 }
 .time div {
+    display: flex;
     position: relative;
-    padding: 0.5rem;
     background-color: #D9D9D9;
     border-radius: 27px;
     height: 46%;
     top: 27%;
     left: 6%;
     width: 88%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    justify-content: center;
 }
 .workspace {
     position: relative;
+    top: 0;
     left: 15%;
     width: 70%;
     height: 85%;
@@ -235,6 +234,11 @@ export default {
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.workspace ul li:nth-child(5) {
+    display:flex;
+    justify-content: center;
+    align-content: center;
 }
 p {
     font-weight: bold;

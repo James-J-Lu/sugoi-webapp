@@ -174,7 +174,7 @@ export default {
   --bs-dropdown-border-radius: none;
 }
 .userDrop li a{
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
   color: black;
   background-color: #F9ECBE;
@@ -194,7 +194,7 @@ export default {
   width: 100%;
   height: 15%;
   background-color: #F6E298;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
 }
 .mainBar ul {

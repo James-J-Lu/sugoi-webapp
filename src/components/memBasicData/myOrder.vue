@@ -45,7 +45,9 @@
                         <br>
                         <div v-for="(adoptOrder, index) in adoptOrders" :key="adoptOrder.adoptionOrderId" @click="goToDetailPage(index)">
                             <div class="eachOrder">
-                                <div class="imgInEachOrder"></div>
+                                <div class="imgInEachOrder">
+                                    <img src="@/assets/Pet/A3.jpg" alt="">
+                                </div>
                                 <div class="orderId">
                                     <!-- &emsp; 全形空格 排版用 -->
                                     <p>訂單編號：{{ adoptOrder.adoptionOrderId }}&emsp;</p>
@@ -160,11 +162,12 @@
                     </div>
                     <p> </p>
                     <div v-if="!editOrderTime" class="content">
-                        <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
+                        <img src="@/assets/Pet/A3.jpg"
                             class="image">
 
                         <div class="text">
                             <p>狗狗：{{ this.Apetnames[this.choseInd] }}</p>
+                            <p>領養時間：2022-12-29 16:00:00</p>
                             <p>領養時間：{{ this.adoptOrders[this.choseInd].appointmentTime }}</p>
                             <div class="cancelstatus" v-if="this.adoptOrders[this.choseInd].status == 0">訂單編號：{{ this.adoptOrders[this.choseInd].adoptionOrderId }} 已取消</div>
                             <button v-if="this.adoptOrders[this.choseInd].status != 0" type="button" class="navBtn"
@@ -174,7 +177,7 @@
 
                     <!-- 修改領養時間 -->
                     <div v-if="editOrderTime" class="content">
-                        <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
+                        <img src="@/assets/Pet/A3.jpg"
                             class="image">
                         <div class="text">
                             <p>狗狗：{{ this.Apetnames[this.choseInd] }}</p>

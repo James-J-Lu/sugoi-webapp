@@ -7,7 +7,7 @@
         <div class="buttonBox">
             <div>
                 <button v-if="editBool == 'false'" type="button" class="submitBtn0" @click="editPet"> 編輯或新增狗狗 </button>
-                <button v-if="editBool == 'true' && !newPetF" type="button" class="submitBtn0" @click="pushPet"> 再新增一隻狗狗吧 </button>
+                <button v-if="editBool == 'true' && !newPetF" type="button" class="submitBtn0" @click="pushPet"> 新增一隻狗狗吧 </button>
             </div>
             <div>
                 <button v-if="editBool == 'true'" type="button" class="submitBtn1" @click="cancelEdit"> 取消更改 </button>
@@ -42,6 +42,7 @@ export default {
                 petDisease: null,
                 isLigation: null,
                 dietaryHabit: null,
+                img: null,
             },
 
             // flag
@@ -102,6 +103,7 @@ export default {
         },
 
         editPet() {
+            console.log(this.MPdatas)
             this.editBool = 'true'
         },
 
@@ -114,6 +116,7 @@ export default {
             this.nullPet.petDisease = null
             this.nullPet.isLigation = null
             this.nullPet.dietaryHabit = null
+            this.nullPet.img = null
         },
 
         getMemberPet() {

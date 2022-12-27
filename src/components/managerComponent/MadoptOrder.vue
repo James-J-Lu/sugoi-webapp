@@ -224,6 +224,7 @@ export default {
                 .then(response => {
                     if(response.data == 'success') {
                         console.log('ok')
+                        // 還沒做 還要改apotionpet狀態
                     }
                 })
                 .catch(e => {

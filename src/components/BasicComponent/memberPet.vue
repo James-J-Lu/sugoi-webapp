@@ -2,7 +2,8 @@
     <div class="memberPet">
         <div class="top-div">
             <p></p>
-            <img src="@/assets/Pet/3.jpg" alt="">
+            <img v-if="edit == 'false'" :src="MPdataO.img" alt="">
+            <input v-if="edit == 'true'" class="form-control" ref="fileInput" type="file" @input="pickFile">
             <p></p>
             <div class="top-right-div">
                 <p class="name" v-if="edit == 'false'">{{ MPdataO.petName }}</p>
@@ -61,9 +62,23 @@ export default {
             T_size: null,
             T_disease: null,
             T_dietary: null,
+            T_img: null,
         }
     },
     methods: {
+        pickFile () {
+            let input = this.$refs.fileInput
+            let file = input.files
+            if (file && file[0]) {
+                let reader = new FileReader
+                reader.onload = e => {
+                    this.MPdataO.img = e.target.result
+                }
+                reader.readAsDataURL(file[0])
+                this.$emit('input', file[0])
+            }
+        },
+
         check() {
             console.log(this.MPdataO)
         },
@@ -77,6 +92,7 @@ export default {
                 this.T_gender = this.MPdataO.petGender
                 this.T_ligation = this.MPdataO.isLigation
                 this.T_size = this.MPdataO.petSize
+                this.T_img = this.MPdataO.img
             }
             else if(NV == 'false') {
                 this.MPdataO.petName = this.T_name
@@ -85,6 +101,7 @@ export default {
                 this.MPdataO.petGender = this.T_gender
                 this.MPdataO.isLigation = this.T_ligation
                 this.MPdataO.petSize = this.T_size
+                this.MPdataO.img = this.T_img
             }
         }
     }

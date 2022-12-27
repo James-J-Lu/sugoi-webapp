@@ -8,17 +8,20 @@
 
         <div class="functionpart">
             <div>
-                <DatePicker v-model="selectTime" :clearable="false" class="choseTime" :min-date="new Date()" :enable-time-picker="false">
-                </DatePicker>
-                <select v-model="selectHour" class="choseHour">
-                    <option disabled value="">Please select time</option>
-                    <option>10</option>
-                    <option>13</option>
-                    <option>16</option>
-                    <option>19</option>
-                </select>
+                <DatePicker v-model="selectTime" :clearable="false" class="choseTime" :min-date="new Date()" :enable-time-picker="false"></DatePicker>
+                <div>
+                    <p>請選擇時間：</p>
+                    <select v-model="selectHour" class="choseHour">
+                        <option>10</option>
+                        <option>13</option>
+                        <option>16</option>
+                        <option>19</option>
+                    </select>
+                </div>
             </div>
-            <button type="button" @click="submitNursery" class="submitBtn">完成領養申請</button>
+            <div>
+                <button type="button" @click="submitNursery" class="submitBtn">完成領養申請</button>
+            </div>
         </div>
     </div>
 </template>
@@ -76,8 +79,10 @@ export default {
                     if(response.data == 'success') {
                         AdoptionPetDataService.update(this.Order.adoPetId_AO, this.alterPet)
                             .then(response => {
-                                if(response.data == 'success')
+                                if(response.data == 'success') {
                                     this.getMemberAopt()
+                                    window.alert('成功領養')
+                                }
                             })
                             .catch(e => {
                                 console.log(e)
@@ -132,17 +137,49 @@ export default {
     grid-template-rows: 1fr 1.5fr
 }
 .functionpart div:nth-child(1) {
+    background-color: aliceblue;
+    border-radius: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-content: center;
+    justify-content: center;
+}
+.functionpart div:nth-child(1) div:nth-child(2) {
+    justify-content: flex-start;
+    font-size: 15px;
+}
+.functionpart div:nth-child(1) div:nth-child(2) p{
+    padding-top: 1rem;
+}
+.functionpart div:nth-child(2) {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding-top: 1rem;
+    height: 70%;
+}
+.choseTime {
+    display: flex !important;
+    padding-left: 5rem;
+    align-content: center;
+    justify-content: center;
+}
+.choseHour {
+    display: flex !important;
+    padding-right: 3rem;
+    align-content: center;
+    justify-content: center;
+    width: 40%;
+    height: 100%;
 }
 .submitBtn {
     display: inline-block;
     margin:0;
-    width: 20%;
+    width: 15%;
     bottom: 2%;
     background-color: #FF3D00;
     border-radius: 27px;
-    font-size: 30px;
+    font-size: 23px;
     color: white;
 }
 .defaultMain {
@@ -168,8 +205,8 @@ export default {
     color: black !important;
     /* background-color: rgb(182, 127, 255); */
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(400px, 400px);
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(550px, auto);
 }
 
 </style>

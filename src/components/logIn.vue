@@ -217,20 +217,24 @@ export default {
     color: #FF0000;
 }
 .loginForm li:nth-child(2)  p{
-    padding-left: 18%;
+    padding-left: 20%;
     color: #FF0000;
+    font-size: 20px;
 }
 .loginForm li:nth-child(4) p:nth-child(1){
-    padding-left: 18%;
+    padding-left: 20%;
     color: #FF0000;
+    font-size: 20px;
 }
 .loginForm li:nth-child(4) p:nth-child(2){
-    padding-left: 25%;
+    padding-left: 45%;
     color: #FF0000;
+    font-size: 20px;
 }
 .loginForm li:nth-child(5)  p{
-    padding-left: 18%;
+    padding-left: 20%;
     color: #FF0000;
+    font-size: 20px;
 }
 .loginForm li:nth-child(6) {
     justify-content: center;

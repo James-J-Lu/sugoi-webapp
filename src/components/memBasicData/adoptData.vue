@@ -10,7 +10,7 @@
             </div>
             <br>
             <ul class="dropdown-menu position-static d-grid gap-1 mx-0 shadow w-220px">
-                <form class="row g-3">
+                <!-- <form class="row g-3"> -->
                     <div class="first" v-if="visibility"><!--adoptdataoverview-->
                         <li>
                             <label><span>體型偏好：</span></label>
@@ -91,7 +91,7 @@
 
                         <div class="col-12">
                             <label for="background" class="form-label">簡述家庭環境：{{ originData.space }}</label>
-                        </div><br><br><br>
+                        </div><br>
                         <li>
                             <button type="button" class="edit" @click="edit">編輯</button>
                         </li>
@@ -172,8 +172,7 @@
                         <!--點了confirm存入資料庫-->
 
                     </div>
-                </form>
-
+                <!-- </form> -->
             </ul>
         </div>
     </div>
@@ -250,7 +249,7 @@ export default {
 }
 
 .second {
-    font-size: 35px;
+    font-size: 30px;
 }
 
 .workspace ul {

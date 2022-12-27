@@ -1,7 +1,7 @@
 <template>
     <div class="petComp">
         <div class="imgdiv">
-            <img src="@/assets/Pet/5.jpg"  alt="??" class="img">
+            <img :src="singlePet.img"  alt="??" class="img">
         </div>
         <div class="detail">
             <ul class="dropdown-menu position-static d-grid gap-1 mx-0 w-220px">
@@ -87,8 +87,12 @@ export default {
     border-radius: 20px;
     height: 50%;
     top: 0;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    min-width: 300px;
+    min-height: 300px;
+    max-width: 300px;
+    max-height: 300px;
 }
 .img {
     border-radius: 20px;
@@ -97,10 +101,10 @@ export default {
 }
 .detail {
     position: absolute;
-    bottom: 2%;
-    width: 50%;
+    bottom: 1%;
+    width: 70%;
     height: 55%;
-    left: 25%;
+    left: 15%;
 }
 .detail ul {
   height: 100%;
@@ -109,7 +113,6 @@ export default {
   --bs-dropdown-border-radius: none;
   grid-template-rows: 20% 3% 20% 20% 20%;
   border-radius: 15px;
-  padding-top: 2rem;
   z-index: 10;
 }
 .detail li p{

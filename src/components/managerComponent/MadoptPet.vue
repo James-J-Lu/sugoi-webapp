@@ -1,9 +1,9 @@
 <template>   
     <div class="MadoptPet">
         <p>待領養狗狗
-        <input v-if="P_detail || P_create" @click="changeAccess('Mback')" class="backButton" type="button" value="返回">
-        <input v-if="!P_detail && !P_create" @click="changeAccess('new')" type="button" value="新增">
-        <input v-if="P_detail && !modify " @click="changeAccess('modify')" type="button" value="修改">
+            <input v-if="P_detail || P_create" @click="changeAccess('Mback')" class="backButton" type="button" value="返回">
+            <input v-if="!P_detail && !P_create" @click="changeAccess('new')" type="button" value="新增">
+            <input v-if="P_detail && !modify " @click="changeAccess('modify')" type="button" value="修改">
         </p>
 
         <!-- 全局 -->
@@ -31,13 +31,15 @@
             <div class="container card w-50" style="border-radius: .5rem;">
                 <div class="row g-0">
                     <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                        <img src="@/assets/Pet/3.jpg" alt="??" class="img-fluid my-5" style="width: 200px;" />
+                        <img v-if="!modify" :src="adoptPets[selectPet].img" alt="??" class="img-fluid my-5" style="width: 200px;" />
+                        <input v-if="modify" class="form-control" ref="fileInput" type="file" @input="pickFile">
                     </div>
                     <div class="col-md-8 card-body p-4 row pt-1 col-6 mb-3">
-                        <p>狗狗編號</p>
+                        <p @click="checkimg">狗狗編號</p>
                         <p class="text-muted">{{adoptPets[selectPet].adoPetId}}</p>
                         <p>狗狗名字</p>
-                        <p class="text-muted">{{adoptPets[selectPet].adoPetName}}</p>
+                        <p v-if="!modify" class="text-muted">{{adoptPets[selectPet].adoPetName}}</p>
+                        <input v-if="modify" type="text" v-model="adoptPets[selectPet].adoPetName">
                     </div>
                 </div>
             </div>
@@ -93,7 +95,7 @@
                         <textarea name="info" id="info" :readonly="!modify" cols="50" rows="5" class="form-control introText" v-model="adoptPets[selectPet].adoPetInfo"></textarea>
                     </li>
                     <li>
-                        <button type="button" class="submitBtn" @click="changeAccess('modify_D')">完成</button>
+                        <button v-if="modify" type="button" class="submitBtn" @click="changeAccess('modify_D')">完成</button>
                     </li>
                 </ul>
             </div>
@@ -103,6 +105,10 @@
         <div class="table-responsive" v-if="P_create">
             <div class="new">
                 <ul class="newForm dropdown-menu position-static d-grid gap-1 mx-0 w-220px">
+                    <li>
+                        <p @click="checkimg">上傳圖片：</p>
+                        <input class="form-control" ref="fileInput" type="file" @input="pickFile">
+                    </li>
                     <li>
                         <p>狗狗名字：</p>
                         <input type="text" class="input" v-model="newPet.adoPetName">
@@ -193,7 +199,8 @@ export default {
                 'adoPetGender': null,
                 'dogFriendly': null,
                 'humanFriendly': null,
-                'status': 1
+                'status': 1,
+                'img': null,
             },
             // 修改暫存
             T_Name: null,
@@ -205,9 +212,32 @@ export default {
             T_Figure: null,
             T_Fur: null,
             T_Gender: null,
+            T_img: null,
         }
     },
     methods: {
+        checkimg() {
+            console.log(this.adoptPets[this.selectPet])
+        },
+
+        pickFile () {
+            let input = this.$refs.fileInput
+            let file = input.files
+            if (file && file[0]) {
+                let reader = new FileReader
+                reader.onload = e => {
+                    if(this.modify == true) {
+                        this.adoptPets[this.selectPet].img = e.target.result
+                    }
+                    else {
+                        this.newPet.img = e.target.result
+                    }
+                }
+                reader.readAsDataURL(file[0])
+                this.$emit('input', file[0])
+            }
+        },
+
         saveTemp() {
             this.T_Name = this.adoptPets[this.selectPet].adoPetName
             this.T_Info = this.adoptPets[this.selectPet].adoPetInfo
@@ -218,6 +248,7 @@ export default {
             this.T_Figure = this.adoptPets[this.selectPet].adoPetFigure
             this.T_Fur = this.adoptPets[this.selectPet].adoPetFur
             this.T_Gender = this.adoptPets[this.selectPet].adoPetGender
+            this.T_img = this.adoptPets[this.selectPet].img
         },
         reloadTemp() {
             this.adoptPets[this.selectPet].adoPetName = this.T_Name
@@ -229,6 +260,7 @@ export default {
             this.adoptPets[this.selectPet].adoPetFigure = this.T_Figure
             this.adoptPets[this.selectPet].adoPetFur = this.T_Fur
             this.adoptPets[this.selectPet].adoPetGender = this.T_Gender
+            this.adoptPets[this.selectPet].img = this.T_img
         },
 
         changeAccess(dest, index) {
@@ -251,6 +283,7 @@ export default {
                     });
             }
             else if(dest == 'detail') {
+                
                 this.selectPet = index
                 this.P_detail = true
                 this.P_create = false
@@ -278,10 +311,9 @@ export default {
         createPet() {
             AdoptionPetDataService.create(this.newPet)
                 .then(response => {
-                    console.log(response.data)
                     if(response.data == 'success') {
-                        console.log('-1')
                         this.getData()
+                        window.alert('成功新增帶領養寵物')
                     }
                 })
                 .catch(e => {
@@ -290,17 +322,13 @@ export default {
         },
 
         getData() {
-            console.log('0')
             this.adoptPets = []
             AdoptionPetDataService.getAll()
                 .then(response => {
-                    console.log('1')
                     this.adoptPets = response.data
-                    console.log(response.data)
                     this.P_detail = false
                     this.P_create = false
                     this.modify = false
-                    console.log('2')
                 })
                 .catch(e => {
                     console.log(e);
@@ -315,6 +343,17 @@ export default {
 </script>
 
 <style>
+.imagePreviewWrapper {
+  background-repeat: no-repeat;
+    width: 250px;
+    height: 250px;
+    display: block;
+    cursor: pointer;
+    margin: 0 auto 30px;
+    background-size: contain;
+    background-position: center center;
+}
+
 .MadoptPet {
   text-align: left;
 }
@@ -351,7 +390,7 @@ export default {
 }
 
 .newForm {
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 4fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 4fr 1fr;
     width: 100%;
     height: 95%;
     --bs-dropdown-border-color: none;
