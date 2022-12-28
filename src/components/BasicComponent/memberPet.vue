@@ -24,11 +24,11 @@
                 </div>
                 <div>
                     <p>狗狗體型：</p>
-                    <input class="form-check-input" type="radio" value=0 v-model="MPdataO.petSize" :disabled="edit == 'false'">
-                    <label class="form-check-label">&ensp; 大型犬 &ensp;</label>
                     <input class="form-check-input" type="radio" value=1 v-model="MPdataO.petSize" :disabled="edit == 'false'">
-                    <label class="form-check-label">&ensp; 中型犬 &ensp;</label>
+                    <label class="form-check-label">&ensp; 大型犬 &ensp;</label>
                     <input class="form-check-input" type="radio" value=2 v-model="MPdataO.petSize" :disabled="edit == 'false'">
+                    <label class="form-check-label">&ensp; 中型犬 &ensp;</label>
+                    <input class="form-check-input" type="radio" value=3 v-model="MPdataO.petSize" :disabled="edit == 'false'">
                     <label class="form-check-label">&ensp; 小型犬 &emsp; </label>
                 </div>
             </div>

@@ -6,15 +6,15 @@
                     <thead class="tablehead">
                         <tr>
                             <th>訂單編號</th>
-                            <th>會員帳號</th>
-                            <th>會員姓名</th>
+                            <th>會員編號</th>
+                            <th>狗狗編號</th>
                         </tr>
                     </thead>
                     <tbody class="tablebody">
                         <tr v-for="(order, index) in orders" :key="order.adoptionOrderId" @click="handleClick(index)">
                             <td>{{order.adoptionOrderId}}</td>
-                            <td>{{Maccount}}</td>
-                            <td>{{Mname}}</td>
+                            <td>{{order.memberId_AO}}</td>
+                            <td>{{order.adoPetId_AO}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -29,7 +29,7 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <p class="mb-0">訂單編號</p>
                                 </div>
                                 <div class="col-sm-3">
@@ -37,47 +37,47 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <p class="mb-0">會員編號</p>
                                 </div>
                                 <div class="col-sm-3">
                                     <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].memberId_AO}}</p>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-sm-6">
                                     <p class="mb-0">會員姓名</p>
                                 </div>
                                 <div class="col-sm-3">
                                     <p class="text-muted mb-0" style="text-align: left">{{Mname}}</p>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <p class="mb-0">狗狗編號</p>
                                 </div>
                                 <div class="col-sm-3">
                                     <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].adoPetId_AO}}</p>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-sm-6">
                                     <p class="mb-0">狗狗名稱</p>
                                 </div>
                                 <div class="col-sm-3">
                                     <p class="text-muted mb-0" style="text-align: left">{{Mname}}</p>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <p class="mb-0">約看時間</p>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].appointmentTime}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <p class="mb-0">領養進度</p>
                                 </div>
                                 <div class="col-sm-3">
@@ -101,7 +101,7 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <p class="mb-0">訂單編號</p>
                                 </div>
                                 <div class="col-sm-3">
@@ -109,39 +109,39 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <p class="mb-0">會員編號</p>
                                 </div>
                                 <div class="col-sm-3">
                                     <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].memberId_AO}}</p>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-sm-6">
                                     <p class="mb-0">會員姓名</p>
                                 </div>
                                 <div class="col-sm-3">
                                     <p class="text-muted mb-0" style="text-align: left">{{Mname}}</p>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <p class="mb-0">狗狗編號</p>
                                 </div>
                                 <div class="col-sm-3">
                                     <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].adoPetId_AO}}</p>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-sm-6">
                                     <p class="mb-0">狗狗名稱</p>
                                 </div>
                                 <div class="col-sm-3">
                                     <p class="text-muted mb-0" style="text-align: left">{{Mname}}</p>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <p class="mb-0">約看時間</p>
                                 </div>
                                 <div class="col-sm-4">
@@ -156,16 +156,17 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <label for="progress">領養進度</label>
                                 </div>
                                 <div class="col-sm-1">
-                                        <select v-model="status_T">
-                                            <option value=0>已取消</option>
-                                            <option value=1>受理中</option>
-                                            <option value=2>配對完成</option>
-                                            <option value=2>已完成訂單</option>
-                                        </select>
+                                    <select v-model="status_T">
+                                        <option value=0>會員已取消</option>
+                                        <option value=1>受理中</option>
+                                        <option value=2>配對完成</option>
+                                        <option value=3>已完成訂單</option>
+                                        <option value=4>管理者取消</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -178,6 +179,7 @@
 
 <script>
 import AdoptionOrderDataService from '@/services/AdoptionOrderDataService';
+import AdoptionPetDataService from '@/services/AdoptionPetDataService';
 import { format } from "date-fns";
 import MemberDataService from '@/services/MemberDataService';
 import DatePicker from '@vuepic/vue-datepicker';
@@ -188,12 +190,11 @@ export default {
     data () {
         return {
             orders: [],
-            orderSta: ['已取消', '受理中', '配對完成', '已完成訂單'],
+            orderSta: ['會員已取消', '受理中', '配對完成', '已完成訂單', '管理者取消'],
             time_T: null,
             selectHour: null, 
             status_T: null,
 
-            Maccount: null,
             Mname: null,
             flag: false,
             selectorder: null,
@@ -210,10 +211,15 @@ export default {
 
         //into adjust page
         adjust() {
-            this.editflag=!this.editflag
-            this.time_T = this.orders[this.selectorder].appointmentTime
-            this.selectHour = this.orders[this.selectorder].appointmentTime.split('T')[1].split(':')[0]
-            this.status_T = this.orders[this.selectorder].status
+            if(this.orders[this.selectorder].status == 1 || this.orders[this.selectorder].status == 2) {
+                this.editflag=!this.editflag
+                this.time_T = this.orders[this.selectorder].appointmentTime
+                this.selectHour = this.orders[this.selectorder].appointmentTime.split('T')[1].split(':')[0]
+                this.status_T = this.orders[this.selectorder].status
+            }
+            else {
+                window.alert('訂單狀已無法修改')
+            }
         },
 
         modify() {
@@ -223,8 +229,17 @@ export default {
             AdoptionOrderDataService.update(this.orders[this.selectorder].adoptionOrderId, this.orders[this.selectorder])
                 .then(response => {
                     if(response.data == 'success') {
-                        console.log('ok')
-                        // 還沒做 還要改apotionpet狀態
+                        if(this.status_T == 4 || this.status_T == 0) {
+                            AdoptionPetDataService.update(this.orders[this.selectorder].adoPetId_AO, { status: 2 })
+                            .then(response => {
+                                    window.alert('修改成功')
+                                })
+                                .catch(e => {
+                                    console.log(e);
+                                });
+                        }
+                        else
+                            window.alert('修改成功')
                     }
                 })
                 .catch(e => {

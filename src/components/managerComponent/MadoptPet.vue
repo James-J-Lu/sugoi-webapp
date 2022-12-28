@@ -56,7 +56,8 @@
                     </li>
                     <li>
                         <p>年齡：&emsp;&emsp;</p>
-                        <p class="text-muted">{{adoptPets[selectPet].adoPetAge}}</p>
+                        <p v-if="!modify" class="text-muted">{{adoptPets[selectPet].adoPetAge}}</p>
+                        <input v-if="modify" class="text-muted" type="text" v-model="adoptPets[selectPet].adoPetAge">
                     </li>
                     <li>
                         <p>毛色：&emsp;&emsp;</p>
@@ -94,8 +95,8 @@
                         <p>介紹：&emsp;&emsp;</p>
                         <textarea name="info" id="info" :readonly="!modify" cols="50" rows="5" class="form-control introText" v-model="adoptPets[selectPet].adoPetInfo"></textarea>
                     </li>
-                    <li>
-                        <button v-if="modify" type="button" class="submitBtn" @click="changeAccess('modify_D')">完成</button>
+                    <li class="submitBtn">
+                        <button v-if="modify" type="button" @click="changeAccess('modify_D')">完成</button>
                     </li>
                 </ul>
             </div>
@@ -162,8 +163,8 @@
                         <p>介紹：&emsp;&emsp;</p>
                         <textarea cols="50" rows="5" class="form-control introText" v-model="newPet.adoPetInfo"></textarea>
                     </li>
-                    <li>
-                        <button type="button" class="submitBtn" @click="changeAccess('new_D')">新增</button>
+                    <li class="submitBtn">
+                        <button type="button" @click="changeAccess('new_D')">新增</button>
                     </li>
                 </ul>
             </div>
@@ -216,8 +217,21 @@ export default {
         }
     },
     methods: {
-        checkimg() {
-            console.log(this.adoptPets[this.selectPet])
+        initial() {
+            this.newPet.adoPetId = null
+            this.newPet.adoPetName = null
+            this.newPet.adoPetInfo = null
+            this.newPet.adoPetAge = null
+            this.newPet.adoPetBreed = null
+            this.newPet.adoPetColor = null
+            this.newPet.adoPetDisease = null
+            this.newPet.adoPetFigure = null
+            this.newPet.adoPetFur = null
+            this.newPet.adoPetGender = null
+            this.newPet.dogFriendly = null
+            this.newPet.humanFriendly = null
+            this.newPet.status = null
+            this.newPet.img = null
         },
 
         pickFile () {
@@ -283,7 +297,6 @@ export default {
                     });
             }
             else if(dest == 'detail') {
-                
                 this.selectPet = index
                 this.P_detail = true
                 this.P_create = false
@@ -298,6 +311,7 @@ export default {
                 this.modify = false
             }
             else if(dest == 'new') {
+                this.initial()
                 this.P_detail = false
                 this.P_create = true
                 this.modify = false
@@ -343,6 +357,7 @@ export default {
 </script>
 
 <style>
+
 .imagePreviewWrapper {
   background-repeat: no-repeat;
     width: 250px;
@@ -387,6 +402,14 @@ export default {
     align-items: center;
     justify-content: flex-start;
     font-size: 40px;
+}
+.submitBtn {
+    display: flex;
+    justify-content: center !important;
+}
+.submitBtn button {
+    background-color: rgb(244, 164, 96);
+    border-radius: 20px;
 }
 
 .newForm {

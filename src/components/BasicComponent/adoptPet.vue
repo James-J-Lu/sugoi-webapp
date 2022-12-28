@@ -17,8 +17,8 @@
                 <li>
                     <p class="dropdown-item rounded-2 active">{{ singlePet.adoPetColor }} || {{ singlePet.adoPetFigure }}</p>
                 </li>
-                <li @click="click">
-                    <p class="dropdown-item rounded-2 active">狗狗檔案</p>
+                <li>
+                    <p class="dropdown-item rounded-2 active">{{ singlePet.adoPetInfo }}</p>
                 </li>
             </ul>
         </div>

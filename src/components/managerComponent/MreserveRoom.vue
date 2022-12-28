@@ -53,6 +53,7 @@ export default {
                 "size": null,
                 "time": format(new Date(), 'yyyy-MM-dd')
             },
+            SizeTotal: [ 0, 0, 0 ],
             Timelist:[[],[],[]],
             roomIds: [ [], [], [] ],
             sizes: [ {id: 1, name: '大房間'}, {id: 2, name: '中房間'}, {id: 3, name: '小房間'} ]
@@ -68,7 +69,13 @@ export default {
                 .then(response => {
                     if(response.data == 'success') {
                         window.alert('成功保留房間')
-                        // initial還沒做
+
+                        this.selectedTime = null
+                        this.cond.total = null
+                        this.cond.size = null
+                        this.cond.time = format(new Date(), 'yyyy-MM-dd')
+                        this.Timelist = [[],[],[]]
+                        this.disabledDates = []
                     }
                 })
                 .catch(e => {
@@ -77,25 +84,42 @@ export default {
         },
 
         SelectF() {
-            if(this.Timelist[this.reserveOrder.roomSize - 1].length == 0) {
+            if(this.SizeTotal[this.reserveOrder.roomSize - 1] == 0) {
                 this.cond.size = this.reserveOrder.roomSize
-                ReserveRoomDataService.getList(this.cond)
+                RoomInfoDataService.getAll({ roomSpace: this.cond.size })
                     .then(response => {
-                        this.Timelist[this.cond.size - 1] = response.data
-                        this.checkifBtotal(this.cond.size - 1)
+                        this.SizeTotal[this.cond.size - 1] = Number(response.data)
+                        this.cond.total = this.SizeTotal[this.cond.size - 1]
+                        this.getChecklist()
                     })
                     .catch(e => {
                         console.log(e);
-                    }); 
+                    });
             }
         },
+
+        // 取得該大小每天有幾隻了
+        getChecklist() {
+            ReserveRoomDataService.getList(this.cond)
+                .then(response => {
+                    this.Timelist[this.cond.size - 1] = response.data
+                    console.log(this.Timelist)
+                    this.checkifBtotal(this.cond.size - 1)
+                })
+                .catch(e => {
+                    console.log(e);
+                }); 
+        },
+
         checkifBtotal(size) {
             this.disabledDates = []
+
             Object.keys(this.Timelist[size]).forEach((key) => {
-                if(this.Timelist[size][key] < this.SizeTotal[size]) {
+                if(this.Timelist[size][key] >= this.SizeTotal[size]) {
                     this.disabledDates.push(key)
                 }
             });
+            console.log(this.disabledDates)
         },
 
         getAllroom() {

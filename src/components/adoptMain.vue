@@ -203,7 +203,6 @@ export default {
     font-size: 30px;
     font-weight: bold;
     color: black !important;
-    /* background-color: rgb(182, 127, 255); */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: minmax(550px, auto);

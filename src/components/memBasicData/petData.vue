@@ -75,11 +75,11 @@ export default {
             MemberPetDataService.create(this.MPdatas)
                 .then(response => {
                     this.getMemberPet()
-                    window.alert("新增寵物成功")
                 })
                 .catch(e => {
                     console.log(e);
                 });
+            window.alert("新增寵物成功")
         },
 
         UpdateData() {

@@ -14,7 +14,7 @@
                 <li>
                     <p>&emsp; * &emsp;</p>
                     <p>密碼：</p>
-                    <input v-model="password" type="text" class="input1">
+                    <input v-model="password" type="password" class="input1">
                 </li>
                 <li>
                     <p>請填寫密碼</p>
@@ -44,7 +44,7 @@ export default {
     data () {
         return {
             isMember: null,
-            account: 'kelly',
+            account: 'member3',
             password: '123',
             memberData: [],
             otherVal: {
@@ -74,9 +74,9 @@ export default {
             if(this.isMember == 'member') {
                 this.otherVal.desTination = 'defaultMain'
                 this.otherVal.manager = false
-                console.log(this.otherVal)
+                // console.log(this.otherVal)
                 Object.assign(this.memberData, this.otherVal);
-                console.log(this.memberData)
+                // console.log(this.memberData)
                 this.$emit('getChild', this.memberData)
             }
             //是管理員
@@ -105,7 +105,7 @@ export default {
             MemberDataService.logIn(data)
                 .then(response => {
                     //登入成功
-                    if(response.data != false) {
+                    if(response.data != false && response.data != 'can sign in') {
                         this.memberData = response.data
                         if(response.data.memberAccount != 'manager') {
                             this.isMember = 'member'
@@ -116,8 +116,8 @@ export default {
                             this.back2Main(1)
                         }
                     }
-                    else
-                        console.log('登入失敗')
+                    else if(response.data != false)
+                        window.alert('帳號或密碼錯誤')
                 })
                 .catch(e => {
                     console.log(e);

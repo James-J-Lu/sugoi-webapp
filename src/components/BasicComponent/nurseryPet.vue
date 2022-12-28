@@ -1,6 +1,6 @@
 <template>
     <div class="nurseryPet">
-        <div>
+        <div class="imagee">
             <img :src="pet.img" alt="">
         </div>
         <p>{{ pet.petName }}</p>
@@ -17,6 +17,12 @@ export default {
 </script>
 
 <style scoped>
+.imagee {
+    min-width: 200px;
+    min-height: 100px;
+    max-width: 200px;
+    max-height: 100px;
+}
 .nurseryPet {
     display: grid;
     grid-template-columns: 1fr 1fr;

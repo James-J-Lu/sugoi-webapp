@@ -14,79 +14,79 @@
                     <div class="first" v-if="visibility"><!--adoptdataoverview-->
                         <li>
                             <label><span>體型偏好：</span></label>
-                            <input type="radio" id="s0" value=0 v-model="originData.preferFigue" name="inlineRadioOptions0"
+                            <input class="form-check-input" type="radio" id="s0" value=0 v-model="originData.preferFigue" name="inlineRadioOptions0"
                                 disabled>
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="s1" value=1 v-model="originData.preferFigue" name="inlineRadioOptions0" disabled>
-                            <label for="two">1-大型犬</label>
-                            <input type="radio" id="s2" value=2 v-model="originData.preferFigue" name="inlineRadioOptions0"
+                            <label for="one">&ensp;沒有特別偏好&ensp;</label>
+                            <input class="form-check-input" type="radio" id="s1" value=1 v-model="originData.preferFigue" name="inlineRadioOptions0" disabled>
+                            <label for="two">&ensp;大型犬&ensp;</label>
+                            <input class="form-check-input" type="radio" id="s2" value=2 v-model="originData.preferFigue" name="inlineRadioOptions0"
                                 disabled>
-                            <label for="three">2-中型犬</label>
-                            <input type="radio" id="s3" value=3 v-model="originData.preferFigue" name="inlineRadioOptions0"
+                            <label for="three">&ensp;中型犬&ensp;</label>
+                            <input class="form-check-input" type="radio" id="s3" value=3 v-model="originData.preferFigue" name="inlineRadioOptions0"
                                 disabled>
-                            <label for="four">3-小型犬</label>
+                            <label for="four">&ensp;小型犬&ensp;</label>
                         </li>
                         <li>
                             <label><span>年齡偏好：</span></label>
-                            <input type="radio" id="a0" value=0 v-model="originData.preferAge" name="inlineRadioOptions1" disabled>
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="a1" value=1 v-model="originData.preferAge" name="inlineRadioOptions1"
+                            <input class="form-check-input" type="radio" id="a0" value=0 v-model="originData.preferAge" name="inlineRadioOptions1" disabled>
+                            <label for="one">&ensp;沒有特別偏好&ensp;</label>
+                            <input class="form-check-input" type="radio" id="a1" value=1 v-model="originData.preferAge" name="inlineRadioOptions1"
                                 disabled>
-                            <label for="two">1-2歲以下</label>
-                            <input type="radio" id="a2" value=2 v-model="originData.preferAge" name="inlineRadioOptions1" disabled>
-                            <label for="three">2-2～5歲</label>
-                            <input type="radio" id="a3" value=3 v-model="originData.preferAge" name="inlineRadioOptions1" disabled>
-                            <label for="four">3-5歲以上</label>
+                            <label for="two">&ensp;2歲以下&ensp;</label>
+                            <input class="form-check-input" type="radio" id="a2" value=2 v-model="originData.preferAge" name="inlineRadioOptions1" disabled>
+                            <label for="three">&ensp;2～5歲&ensp;</label>
+                            <input class="form-check-input" type="radio" id="a3" value=3 v-model="originData.preferAge" name="inlineRadioOptions1" disabled>
+                            <label for="four">&ensp;5歲以上&ensp;</label>
                         </li>
                         <li>
                             <label><span>毛色偏好：</span></label>
-                            <input type="radio" id="c0" value=0 v-model="originData.preferColor" name="inlineRadioOptions2"
+                            <input class="form-check-input" type="radio" id="c0" value=0 v-model="originData.preferColor" name="inlineRadioOptions2"
                                 disabled>
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="c1" value=1 v-model="originData.preferColor" name="inlineRadioOptions2"
+                            <label for="one">&ensp;沒有特別偏好&ensp;</label>
+                            <input class="form-check-input" type="radio" id="c1" value=1 v-model="originData.preferColor" name="inlineRadioOptions2"
                                 disabled>
-                            <label for="two">1-白色</label>
-                            <input type="radio" id="c2" value=2 v-model="originData.preferColor" name="inlineRadioOptions2"
+                            <label for="two">&ensp;白色&ensp;</label>
+                            <input class="form-check-input" type="radio" id="c2" value=2 v-model="originData.preferColor" name="inlineRadioOptions2"
                                 disabled>
-                            <label for="three">2-黑色</label>
-                            <input type="radio" id="c3" value=3 v-model="originData.preferColor" name="inlineRadioOptions2"
+                            <label for="three">&ensp;黑色&ensp;</label>
+                            <input class="form-check-input" type="radio" id="c3" value=3 v-model="originData.preferColor" name="inlineRadioOptions2"
                                 disabled>
-                            <label for="four">3-黃色</label>
-                            <input type="radio" id="c4" value=4 v-model="originData.preferColor" name="inlineRadioOptions2"
+                            <label for="four">&ensp;黃色&ensp;</label>
+                            <input class="form-check-input" type="radio" id="c4" value=4 v-model="originData.preferColor" name="inlineRadioOptions2"
                                 disabled>
-                            <label for="five">4-花花色</label>
+                            <label for="five">&ensp;花花色&ensp;</label>
                         </li>
                         <li>
-                            <label><span>毛髮偏好：</span></label>
-                            <input type="radio" id="h0" value=0 v-model="originData.preferFur" name="inlineRadioOptions3"
+                            <label><span>長短毛偏好：</span></label>
+                            <input class="form-check-input" type="radio" id="h0" value=0 v-model="originData.preferFur" name="inlineRadioOptions3"
                                 disabled>
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="h1" value=1 v-model="originData.preferFur" name="inlineRadioOptions3" disabled>
-                            <label for="two">1-長毛</label>
-                            <input type="radio" id="h2" value=2 v-model="originData.preferFur" name="inlineRadioOptions3"
+                            <label for="one">&ensp;沒有特別偏好&ensp;</label>
+                            <input class="form-check-input" type="radio" id="h1" value=1 v-model="originData.preferFur" name="inlineRadioOptions3" disabled>
+                            <label for="two">&ensp;長毛</label>
+                            <input class="form-check-input" type="radio" id="h2" value=2 v-model="originData.preferFur" name="inlineRadioOptions3"
                                 disabled>
-                            <label for="three">2-短毛</label>
+                            <label for="three">&ensp;短毛&ensp;</label>
                         </li>
                         <li>
                             <label><span>性別偏好：</span></label>
-                            <input type="radio" id="s0" value=0 v-model="originData.preferGender" name="inlineRadioOptions4"
+                            <input class="form-check-input" type="radio" id="s0" value=0 v-model="originData.preferGender" name="inlineRadioOptions4"
                                 disabled>
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="s1" value=1 v-model="originData.preferGender" name="inlineRadioOptions4"
+                            <label for="one">&ensp;沒有特別偏好&ensp;</label>
+                            <input class="form-check-input" type="radio" id="s1" value=1 v-model="originData.preferGender" name="inlineRadioOptions4"
                                 disabled>
-                            <label for="two">1-男生</label>
-                            <input type="radio" id="s2" value=2 v-model="originData.preferGender" name="inlineRadioOptions4"
+                            <label for="two">&ensp;男生&ensp;</label>
+                            <input class="form-check-input" type="radio" id="s2" value=2 v-model="originData.preferGender" name="inlineRadioOptions4"
                                 disabled>
-                            <label for="three">2-女生</label>
+                            <label for="three">&ensp;女生&ensp;</label>
                         </li>
                         <li>
                             <label><span>品種偏好：</span></label>
-                            <input type="radio" id="b0" value=0 v-model="originData.preferBreed" name="inlineRadioOptions5"
+                            <input class="form-check-input" type="radio" id="b0" value=0 v-model="originData.preferBreed" name="inlineRadioOptions5"
                                 disabled>
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="b1" value=1 v-model="originData.preferBreed" name="inlineRadioOptions5"
+                            <label for="one">&ensp;沒有特別偏好&ensp;</label>
+                            <input class="form-check-input" type="radio" id="b1" value=1 v-model="originData.preferBreed" name="inlineRadioOptions5"
                                 disabled>
-                            <label for="two">1-只限品種狗</label>
+                            <label for="two">&ensp;只限品種狗&ensp;</label>
                         </li>
 
                         <div class="col-12">
@@ -101,63 +101,63 @@
                     <div class="second" v-if="!visibility">
                         <li>
                             <label><span>體型偏好：</span></label>
-                            <input type="radio" id="s0" value=0 v-model="editData.preferFigue" name="inlineRadioOptions0">
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="s1" value=1 v-model="editData.preferFigue" name="inlineRadioOptions0">
-                            <label for="two">1-大型犬</label>
-                            <input type="radio" id="s2" value=2 v-model="editData.preferFigue" name="inlineRadioOptions0">
-                            <label for="three">2-中型犬</label>
-                            <input type="radio" id="s3" value=3 v-model="editData.preferFigue" name="inlineRadioOptions0">
-                            <label for="four">3-小型犬</label>
+                            <input class="form-check-input" type="radio" id="s0" value=0 v-model="editData.preferFigue" name="inlineRadioOptions0">
+                            <label for="one">&ensp;沒有特別偏好</label>
+                            <input class="form-check-input" type="radio" id="s1" value=1 v-model="editData.preferFigue" name="inlineRadioOptions0">
+                            <label for="two">&ensp;大型犬</label>
+                            <input class="form-check-input" type="radio" id="s2" value=2 v-model="editData.preferFigue" name="inlineRadioOptions0">
+                            <label for="three">&ensp;中型犬</label>
+                            <input class="form-check-input" type="radio" id="s3" value=3 v-model="editData.preferFigue" name="inlineRadioOptions0">
+                            <label for="four">&ensp;小型犬</label>
                         </li>
                         <li>
                             <label><span>年齡偏好：</span></label>
-                            <input type="radio" id="a0" value=0 v-model="editData.preferAge" name="inlineRadioOptions1">
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="a1" value=1 v-model="editData.preferAge" name="inlineRadioOptions1">
-                            <label for="two">1-2歲以下</label>
-                            <input type="radio" id="a2" value=2 v-model="editData.preferAge" name="inlineRadioOptions1">
-                            <label for="three">2-2～5歲</label>
-                            <input type="radio" id="a3" value=3 v-model="editData.preferAge" name="inlineRadioOptions1">
-                            <label for="four">3-5歲以上</label>
+                            <input class="form-check-input" type="radio" id="a0" value=0 v-model="editData.preferAge" name="inlineRadioOptions1">
+                            <label for="one">&ensp;沒有特別偏好</label>
+                            <input class="form-check-input" type="radio" id="a1" value=1 v-model="editData.preferAge" name="inlineRadioOptions1">
+                            <label for="two">&ensp;2歲以下</label>
+                            <input class="form-check-input" type="radio" id="a2" value=2 v-model="editData.preferAge" name="inlineRadioOptions1">
+                            <label for="three">&ensp;2～5歲</label>
+                            <input class="form-check-input" type="radio" id="a3" value=3 v-model="editData.preferAge" name="inlineRadioOptions1">
+                            <label for="four">&ensp;5歲以上</label>
                         </li>
                         <li>
                             <label><span>毛色偏好：</span></label>
-                            <input type="radio" id="c0" value=0 v-model="editData.preferColor" name="inlineRadioOptions2">
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="c1" value=1 v-model="editData.preferColor" name="inlineRadioOptions2">
-                            <label for="two">1-白色</label>
-                            <input type="radio" id="c2" value=2 v-model="editData.preferColor" name="inlineRadioOptions2">
-                            <label for="three">2-黑色</label>
-                            <input type="radio" id="c3" value=3 v-model="editData.preferColor" name="inlineRadioOptions2">
-                            <label for="four">3-黃色</label>
-                            <input type="radio" id="c4" value=4 v-model="editData.preferColor" name="inlineRadioOptions2">
-                            <label for="five">4-花花色</label>
+                            <input class="form-check-input" type="radio" id="c0" value=0 v-model="editData.preferColor" name="inlineRadioOptions2">
+                            <label for="one">&ensp;沒有特別偏好</label>
+                            <input class="form-check-input" type="radio" id="c1" value=1 v-model="editData.preferColor" name="inlineRadioOptions2">
+                            <label for="two">&ensp;白色</label>
+                            <input class="form-check-input" type="radio" id="c2" value=2 v-model="editData.preferColor" name="inlineRadioOptions2">
+                            <label for="three">&ensp;黑色</label>
+                            <input class="form-check-input" type="radio" id="c3" value=3 v-model="editData.preferColor" name="inlineRadioOptions2">
+                            <label for="four">&ensp;黃色</label>
+                            <input class="form-check-input" type="radio" id="c4" value=4 v-model="editData.preferColor" name="inlineRadioOptions2">
+                            <label for="five">&ensp;花花色</label>
                         </li>
                         <li>
                             <label><span>長短毛偏好：</span></label>
-                            <input type="radio" id="h0" value=0 v-model="editData.preferFur" name="inlineRadioOptions3">
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="h1" value=1 v-model="editData.preferFur" name="inlineRadioOptions3">
-                            <label for="two">1-長毛</label>
-                            <input type="radio" id="h2" value=2 v-model="editData.preferFur" name="inlineRadioOptions3">
-                            <label for="three">2-短毛</label>
+                            <input class="form-check-input" type="radio" id="h0" value=0 v-model="editData.preferFur" name="inlineRadioOptions3">
+                            <label for="one">&ensp;沒有特別偏好</label>
+                            <input class="form-check-input" type="radio" id="h1" value=1 v-model="editData.preferFur" name="inlineRadioOptions3">
+                            <label for="two">&ensp;長毛</label>
+                            <input class="form-check-input" type="radio" id="h2" value=2 v-model="editData.preferFur" name="inlineRadioOptions3">
+                            <label for="three">&ensp;短毛</label>
                         </li>
                         <li>
                             <label><span>性別偏好：</span></label>
-                            <input type="radio" id="s0" value=0 v-model="editData.preferGender" name="inlineRadioOptions4">
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="s1" value=1 v-model="editData.preferGender" name="inlineRadioOptions4">
-                            <label for="two">1-男生</label>
-                            <input type="radio" id="s2" value=2 v-model="editData.preferGender" name="inlineRadioOptions4">
-                            <label for="three">2-女生</label>
+                            <input class="form-check-input" type="radio" id="s0" value=0 v-model="editData.preferGender" name="inlineRadioOptions4">
+                            <label for="one">&ensp;沒有特別偏好</label>
+                            <input class="form-check-input" type="radio" id="s1" value=1 v-model="editData.preferGender" name="inlineRadioOptions4">
+                            <label for="two">&ensp;男生</label>
+                            <input class="form-check-input" type="radio" id="s2" value=2 v-model="editData.preferGender" name="inlineRadioOptions4">
+                            <label for="three">&ensp;女生</label>
                         </li>
                         <li>
                             <label><span>品種偏好：</span></label>
-                            <input type="radio" id="b0" value=0 v-model="editData.preferBreed" name="inlineRadioOptions5">
-                            <label for="one">0-沒有特別偏好</label>
-                            <input type="radio" id="b1" value=1 v-model="editData.preferBreed" name="inlineRadioOptions5">
-                            <label for="two">1-只限品種狗</label>
+                            <input class="form-check-input" type="radio" id="b0" value=0 v-model="editData.preferBreed" name="inlineRadioOptions5">
+                            <label for="one">&ensp;沒有特別偏好</label>
+                            <input class="form-check-input" type="radio" id="b1" value=1 v-model="editData.preferBreed" name="inlineRadioOptions5">
+                            <label for="two">&ensp;只限品種狗</label>
                         </li>
 
                         <div class="col-12">
@@ -211,16 +211,43 @@ export default {
         modify() {
             //轉成int
             //從adopt寫入領養資料 成功就將下列更新
-            AdoptionDataService.update(this.memberStatus.memberId, this.editData)
+            if(this.originData.adoptionId != null) {
+                AdoptionDataService.update(this.originData.memberId_ap, this.editData)
                 .then(response => {
                     this.originData = this.editData
                     this.visibility = true
                     this.pop = true
                     this.now = new Date()
+                    window.alert('修改領養資料成功')
                 })
                 .catch(e => {
                     console.log(e);
                 });
+            }
+            else if(this.originData.adoptionId == null) {
+                var data = {
+                    adotionId: null,
+                    memberId_ap: this.memberStatus.id,
+                    preferFigue: this.editData.preferFigue,
+                    preferAge: this.editData.preferAge,
+                    preferColor: this.editData.preferColor,
+                    preferFur: this.editData.preferFur,
+                    prederGender: this.editData.prederGender,
+                    preferBreed: this.editData.preferBreed,
+                    space: this.editData.space,
+                }
+                AdoptionDataService.create(data)
+                    .then(response => {
+                        this.originData = data
+                        this.visibility = true
+                        this.pop = true
+                        this.now = new Date()
+                        window.alert('新增領養資料成功')
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+            }
         },
 
         popoff() {
@@ -228,9 +255,12 @@ export default {
         },
 
         getMemberadoption() {
+            this.originData = {}
             AdoptionDataService.findByMID(this.memberStatus.id)
                 .then(response => {
-                    this.originData = response.data[0]
+                    if(response.data.length > 0) {
+                        this.originData = response.data[0]
+                    }
                 })
                 .catch(e => {
                     console.log(e);

@@ -6,15 +6,17 @@
                     <thead class="tablehead">
                         <tr>
                             <th>訂單編號</th>
-                            <th>會員帳號</th>
-                            <th>會員姓名</th>
+                            <th>會員編號</th>
+                            <th>開始時間</th>
+                            <th>結束時間</th>
                         </tr>
                     </thead>
                     <tbody class="tablebody">
                         <tr v-for="(order, index) in orders" :key="order.nurseryPetOrderId" @click="handleClick(index)">
                             <td>{{order.nurseryPetOrderId}}</td>
-                            <td>{{MemberD[index].memberName}}</td>
-                            <td>{{MemberD[index].memberName}}</td>
+                            <td>{{order.memberId_NPO}}</td>
+                            <td>{{order.startTime}}</td>
+                            <td>{{order.endTime}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -48,18 +50,34 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-5">
-                                    <p class="mb-0">寵物編號</p>
+                                    <p class="mb-0">寵物名稱 | 性別</p>
                                 </div>
-                                <div class="col-sm-3">
-                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].petId_NPO}}</p>
+                                <div class="col-sm-4">
+                                    <p class="text-muted mb-0" style="text-align: left">{{detailPet.petName}} | {{genders[detailPet.petGender]}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-5">
-                                    <p class="mb-0">房間編號</p>
+                                    <p class="mb-0">寵物大小 | 結紮</p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <p class="text-muted mb-0" style="text-align: left">{{sizes[detailPet.petSize-1]}} | {{ligations[detailPet.isLigation]}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <p class="mb-0">寵物疾病</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].roomId_NPO}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">{{detailPet.petDisease}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <p class="mb-0">寵物飲食</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <p class="text-muted mb-0" style="text-align: left">{{ detailPet.dietaryHabit }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -119,18 +137,34 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-5">
-                                    <p class="mb-0">寵物編號</p>
+                                    <p class="mb-0">寵物名稱 | 性別</p>
                                 </div>
                                 <div class="col-sm-4">
-                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].petId_NPO}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">{{detailPet.petName}} | {{genders[detailPet.petGender]}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-5">
-                                    <p class="mb-0">房間編號</p>
+                                    <p class="mb-0">寵物大小 | 結紮</p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <p class="text-muted mb-0" style="text-align: left">{{sizes[detailPet.petSize-1]}} | {{ligations[detailPet.isLigation]}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <p class="mb-0">寵物疾病</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <p class="text-muted mb-0" style="text-align: left">{{orders[selectorder].roomId_NPO}}</p>
+                                    <p class="text-muted mb-0" style="text-align: left">{{detailPet.petDisease}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <p class="mb-0">寵物飲食</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <p class="text-muted mb-0" style="text-align: left">{{ detailPet.dietaryHabit }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -175,6 +209,7 @@
 
 <script>
 import NurserypetorderDataService from '@/services/NurserypetorderDataService';
+import MemberPetDataService from '@/services/MemberPetDataService';
 import MemberDataService from '@/services/MemberDataService';
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -186,6 +221,10 @@ import '@vuepic/vue-datepicker/dist/main.css'
                 orders: [],
                 MemberD: [],
                 orderSta: ['使用者已刪除','正常','管理者已取消'],
+                genders: ['男性', '女性'],
+                sizes: ['大型', '中型', '小型'],
+                ligations: ['已結紮', '未結紮'],
+                detailPet: {},
                 status_T: null,
                 price_T: null,
 
@@ -201,6 +240,14 @@ import '@vuepic/vue-datepicker/dist/main.css'
                 handleClick(index){
                     this.flag = !this.flag
                     this.selectorder = index
+                    this.detailPet = {}
+                    MemberPetDataService.get(this.orders[this.selectorder].petId_NPO)
+                        .then(response => {
+                            this.detailPet = response.data
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
                 },
 
                 //進入修改

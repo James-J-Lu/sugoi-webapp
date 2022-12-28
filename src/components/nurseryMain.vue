@@ -98,15 +98,14 @@ export default {
                         console.log(e);
                     });
             }
-            this.checkifBtotal(this.cond.size - 1)
         },
-
+        
+        // 取得該大小每天有幾隻了
         getChecklist() {
             ReserveRoomDataService.getList(this.cond)
                 .then(response => {
                     this.Timelist[this.cond.size - 1] = response.data
                     this.checkifBtotal(this.cond.size - 1)
-                    console.log(response.data)
                 })
                 .catch(e => {
                     console.log(e);
@@ -115,8 +114,9 @@ export default {
 
         checkifBtotal(size) {
             this.disabledDates = []
+
             Object.keys(this.Timelist[size]).forEach((key) => {
-                if(this.Timelist[size][key] < this.SizeTotal[size]) {
+                if(this.Timelist[size][key] >= this.SizeTotal[size]) {
                     this.disabledDates.push(key)
                 }
             });
@@ -147,7 +147,10 @@ export default {
                         this.reserveOrder.orderId = response.data
                         ReserveRoomDataService.create(this.reserveOrder)
                             .then(response => {
-                                console.log(response.data)
+                                if(response.data == 'success') {
+                                    this.getMemberPet()
+                                    window.alert('成功新增托兒訂單')
+                                }
                             })
                             .catch(e => {
                                 console.log(e);
@@ -164,6 +167,14 @@ export default {
             MemberPetDataService.findByMID(this.memberStatus.id)
                 .then(response => {
                     this.Mpets = response.data
+                
+                    this.selectedPet = null
+                    this.selectedTime = null
+                    this.cond.total = null
+                    this.cond.size = null
+                    this.cond.time = format(new Date(), 'yyyy-MM-dd')
+                    this.Timelist = [[],[],[]]
+                    this.disabledDates = []
                 })
                 .catch(e => {
                     console.log(e);
@@ -233,7 +244,7 @@ export default {
 .workspace ul li:nth-child(2) {
     display: grid;
     grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 .workspace ul li:nth-child(5) {
     display:flex;

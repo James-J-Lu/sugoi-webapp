@@ -18,7 +18,9 @@
                         <br>
                         <div v-for="(nurseryOrder, index) in nurseryOrders" :key="nurseryOrder.nurseryPetOrderId" @click="goToDetailPage(index)">
                             <div class="eachOrder">
-                                <div class="imgInEachOrder"></div>
+                                <div class="imgInEachOrder">
+                                    <img :src="petimgs[index]" alt="">
+                                </div>
                                 <div class="orderId">
                                     <!-- &emsp; 全形空格 排版用 -->
                                     <p>訂單編號：{{ nurseryOrder.nurseryPetOrderId }}&emsp;</p>
@@ -46,7 +48,7 @@
                         <div v-for="(adoptOrder, index) in adoptOrders" :key="adoptOrder.adoptionOrderId" @click="goToDetailPage(index)">
                             <div class="eachOrder">
                                 <div class="imgInEachOrder">
-                                    <img src="@/assets/Pet/A3.jpg" alt="">
+                                    <img :src="Apetimgs[index]" alt="">
                                 </div>
                                 <div class="orderId">
                                     <!-- &emsp; 全形空格 排版用 -->
@@ -82,8 +84,7 @@
 
                     <div v-if="this.nurseryOrders[this.choseInd].status == 1">
                         <div class="content">
-                            <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
-                                class="image">
+                            <img :src="petimgs[this.choseInd]" class="image">
                             <div class="text">
                                 <p>狗狗：{{ petnames[this.choseInd] }}</p>
                                 <!-- <p>床位：{{ detailNOrderRoomNum }}</p> 先拿掉床位都一樣 -->
@@ -102,30 +103,28 @@
 
                     <div v-if="this.nurseryOrders[this.choseInd].status == 0">
                         <div class="content">
-                            <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
-                                class="image">
+                            <img :src="petimgs[this.choseInd]" class="image">
                             <div class="text">
-                                <p>狗狗：{{ detailNOrderPetName }}</p>
-                                <p>床位：{{ detailNOrderRoomNum }}</p>
-                                <p>入住時間：{{ detailNOrderSTime }}</p>
-                                <p>退房時間：{{ detailNOrderETime }}</p>
-                                <p>總金額：$ {{ detailNOrderPrice }}</p>
-                                <div class="cancelstatus">訂單編號：{{ detailNOrderId }} 已取消</div>
+                                <p>狗狗：{{ petnames[this.choseInd] }}</p>
+                                <!-- <p>床位：{{ detailNOrderRoomNum }}</p> -->
+                                <p>入住時間：{{ this.nurseryOrders[this.choseInd].startTime }}</p>
+                                <p>退房時間：{{ this.nurseryOrders[this.choseInd].endTime }}</p>
+                                <p>總金額：$ {{ this.nurseryOrders[this.choseInd].price }}</p>
+                                <div class="cancelstatus">訂單編號：{{ this.nurseryOrders[this.choseInd].nurseryPetOrderId }} 已取消</div>
                             </div>
                         </div>
                     </div>
 
                     <div v-if="this.nurseryOrders[this.choseInd].status == 2">
                         <div class="content">
-                            <img src="https://static.vecteezy.com/system/resources/previews/006/059/952/non_2x/dog-icon-isolated-on-white-background-puppy-head-pictogram-free-vector.jpg"
-                                class="image">
+                            <img :src="petimgs[this.choseInd]" class="image">
                             <div class="text">
-                                <p>狗狗：{{ detailNOrderPetName }}</p>
-                                <p>床位：{{ detailNOrderRoomNum }}</p>
-                                <p>入住時間：{{ detailNOrderSTime }}</p>
-                                <p>退房時間：{{ detailNOrderETime }}</p>
-                                <p>總金額：$ {{ detailNOrderPrice }}</p>
-                                <div class="cancelstatus">訂單編號：{{ detailNOrderId }} 已被思狗意取消，如有任何問題請聯繫我們！</div>
+                                <p>狗狗：{{ petnames[this.choseInd] }}</p>
+                                <!-- <p>床位：{{ detailNOrderRoomNum }}</p> -->
+                                <p>入住時間：{{ this.nurseryOrders[this.choseInd].startTime }}</p>
+                                <p>退房時間：{{ this.nurseryOrders[this.choseInd].endTime }}</p>
+                                <p>總金額：$ {{ this.nurseryOrders[this.choseInd].price }}</p>
+                                <div class="cancelstatus">訂單編號：{{ this.nurseryOrders[this.choseInd].nurseryPetOrderId }} 已被思狗意取消，如有任何問題請聯繫我們！</div>
                             </div>
                         </div>
                     </div>
@@ -162,23 +161,21 @@
                     </div>
                     <p> </p>
                     <div v-if="!editOrderTime" class="content">
-                        <img src="@/assets/Pet/A3.jpg"
-                            class="image">
+                        <img :src="Apetimgs[this.choseInd]" class="image">
 
                         <div class="text">
                             <p>狗狗：{{ this.Apetnames[this.choseInd] }}</p>
                             <p>領養時間：2022-12-29 16:00:00</p>
                             <p>領養時間：{{ this.adoptOrders[this.choseInd].appointmentTime }}</p>
                             <div class="cancelstatus" v-if="this.adoptOrders[this.choseInd].status == 0">訂單編號：{{ this.adoptOrders[this.choseInd].adoptionOrderId }} 已取消</div>
-                            <button v-if="this.adoptOrders[this.choseInd].status != 0" type="button" class="navBtn"
-                                @click="navigation">查看狗狗檔案</button>
+                            <div class="cancelstatus" v-if="this.adoptOrders[this.choseInd].status == 4">配對失敗， 疑問請洽思狗意</div>
+                            <!-- <button v-if="this.adoptOrders[this.choseInd].status != 0" type="button" class="navBtn" @click="navigation">查看狗狗檔案</button> -->
                         </div>
                     </div>
 
                     <!-- 修改領養時間 -->
                     <div v-if="editOrderTime" class="content">
-                        <img src="@/assets/Pet/A3.jpg"
-                            class="image">
+                        <img :src="Apetimgs[this.choseInd]" class="image">
                         <div class="text">
                             <p>狗狗：{{ this.Apetnames[this.choseInd] }}</p>
                             <p>領養時間：</p>
@@ -203,7 +200,7 @@
                         <button v-if="this.adoptOrders[this.choseInd].status == 1 && !editOrderTime" type="button"
                             class="deleteBtn" @click="deleteAOrder(this.choseInd)">刪除領養訂單</button>
                         <!-- 如果訂單未被刪過且尚未領養成功才能編輯訂單（用來防呆＋畫面比較好看）-->
-                        <button v-if="this.adoptOrders[this.choseInd].status != 0 && !editOrderTime && this.adoptOrders[this.choseInd].status != 3" type="button"
+                        <button v-if="this.adoptOrders[this.choseInd].status != 0 && !editOrderTime && this.adoptOrders[this.choseInd].status != 3 && this.adoptOrders[this.choseInd].status != 4" type="button"
                             class="editBtn" @click="editAOrder">修改領養時間</button>
                     </div>
                 </div>
@@ -260,7 +257,9 @@ export default {
             detailAOrderId: 555,
             detailAOrderPetName: 'gina',
             detailAOrderAppointTime: '2022/7/14 09:00',
-
+            
+            petimgs: [],
+            Apetimgs: [],
             petnames: [],
             Apetnames: [],
             choseInd: null,
@@ -373,12 +372,20 @@ export default {
         getOrders() {
             NurserypetorderDataService.findByMID(this.memberStatus.id)
                 .then(response => {
+                    if(response.data.length == 0) {
+                        this.noNOrders == true
+                    }
+                    else {
+                        this.noAOrders == false
+                    }
+
                     this.nurseryOrders = response.data
 
                     for(var i = 0; i < response.data.length; i++) {
                         MemberPetDataService.get(response.data[i].petId_NPO)
                             .then(response => {
                                 this.petnames.push(response.data.petName)
+                                this.petimgs.push(response.data.img)
                             })
                             .catch(e => {
                                 console.log(e);
@@ -391,11 +398,19 @@ export default {
 
             AdoptionOrderDataService.findByMID(this.memberStatus.id)
                 .then(response => {
+                    if(response.data.length == 0) {
+                        this.noAOrders == true
+                    }
+                    else {
+                        this.noAOrders == false
+                    }
+
                     this.adoptOrders = response.data
                     for(var j = 0; j < response.data.length; j++) {
                         AdoptionPetDataService.get(response.data[j].adoPetId_AO)
                             .then(response => {
                                 this.Apetnames.push(response.data.adoPetName)
+                                this.Apetimgs.push(response.data.img)
                                 this.editOrderTime = false //回到查看頁面
                             })
                             .catch(e => {
@@ -475,7 +490,7 @@ export default {
 }
 
 .imgInEachOrder {
-    background-color: rgb(232, 196, 196);
+    /* background-color: rgb(232, 196, 196); */
     width: 200px;
     height: 200px;
     border-color: #114ABA;
